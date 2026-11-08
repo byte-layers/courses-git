@@ -443,7 +443,70 @@ def cherry_pick():
     return a
 
 
-ALL = [commit_and_branch, lifecycle, switch, fast_forward, merge_commit, push_fetch_pull, push_rejected, reset_modes, rebase, cherry_pick]
+def merge_request():
+    a = Anim("merge-request", "gitlab-merge-requests")
+    a.commit("C1", "C1", 240, 65)
+    a.pill("main", "main", 100, 65)
+    a.edge("main", "C1", GN)
+    a.pill("lock", "protégée", 100, 120, "bad")
+    a.key("main est protégée : personne n'y pousse directement")
+    a.commit("F1", "F1", 420, 170, fro=(420, 130))
+    a.edge("F1", "C1")
+    a.pill("feat", "feature/1", 560, 170)
+    a.edge("feat", "F1", GN)
+    a.key("Le travail se fait sur une branche, publiée sur GitLab", color=PV)
+    a.card("mr", "Merge request\nrelecture, commentaires", 240, 280, fro=(420, 170))
+    a.edge("F1", "mr", PK)
+    a.key("Une merge request propose de fusionner, et on la relit", color=PK)
+    a.rm("mr", "E:F1:mr", "E:main:C1")
+    a.commit("M", "M", 240, 280, "new", fro=(240, 280))
+    a.edge("M", "C1", PK)
+    a.edge("M", "F1", PK)
+    a.edge("main", "M", GN)
+    a.move("main", y=280)
+    a.move("lock", y=335)
+    a.key("Merge : le code arrive sur main, et l'issue se ferme", color=GN, hold=1800)
+    return a
+
+
+def runner_job():
+    a = Anim("runner-job", "gitlab-runner")
+    a.zone("g", "GitLab", 140, 190, 240, 340)
+    a.zone("r", "Runner", 480, 190, 280, 340)
+    a.card("pipe", "Pipeline\njob : tests", 140, 110)
+    a.key("Un git push crée un pipeline, et son job attend sur GitLab")
+    a.pill("poll", "Du travail ?", 310, 110, "remote", fro=(450, 110))
+    a.key("Le runner interroge GitLab à intervalles réguliers", color=GY)
+    a.rm("poll")
+    a.card("job", "job : tests", 480, 110, fro=(140, 110))
+    a.key("GitLab lui confie le job", color=PV)
+    a.card("cont", "Conteneur neuf\nnpm install\nnpm test", 480, 225, "new", fro=(480, 180))
+    a.key("Le runner exécute le job dans un conteneur neuf", color=PK)
+    a.rm("cont")
+    a.card("res", "Trace et artefacts", 140, 245, "ok", fro=(480, 245))
+    a.key("Il renvoie la trace et les artefacts à GitLab, et le job est terminé", color=GN, hold=1800)
+    return a
+
+
+def cache_artifacts():
+    a = Anim("cache-vs-artifacts", "cache-vs-artifacts")
+    a.zone("g", "GitLab", 320, 110, 600, 150)
+    a.zone("r", "Runner", 320, 285, 600, 170)
+    a.pill("j1", "job build", 130, 250, "branch")
+    a.pill("j2", "job test", 505, 250, "branch")
+    a.key("Deux jobs d'un même pipeline, chacun dans un environnement neuf")
+    a.card("art", "artefact : dist/", 130, 110, "new", fro=(130, 250))
+    a.key("L'artefact du job build remonte sur GitLab", color=PK)
+    a.move("art", x=505, y=110)
+    a.key("GitLab le conserve, et le remet aux jobs des stages suivants", color=PK)
+    a.move("art", y=210)
+    a.key("Le job test reçoit l'artefact : c'est garanti", color=GN)
+    a.card("cache", "cache : node_modules/", 320, 330, "card", fro=(130, 250))
+    a.key("Le cache reste côté runner, pour le prochain pipeline, sans garantie", color=PV, hold=1800)
+    return a
+
+
+ALL = [commit_and_branch, lifecycle, switch, fast_forward, merge_commit, push_fetch_pull, push_rejected, reset_modes, rebase, cherry_pick, merge_request, runner_job, cache_artifacts]
 
 if __name__ == "__main__":
     sheet = []

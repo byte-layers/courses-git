@@ -1,0 +1,22 @@
+title: "Automatiser avec GitLab CI"
+description: "Écrire un pipeline, le fiabiliser, et faire de lui un garde-fou pour les merge requests."
+level: beginner
+tags: [gitlab, ci]
+prerequisites: "Savoir utiliser les merge requests sur GitLab, et avoir un compte GitLab."
+layers:
+  - title: "Comprendre"
+    summary: "CI/CD, pipelines et runners"
+    contents:
+      - { slug: ci-cd-why, role: read-first }
+      - { slug: gitlab-runner, role: read-first }
+  - title: "Premier pipeline"
+    summary: "Écrire et découper un pipeline"
+    contents:
+      - { slug: gitlab-first-pipeline, role: proof }
+      - { slug: cache-vs-artifacts }
+  - title: "Fiabiliser"
+    summary: "Variables, cache, règles, et garde-fou sur les merge requests"
+    contents:
+      - { slug: gitlab-ci-essentials }
+      - { slug: gitlab-ci-quality-gate }
+      - { slug: gitlab-ci-challenge, role: proof }

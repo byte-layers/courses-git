@@ -1,0 +1,21 @@
+title: "Gérer un projet avec GitLab"
+description: "Créer un projet, organiser le travail, relire le code et livrer à plusieurs avec des merge requests."
+level: beginner
+tags: [gitlab]
+prerequisites: "Savoir utiliser Git avec un dépôt distant, et avoir un compte GitLab."
+layers:
+  - title: "Démarrer"
+    summary: "La plateforme, un groupe et un projet"
+    contents:
+      - { slug: gitlab-platform-tour, role: read-first }
+      - { slug: gitlab-first-project, role: proof }
+  - title: "Organiser"
+    summary: "Labels, jalons, issues, tableau et wiki"
+    contents:
+      - { slug: gitlab-plan-work, role: proof }
+  - title: "Livrer à plusieurs"
+    summary: "Branches protégées, merge requests et workflow d'équipe"
+    contents:
+      - { slug: gitlab-merge-requests }
+      - { slug: gitlab-team-workflow }
+      - { slug: gitlab-team-workflow-challenge, role: proof }
