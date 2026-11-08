@@ -1,0 +1,37 @@
+title: "Être opérationnel avec Git"
+description: "Enregistrer son travail, brancher, collaborer, réparer ses erreurs et publier des versions : une compétence à la fois, à vérifier sur votre poste."
+level: beginner
+tags: [git]
+prerequisites: "Savoir utiliser un terminal, et avoir Git 2.28 ou plus récent."
+layers:
+  - title: "Travailler en local"
+    summary: "Enregistrer son travail et relire son historique"
+    contents:
+      - { slug: why-version-control, role: read-first }
+      - { slug: git-first-commits }
+      - { slug: git-commit-snapshot }
+      - { slug: git-first-commits-challenge, role: proof }
+  - title: "Utiliser les branches"
+    summary: "Travailler en parallèle et fusionner, conflits compris"
+    contents:
+      - { slug: git-branches-merge }
+      - { slug: git-branch-pointer }
+      - { slug: git-conflict-challenge, role: proof }
+  - title: "Travailler en remote"
+    summary: "Partager son travail avec un dépôt distant"
+    contents:
+      - { slug: git-remotes }
+      - { slug: git-remote-tracking }
+      - { slug: git-diverged-challenge, role: proof }
+  - title: "Réparer"
+    summary: "Annuler, réécrire et reporter des commits sans rien perdre"
+    contents:
+      - { slug: git-undo }
+      - { slug: git-rebase-cherry-pick }
+      - { slug: git-repair-challenge, role: proof }
+  - title: "S'organiser"
+    summary: "Choisir un workflow et publier des versions"
+    contents:
+      - { slug: git-workflows, role: read-first }
+      - { slug: git-release-flow }
+      - { slug: git-release-challenge, role: proof }
