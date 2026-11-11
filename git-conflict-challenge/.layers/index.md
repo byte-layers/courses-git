@@ -21,7 +21,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 
 - **Ce qu'il faut savoir** : ce qu'enseigne [Travailler en parallèle avec les branches](https://byte-layers.com/fr/skills/git-branches-merge).
 - **Ce qu'il faut avoir** : Git 2.28 ou plus récent, votre identité réglée, et un terminal (Git Bash sous Windows).
-- **Un dépôt de départ** : `~/layers-git/l2-challenge` est créé pour vous à l'ouverture. Il contient le projet `statuspage`, avec la branche `main` et deux branches prêtes à être fusionnées, `feature/seuil-bas` et `feature/seuil-haut`. La dernière tâche le supprime.
+- **Un dépôt de départ** : `~/byte-layers/git/l2-challenge` est créé pour vous à l'ouverture. Il contient le projet `statuspage`, avec la branche `main` et deux branches prêtes à être fusionnées, `feature/seuil-bas` et `feature/seuil-haut`. La dernière tâche le supprime.
 - **L'ordre compte** : chaque tâche reprend l'état laissé par la précédente.
 
 # Tâche 1 : une nouveauté en avance rapide
@@ -29,7 +29,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 ## Ajouter une bannière sur une branche et la fusionner
 
 ```setup
-D=~/layers-git/l2-challenge
+D=~/byte-layers/git/l2-challenge
 if [ ! -d "$D/.git" ]; then
   mkdir -p "$D" && cd "$D" && git init -q -b main
   G="git -c user.name=byte_layers -c user.email=contact@byte-layers.com"
@@ -46,7 +46,7 @@ if [ ! -d "$D/.git" ]; then
 fi
 ```
 
-Le dépôt de départ se trouve dans `~/layers-git/l2-challenge`. Créez-y une branche `feature/banniere`, ajoutez une ligne contenant le mot `Maintenance` à `index.html` dans un commit, puis amenez ce travail sur `main`.
+Le dépôt de départ se trouve dans `~/byte-layers/git/l2-challenge`. Créez-y une branche `feature/banniere`, ajoutez une ligne contenant le mot `Maintenance` à `index.html` dans un commit, puis amenez ce travail sur `main`.
 
 **Critères :**
 
@@ -65,7 +65,7 @@ Une fusion se lance depuis la branche qui reçoit le travail.
 ```
 
 ```verify
-D=~/layers-git/l2-challenge
+D=~/byte-layers/git/l2-challenge
 if ! git -C "$D" show-ref --verify --quiet refs/heads/feature/banniere; then
   echo "La branche feature/banniere n'existe pas."
   exit 1
@@ -99,9 +99,9 @@ echo "La bannière est sur main, en avance rapide."
 
 ````solution
 ```bash
-cd ~/layers-git/l2-challenge && git switch -c feature/banniere
-cd ~/layers-git/l2-challenge && echo '<p>Maintenance prévue</p>' >> index.html && git commit -am "Ajoute la bannière"
-cd ~/layers-git/l2-challenge && git switch main && git merge feature/banniere
+cd ~/byte-layers/git/l2-challenge && git switch -c feature/banniere
+cd ~/byte-layers/git/l2-challenge && echo '<p>Maintenance prévue</p>' >> index.html && git commit -am "Ajoute la bannière"
+cd ~/byte-layers/git/l2-challenge && git switch main && git merge feature/banniere
 ```
 ````
 
@@ -122,7 +122,7 @@ Sans option, Git ouvrira un éditeur pour le message du commit. Une option de `g
 ```
 
 ```verify
-D=~/layers-git/l2-challenge
+D=~/byte-layers/git/l2-challenge
 if ! git -C "$D" merge-base --is-ancestor feature/seuil-bas main; then
   echo "main ne contient pas encore le travail de feature/seuil-bas."
   exit 1
@@ -140,7 +140,7 @@ echo "Les deux historiques sont réunis."
 
 ````solution
 ```bash
-cd ~/layers-git/l2-challenge && git merge --no-edit feature/seuil-bas
+cd ~/byte-layers/git/l2-challenge && git merge --no-edit feature/seuil-bas
 ```
 ````
 
@@ -166,7 +166,7 @@ Après avoir corrigé le fichier, deux commandes concluent la fusion, et la prem
 ```
 
 ```verify
-D=~/layers-git/l2-challenge
+D=~/byte-layers/git/l2-challenge
 if git -C "$D" rev-parse -q --verify MERGE_HEAD >/dev/null; then
   echo "Une fusion est encore en cours : terminez-la."
   exit 1
@@ -188,9 +188,9 @@ echo "Le conflit est résolu : 10 minutes."
 
 ````solution
 ```bash
-cd ~/layers-git/l2-challenge && git merge feature/seuil-haut
-printf '# Runbook\n\nAlerte au bout de : 10 minutes\n' > ~/layers-git/l2-challenge/runbook.md
-cd ~/layers-git/l2-challenge && git add runbook.md && git commit --no-edit
+cd ~/byte-layers/git/l2-challenge && git merge feature/seuil-haut
+printf '# Runbook\n\nAlerte au bout de : 10 minutes\n' > ~/byte-layers/git/l2-challenge/runbook.md
+cd ~/byte-layers/git/l2-challenge && git add runbook.md && git commit --no-edit
 ```
 ````
 
@@ -207,7 +207,7 @@ L'option qui supprime une branche refuse de le faire si elle n'est pas fusionné
 ```
 
 ```verify
-D=~/layers-git/l2-challenge
+D=~/byte-layers/git/l2-challenge
 if [ "$(git -C "$D" for-each-ref --format='%(refname:short)' refs/heads/ | tr -d '\n')" != "main" ]; then
   echo "Il devrait ne rester que la branche main."
   exit 1
@@ -217,7 +217,7 @@ echo "Il ne reste que main."
 
 ````solution
 ```bash
-cd ~/layers-git/l2-challenge && git branch -d feature/banniere feature/seuil-bas feature/seuil-haut
+cd ~/byte-layers/git/l2-challenge && git branch -d feature/banniere feature/seuil-bas feature/seuil-haut
 ```
 ````
 
@@ -225,13 +225,13 @@ cd ~/layers-git/l2-challenge && git branch -d feature/banniere feature/seuil-bas
 
 ## Supprimer le dossier du challenge
 
-Supprimez le dossier `~/layers-git/l2-challenge` et tout ce qu'il contient. Vérifiez d'abord que votre terminal ne se trouve pas dedans.
+Supprimez le dossier `~/byte-layers/git/l2-challenge` et tout ce qu'il contient. Vérifiez d'abord que votre terminal ne se trouve pas dedans.
 
-**Critère :** le dossier `~/layers-git/l2-challenge` n'existe plus.
+**Critère :** le dossier `~/byte-layers/git/l2-challenge` n'existe plus.
 
 ```verify
-if [ -e ~/layers-git/l2-challenge ]; then
-  echo "Le dossier ~/layers-git/l2-challenge existe encore."
+if [ -e ~/byte-layers/git/l2-challenge ]; then
+  echo "Le dossier ~/byte-layers/git/l2-challenge existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé. Challenge terminé."
@@ -239,6 +239,6 @@ echo "Le dossier est supprimé. Challenge terminé."
 
 ````solution
 ```bash
-cd ~ && rm -rf ~/layers-git/l2-challenge
+cd ~ && rm -rf ~/byte-layers/git/l2-challenge
 ```
 ````

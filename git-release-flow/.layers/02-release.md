@@ -10,8 +10,8 @@ description: "Stabiliser sur release/1.0.0, fusionner dans main, poser un tag, r
 Créez la branche et finalisez la version. Ici, cela consiste à écrire le numéro de version dans un fichier :
 
 ```exec
-cd ~/layers-git/l5-release/depot && git switch -c release/1.0.0
-cd ~/layers-git/l5-release/depot && echo '1.0.0' > VERSION && git add VERSION && git commit -m "Prépare la version 1.0.0"
+cd ~/byte-layers/git/l5-release/depot && git switch -c release/1.0.0
+cd ~/byte-layers/git/l5-release/depot && echo '1.0.0' > VERSION && git add VERSION && git commit -m "Prépare la version 1.0.0"
 ```
 
 ## 02.2 - Fusionner dans main et poser un tag
@@ -19,15 +19,15 @@ cd ~/layers-git/l5-release/depot && echo '1.0.0' > VERSION && git add VERSION &&
 Un **tag** est un nom permanent attaché à un commit, utilisé pour marquer une version. Contrairement à une branche, il ne se déplace pas tout seul. Le numéro suit souvent la **gestion sémantique de version**, majeure, mineure et correctif, comme dans `1.0.0`. L'option `-a` crée un tag annoté, qui garde son auteur, sa date et un message :
 
 ```exec
-cd ~/layers-git/l5-release/depot && git switch main
-cd ~/layers-git/l5-release/depot && git merge --no-ff --no-edit release/1.0.0
-cd ~/layers-git/l5-release/depot && git tag -a v1.0.0 -m "Version 1.0.0"
+cd ~/byte-layers/git/l5-release/depot && git switch main
+cd ~/byte-layers/git/l5-release/depot && git merge --no-ff --no-edit release/1.0.0
+cd ~/byte-layers/git/l5-release/depot && git tag -a v1.0.0 -m "Version 1.0.0"
 ```
 
 Un simple `git push` n'envoie pas les tags, et il faut les nommer :
 
 ```exec
-cd ~/layers-git/l5-release/depot && git push origin main v1.0.0
+cd ~/byte-layers/git/l5-release/depot && git push origin main v1.0.0
 ```
 
 Git publie la branche et le tag :
@@ -38,7 +38,7 @@ Git publie la branche et le tag :
 ```
 
 ```verify
-S=~/layers-git/l5-release/serveur.git
+S=~/byte-layers/git/l5-release/serveur.git
 if ! git -C "$S" rev-parse -q --verify refs/tags/v1.0.0 >/dev/null; then
   echo "Le serveur n'a pas le tag v1.0.0."
   exit 1
@@ -61,13 +61,13 @@ echo "La version 1.0.0 est publiée et taguée."
 La branche de release a pu recevoir des ajustements, et `develop` doit les avoir aussi. Fusionnez-la, supprimez-la, et publiez :
 
 ```exec
-cd ~/layers-git/l5-release/depot && git switch develop
-cd ~/layers-git/l5-release/depot && git merge --no-ff --no-edit release/1.0.0
-cd ~/layers-git/l5-release/depot && git branch -d release/1.0.0 && git push
+cd ~/byte-layers/git/l5-release/depot && git switch develop
+cd ~/byte-layers/git/l5-release/depot && git merge --no-ff --no-edit release/1.0.0
+cd ~/byte-layers/git/l5-release/depot && git branch -d release/1.0.0 && git push
 ```
 
 ```verify
-S=~/layers-git/l5-release/serveur.git
+S=~/byte-layers/git/l5-release/serveur.git
 if [ "$(git -C "$S" show develop:VERSION 2>/dev/null)" != "1.0.0" ]; then
   echo "develop devrait contenir le fichier VERSION sur le serveur."
   exit 1

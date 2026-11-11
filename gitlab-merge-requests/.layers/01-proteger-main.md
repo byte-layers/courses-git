@@ -10,14 +10,14 @@ Sur un projet d'équipe, `main` doit rester stable. Une **branche protégée** l
 Créez un projet public nommé `statuspage-mr`, dans votre groupe ou votre espace personnel, avec **+**, **New project/repository**, **Create blank project**, et un README. Copiez son adresse **Clone with SSH** dans ce fichier, en remplaçant l'exemple :
 
 ```bash
-mkdir -p ~/layers-git/gitlab-mr
-echo 'git@gitlab.com:demo-votre-nom/statuspage-mr.git' > ~/layers-git/gitlab-mr/url
+mkdir -p ~/byte-layers/git/gitlab-mr
+echo 'git@gitlab.com:demo-votre-nom/statuspage-mr.git' > ~/byte-layers/git/gitlab-mr/url
 ```
 
 Clonez ensuite le projet :
 
 ```exec
-cd ~/layers-git/gitlab-mr && git clone "$(cat url)" statuspage
+cd ~/byte-layers/git/gitlab-mr && git clone "$(cat url)" statuspage
 ```
 
 ## 01.2 - Interdire les envois directs sur main
@@ -25,9 +25,9 @@ cd ~/layers-git/gitlab-mr && git clone "$(cat url)" statuspage
 Par défaut, GitLab protège déjà `main`, mais les Maintainers, dont vous faites partie, peuvent toujours y pousser. Vous allez fermer cette porte. Ouvrez **Settings**, **Repository**, et dépliez **Protected branches**. Sur la ligne `main`, réglez **Allowed to push and merge** sur **No one**, en laissant **Allowed to merge** sur **Maintainers**.
 
 ```verify
-C=$(cat ~/layers-git/gitlab-mr/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-mr/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-mr/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-mr/url."
   exit 1
 fi
 case "$C" in
@@ -53,8 +53,8 @@ echo "Plus personne ne peut pousser directement sur main."
 Faites un commit sur `main` et tentez de l'envoyer. Le refus est attendu :
 
 ```exec
-cd ~/layers-git/gitlab-mr/statuspage && echo '<h1>Statut</h1>' > index.html && git add index.html && git commit -m "Ajoute la page directement sur main"
-cd ~/layers-git/gitlab-mr/statuspage && git push
+cd ~/byte-layers/git/gitlab-mr/statuspage && echo '<h1>Statut</h1>' > index.html && git add index.html && git commit -m "Ajoute la page directement sur main"
+cd ~/byte-layers/git/gitlab-mr/statuspage && git push
 ```
 
 GitLab bloque l'envoi et explique pourquoi :
@@ -67,7 +67,7 @@ remote: GitLab: You are not allowed to push code to protected branches on this p
 Retirez ce commit local. `git reset --hard origin/main` ramène votre branche à l'état du serveur :
 
 ```exec
-cd ~/layers-git/gitlab-mr/statuspage && git reset --hard origin/main
+cd ~/byte-layers/git/gitlab-mr/statuspage && git reset --hard origin/main
 ```
 
 > 📖 [Branches protégées](https://docs.gitlab.com/user/project/repository/branches/protected/)

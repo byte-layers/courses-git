@@ -10,7 +10,7 @@ Votre rebase a réécrit un commit que le serveur connaissait déjà. Cette situ
 Tentez de publier. Le refus est attendu :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git push
+cd ~/byte-layers/git/l4-rebase/depot && git push
 ```
 
 Git refuse l'envoi :
@@ -28,7 +28,7 @@ Le serveur possède l'ancien commit, et votre branche ne le contient plus. Le te
 `--force-with-lease` remplace la branche distante, **à condition** qu'elle soit encore là où vous l'aviez vue au dernier contact. Si un collègue y a poussé entre-temps et que vous ne l'avez pas vu, Git refuse, là où `--force` aurait écrasé son travail :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git push --force-with-lease
+cd ~/byte-layers/git/l4-rebase/depot && git push --force-with-lease
 ```
 
 Le signe `+` signale un remplacement forcé :
@@ -42,9 +42,9 @@ Le signe `+` signale un remplacement forcé :
 Le serveur a maintenant la branche réécrite, et elle peut rejoindre `main` en avance rapide, sans commit de merge :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git switch main
-cd ~/layers-git/l4-rebase/depot && git merge feature/db
-cd ~/layers-git/l4-rebase/depot && git log --oneline --all --graph
+cd ~/byte-layers/git/l4-rebase/depot && git switch main
+cd ~/byte-layers/git/l4-rebase/depot && git merge feature/db
+cd ~/byte-layers/git/l4-rebase/depot && git log --oneline --all --graph
 ```
 
 La fourche a disparu de l'historique :
@@ -56,7 +56,7 @@ La fourche a disparu de l'historique :
 ```
 
 ```verify
-D=~/layers-git/l4-rebase
+D=~/byte-layers/git/l4-rebase
 if [ "$(git -C "$D/serveur.git" rev-parse feature/db)" != "$(git -C "$D/depot" rev-parse feature/db)" ]; then
   echo "Le serveur n'a pas la branche réécrite. Lancez git push --force-with-lease depuis feature/db."
   exit 1

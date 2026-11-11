@@ -25,7 +25,7 @@ Si vous pensez déjà savoir tout cela, tentez directement le challenge [Fusionn
 
 Cinq étapes à suivre dans l'ordre, environ 1 h 15 en tout. La première étape crée un petit projet `statuspage`, avec une page `index.html` et un `runbook.md`, que vous faites ensuite évoluer sur plusieurs branches.
 
-Vos fichiers vivent dans `~/layers-git/l2`. Comme dans le cours précédent, chaque commande de travail commence par `cd ~/layers-git/l2 &&` pour le bouton qui l'exécute, et un seul `cd` suffit quand vous tapez vous-même vos commandes. Votre terminal peut afficher les messages en français, et les identifiants de commit seront différents des exemples. La dernière étape supprime ce dossier.
+Vos fichiers vivent dans `~/byte-layers/git/l2`. Comme dans le cours précédent, chaque commande de travail commence par `cd ~/byte-layers/git/l2 &&` pour le bouton qui l'exécute, et un seul `cd` suffit quand vous tapez vous-même vos commandes. Votre terminal peut afficher les messages en français, et les identifiants de commit seront différents des exemples. La dernière étape supprime ce dossier.
 
 Ce cours utilise `git switch`, la commande actuelle pour changer de branche. Vous rencontrerez aussi `git checkout` en entreprise et dans la documentation, qui fait le même travail, en plus d'autres choses.
 

@@ -35,7 +35,7 @@ Les stages s'enchaînent, et les jobs d'un même stage tournent en parallèle.
 Créez le fichier à compléter :
 
 ```exec
-cat > ~/layers-git/ci-first/calculatrice/.gitlab-ci.yml <<'EOF'
+cat > ~/byte-layers/git/ci-first/calculatrice/.gitlab-ci.yml <<'EOF'
 stages:
   # TODO : déclarez un stage nommé test
 
@@ -48,14 +48,14 @@ tests:
 EOF
 ```
 
-Ouvrez `~/layers-git/ci-first/calculatrice/.gitlab-ci.yml` dans votre éditeur, et remplacez chaque `# TODO` en suivant l'exemple ci-dessus. En YAML, l'indentation compte : utilisez des espaces, et pas de tabulation. Pour valider sa syntaxe, vous pouvez le coller dans GitLab, avec **Build**, **Pipeline editor**, sans l'y enregistrer.
+Ouvrez `~/byte-layers/git/ci-first/calculatrice/.gitlab-ci.yml` dans votre éditeur, et remplacez chaque `# TODO` en suivant l'exemple ci-dessus. En YAML, l'indentation compte : utilisez des espaces, et pas de tabulation. Pour valider sa syntaxe, vous pouvez le coller dans GitLab, avec **Build**, **Pipeline editor**, sans l'y enregistrer.
 
 ## 02.3 - Publier et regarder le pipeline
 
 Publiez le fichier :
 
 ```exec
-cd ~/layers-git/ci-first/calculatrice && git add .gitlab-ci.yml && git commit -m "Ajoute le pipeline de tests" && git push
+cd ~/byte-layers/git/ci-first/calculatrice && git add .gitlab-ci.yml && git commit -m "Ajoute le pipeline de tests" && git push
 ```
 
 Sur GitLab, ouvrez **Build**, **Pipelines**. Le pipeline apparaît, passe à l'état **Running**, puis **Passed**. Cliquez sur le job `tests` pour lire sa **trace**, le journal de son exécution : vous y voyez l'image téléchargée, vos commandes, et le rapport de mocha.
@@ -82,9 +82,9 @@ tests:
 ````
 
 ```verify
-C=$(cat ~/layers-git/ci-first/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-first/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-first/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-first/url."
   exit 1
 fi
 case "$C" in

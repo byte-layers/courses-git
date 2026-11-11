@@ -25,6 +25,6 @@ Si vous pensez déjà savoir tout cela, tentez directement le challenge [Créer 
 
 Sept étapes à suivre dans l'ordre, environ une heure en tout. Vous construisez un petit dépôt, le projet `statuspage`, qui contient à la fois du code et de la documentation : la page `index.html` affiche l'état de services, et le fichier `runbook.md` décrit la marche à suivre en cas d'incident. Git traite les deux de la même façon.
 
-Vos fichiers vivent dans `~/layers-git/l1`, le signe `~` désignant votre dossier personnel. La dernière étape supprime ce dossier, et Git n'est pas modifié en dehors de votre identité, réglée une fois pour toutes.
+Vos fichiers vivent dans `~/byte-layers/git/l1`, le signe `~` désignant votre dossier personnel. La dernière étape supprime ce dossier, et Git n'est pas modifié en dehors de votre identité, réglée une fois pour toutes.
 
 **Sous Windows**, les commandes de ce cours se tapent dans le terminal **Git Bash**, livré avec Git. La première étape vous l'explique.

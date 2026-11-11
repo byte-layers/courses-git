@@ -19,6 +19,6 @@ Dans ce lab, vous faites vivre le projet `statuspage` selon Gitflow : deux fonct
 
 **Ce qu'il faut** : Git 2.28 ou plus récent, votre identité réglée, et un terminal (Git Bash sous Windows). Votre terminal peut afficher les messages en français.
 
-**Vos fichiers** vivent dans `~/layers-git/l5-release`, avec un dépôt `depot` et son serveur local. Chaque commande commence par `cd ~/layers-git/l5-release/depot &&` pour le bouton qui l'exécute. La dernière étape supprime ce dossier.
+**Vos fichiers** vivent dans `~/byte-layers/git/l5-release`, avec un dépôt `depot` et son serveur local. Chaque commande commence par `cd ~/byte-layers/git/l5-release/depot &&` pour le bouton qui l'exécute. La dernière étape supprime ce dossier.
 
 > 💡 **Remarque.** Ce lab n'utilise que des commandes Git standards. Il existe une commande `git flow` qui enchaîne ces gestes. L'implémentation la plus répandue n'est plus maintenue. Connaître les commandes sous-jacentes vous rend indépendant de l'outil.

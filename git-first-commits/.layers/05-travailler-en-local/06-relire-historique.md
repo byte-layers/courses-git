@@ -10,7 +10,7 @@ Vous avez maintenant quatre commits. Enregistrer n'a d'intérêt que si l'on peu
 `git log` affiche les commits du plus récent au plus ancien :
 
 ```exec
-cd ~/layers-git/l1 && git log
+cd ~/byte-layers/git/l1 && git log
 ```
 
 Chaque commit montre son identifiant complet, son auteur, sa date et son message. Si la liste dépasse l'écran, les flèches la font défiler et `q` la quitte. Le long code hexadécimal s'appelle le **hash** du commit, et il l'identifie de façon unique. La mention `HEAD -> main` dit que vous êtes sur la branche `main`, et que ce commit en est le dernier.
@@ -26,7 +26,7 @@ Date:   Sun Nov 8 22:56:10 2026 +0100
 L'option `--oneline` résume chaque commit en une ligne, et c'est la forme qu'on utilise le plus souvent :
 
 ```exec
-cd ~/layers-git/l1 && git log --oneline
+cd ~/byte-layers/git/l1 && git log --oneline
 ```
 
 Les sept premiers caractères du hash suffisent à désigner un commit, et ils seront différents chez vous :
@@ -69,7 +69,7 @@ Pour voir ce mécanisme s'animer, essayez le premier niveau de la **Séquence d'
 Vous avez déjà utilisé `git show` sur votre premier commit. Sans argument, il montre le dernier :
 
 ```exec
-cd ~/layers-git/l1 && git show
+cd ~/byte-layers/git/l1 && git show
 ```
 
 Vous y retrouvez la ligne ajoutée à `index.html`. Pour regarder un commit plus ancien, donnez-lui son hash. Dans le résultat de `git log --oneline`, copiez le hash de la dernière ligne, celui de votre tout premier commit, et placez-le après `git show`, en remplaçant celui de cet exemple :
@@ -81,7 +81,7 @@ git show 1f7561a
 Vous voyez le contenu du tout premier commit, celui qui a créé `index.html`.
 
 ```verify
-D=~/layers-git/l1
+D=~/byte-layers/git/l1
 N=$(git -C "$D" rev-list --count HEAD 2>/dev/null)
 if [ -z "$N" ] || [ "$N" -lt 4 ]; then
   echo "Votre historique devrait contenir au moins quatre commits. Reprenez la création de vos commits."

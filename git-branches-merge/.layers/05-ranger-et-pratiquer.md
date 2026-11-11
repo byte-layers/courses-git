@@ -10,11 +10,11 @@ Vous avez utilisé tous les gestes de base des branches. Il reste à ranger cell
 Les deux branches du seuil sont maintenant dans `main`, et vous pouvez supprimer leurs noms en une seule commande :
 
 ```exec
-cd ~/layers-git/l2 && git branch -d feature/seuil-bas feature/seuil-haut
+cd ~/byte-layers/git/l2 && git branch -d feature/seuil-bas feature/seuil-haut
 ```
 
 ```verify
-D=~/layers-git/l2
+D=~/byte-layers/git/l2
 if [ "$(git -C "$D" for-each-ref --format='%(refname:short)' refs/heads/ | tr -d '\n')" != "main" ]; then
   echo "Il devrait ne rester que la branche main. git branch vous montre les autres."
   exit 1
@@ -27,15 +27,15 @@ echo "Il ne reste que main."
 Créez une branche avec un commit que vous n'avez pas fusionné, puis tentez de la supprimer :
 
 ```exec
-cd ~/layers-git/l2 && git switch -c feature/brouillon
-cd ~/layers-git/l2 && echo 'brouillon' > notes.txt && git add notes.txt && git commit -m "Ajoute un brouillon"
-cd ~/layers-git/l2 && git switch main
+cd ~/byte-layers/git/l2 && git switch -c feature/brouillon
+cd ~/byte-layers/git/l2 && echo 'brouillon' > notes.txt && git add notes.txt && git commit -m "Ajoute un brouillon"
+cd ~/byte-layers/git/l2 && git switch main
 ```
 
 La tentative suivante doit échouer, et c'est ce qu'on veut constater. Elle affichera une erreur, sans aucun dégât :
 
 ```exec
-cd ~/layers-git/l2 && git branch -d feature/brouillon
+cd ~/byte-layers/git/l2 && git branch -d feature/brouillon
 ```
 
 Git refuse, parce que ce commit n'existe sur aucune autre branche :
@@ -48,11 +48,11 @@ hint: If you are sure you want to delete it, run 'git branch -D feature/brouillo
 Avec un `D` majuscule, vous lui dites que vous abandonnez ce travail en connaissance de cause. C'est le cas ici :
 
 ```exec
-cd ~/layers-git/l2 && git branch -D feature/brouillon
+cd ~/byte-layers/git/l2 && git branch -D feature/brouillon
 ```
 
 ```verify
-D=~/layers-git/l2
+D=~/byte-layers/git/l2
 if git -C "$D" show-ref --verify --quiet refs/heads/feature/brouillon; then
   echo "La branche feature/brouillon existe encore. Lancez git branch -D feature/brouillon."
   exit 1
@@ -84,12 +84,12 @@ Le graphe est également disponible dans votre éditeur : VS Code affiche l'hist
 Ce dossier ne servira plus, et vous pouvez le supprimer depuis votre dossier personnel. `rm -rf` efface le dossier et son contenu sans demander de confirmation :
 
 ```exec
-cd ~ && rm -rf ~/layers-git/l2
+cd ~ && rm -rf ~/byte-layers/git/l2
 ```
 
 ```verify
-if [ -e ~/layers-git/l2 ]; then
-  echo "Le dossier ~/layers-git/l2 existe encore."
+if [ -e ~/byte-layers/git/l2 ]; then
+  echo "Le dossier ~/byte-layers/git/l2 existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

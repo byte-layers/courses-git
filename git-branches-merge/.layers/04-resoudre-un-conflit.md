@@ -10,37 +10,37 @@ Un **conflit** survient quand deux branches modifient la même ligne, ou des lig
 Créez la première branche, qui abaisse le seuil. Cette commande réécrit tout le fichier, et seule la ligne du seuil change. L'option `-a` de `git commit` prépare les fichiers déjà suivis, et vous évite ici un `git add` :
 
 ```exec
-cd ~/layers-git/l2 && git switch -c feature/seuil-bas
-cat > ~/layers-git/l2/runbook.md <<'EOF'
+cd ~/byte-layers/git/l2 && git switch -c feature/seuil-bas
+cat > ~/byte-layers/git/l2/runbook.md <<'EOF'
 # Runbook
 
 Alerte au bout de : 2 minutes
 ## Contacts
 EOF
-cd ~/layers-git/l2 && git commit -am "Abaisse le seuil à 2 minutes"
+cd ~/byte-layers/git/l2 && git commit -am "Abaisse le seuil à 2 minutes"
 ```
 
 Repartez de `main` pour créer la seconde branche, qui relève ce même seuil :
 
 ```exec
-cd ~/layers-git/l2 && git switch main && git switch -c feature/seuil-haut
-cat > ~/layers-git/l2/runbook.md <<'EOF'
+cd ~/byte-layers/git/l2 && git switch main && git switch -c feature/seuil-haut
+cat > ~/byte-layers/git/l2/runbook.md <<'EOF'
 # Runbook
 
 Alerte au bout de : 10 minutes
 ## Contacts
 EOF
-cd ~/layers-git/l2 && git commit -am "Relève le seuil à 10 minutes"
+cd ~/byte-layers/git/l2 && git commit -am "Relève le seuil à 10 minutes"
 ```
 
 Revenez sur `main` et fusionnez la première branche. Tout se passe bien, c'est une avance rapide comme pour `feature/db` :
 
 ```exec
-cd ~/layers-git/l2 && git switch main && git merge feature/seuil-bas
+cd ~/byte-layers/git/l2 && git switch main && git merge feature/seuil-bas
 ```
 
 ```verify
-D=~/layers-git/l2
+D=~/byte-layers/git/l2
 if ! git -C "$D" merge-base --is-ancestor feature/seuil-bas main 2>/dev/null; then
   echo "feature/seuil-bas devrait être fusionnée dans main."
   exit 1
@@ -57,7 +57,7 @@ echo "main contient le seuil à 2 minutes, et feature/seuil-haut attend."
 Fusionnez maintenant la seconde branche. Elle modifie la ligne que `main` vient de changer :
 
 ```exec
-cd ~/layers-git/l2 && git merge feature/seuil-haut
+cd ~/byte-layers/git/l2 && git merge feature/seuil-haut
 ```
 
 Git s'arrête et nomme le fichier en cause :
@@ -71,7 +71,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 Votre dépôt est dans un état intermédiaire, que `git status` décrit, et il vous donne aussi la marche à suivre :
 
 ```exec
-cd ~/layers-git/l2 && git status
+cd ~/byte-layers/git/l2 && git status
 ```
 
 La section `Unmerged paths` liste les fichiers à résoudre :
@@ -90,7 +90,7 @@ Unmerged paths:
 Affichez le fichier pour voir comment Git a représenté le désaccord :
 
 ```exec
-cd ~/layers-git/l2 && cat runbook.md
+cd ~/byte-layers/git/l2 && cat runbook.md
 ```
 
 Git a écrit les deux versions dans le fichier, encadrées par des **marqueurs de conflit** :
@@ -118,7 +118,7 @@ Si vous préférez renoncer, `git merge --abort` remet le dépôt exactement com
 
 ## 04.3 - Décider, puis terminer la fusion
 
-Résoudre un conflit, c'est écrire le contenu final du fichier et retirer les trois marqueurs. La bonne réponse n'est pas forcément l'une des deux versions : ici, votre équipe tranche pour **5 minutes**. Ouvrez `runbook.md` avec l'une de ces commandes, depuis le dossier `~/layers-git/l2` :
+Résoudre un conflit, c'est écrire le contenu final du fichier et retirer les trois marqueurs. La bonne réponse n'est pas forcément l'une des deux versions : ici, votre équipe tranche pour **5 minutes**. Ouvrez `runbook.md` avec l'une de ces commandes, depuis le dossier `~/byte-layers/git/l2` :
 
 | Votre outil | La commande | Pour sauvegarder |
 |---|---|---|
@@ -138,7 +138,7 @@ VS Code affiche aussi des boutons pour accepter l'une ou l'autre version. Ici, a
 Si vous n'arrivez vraiment pas à éditer ce fichier, cette commande écrit le résultat à votre place. Essayez d'abord à la main, car c'est ce geste que vous referez au travail.
 
 ```exec
-cat > ~/layers-git/l2/runbook.md <<'EOF'
+cat > ~/byte-layers/git/l2/runbook.md <<'EOF'
 # Runbook
 
 Alerte au bout de : 5 minutes
@@ -149,19 +149,19 @@ EOF
 Vérifiez le résultat avant d'aller plus loin. Il ne doit rester ni marqueur, ni ligne à 10 minutes :
 
 ```exec
-cd ~/layers-git/l2 && cat runbook.md
+cd ~/byte-layers/git/l2 && cat runbook.md
 ```
 
 Indiquez ensuite à Git que ce fichier est résolu. C'est encore `git add` qui s'en charge, et il prend ici un sens particulier :
 
 ```exec
-cd ~/layers-git/l2 && git add runbook.md
+cd ~/byte-layers/git/l2 && git add runbook.md
 ```
 
 `git status` confirme qu'il ne reste plus qu'à conclure :
 
 ```exec
-cd ~/layers-git/l2 && git status
+cd ~/byte-layers/git/l2 && git status
 ```
 
 Git indique que tous les conflits sont réglés :
@@ -178,13 +178,13 @@ Changes to be committed:
 Terminez la fusion avec un commit, et gardez le message proposé :
 
 ```exec
-cd ~/layers-git/l2 && git commit --no-edit
+cd ~/byte-layers/git/l2 && git commit --no-edit
 ```
 
 Le haut du graphe montre le résultat, et le conflit a laissé un commit de merge ordinaire :
 
 ```exec
-cd ~/layers-git/l2 && git log --oneline --all --graph
+cd ~/byte-layers/git/l2 && git log --oneline --all --graph
 ```
 
 Les deux branches du seuil se rejoignent dans un nouveau commit :
@@ -199,7 +199,7 @@ Les deux branches du seuil se rejoignent dans un nouveau commit :
 ```
 
 ```verify
-D=~/layers-git/l2
+D=~/byte-layers/git/l2
 if git -C "$D" rev-parse -q --verify MERGE_HEAD >/dev/null; then
   echo "La fusion n'est pas terminée. Lancez git add, puis git commit --no-edit."
   exit 1

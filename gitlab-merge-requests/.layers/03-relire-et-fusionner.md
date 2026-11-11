@@ -20,14 +20,14 @@ Cette animation résume le chemin parcouru :
 Mettez à jour votre poste :
 
 ```exec
-cd ~/layers-git/gitlab-mr/statuspage && git switch main && git pull
-cd ~/layers-git/gitlab-mr/statuspage && ls
+cd ~/byte-layers/git/gitlab-mr/statuspage && git switch main && git pull
+cd ~/byte-layers/git/gitlab-mr/statuspage && ls
 ```
 
 ```verify
-C=$(cat ~/layers-git/gitlab-mr/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-mr/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-mr/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-mr/url."
   exit 1
 fi
 case "$C" in
@@ -44,7 +44,7 @@ if ! curl -fsS "$A/issues?state=closed" 2>/dev/null | grep -q '"type":"ISSUE"'; 
   echo "L'issue n'est pas fermée. Le message du commit doit contenir Closes suivi de son numéro."
   exit 1
 fi
-if [ ! -f ~/layers-git/gitlab-mr/statuspage/index.html ]; then
+if [ ! -f ~/byte-layers/git/gitlab-mr/statuspage/index.html ]; then
   echo "index.html n'est pas encore sur votre poste. Lancez git pull depuis main."
   exit 1
 fi

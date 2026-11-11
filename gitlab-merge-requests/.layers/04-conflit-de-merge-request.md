@@ -10,8 +10,8 @@ Deux merge requests peuvent modifier la même ligne. La première passe, et la s
 Créez deux branches depuis `main`, qui fixent chacune une valeur différente pour le seuil :
 
 ```exec
-cd ~/layers-git/gitlab-mr/statuspage && git switch -c feature/seuil-bas && echo 'Seuil : 2 minutes' > seuil.txt && git add seuil.txt && git commit -m "Fixe le seuil à 2 minutes" && git push -u origin feature/seuil-bas
-cd ~/layers-git/gitlab-mr/statuspage && git switch main && git switch -c feature/seuil-haut && echo 'Seuil : 10 minutes' > seuil.txt && git add seuil.txt && git commit -m "Fixe le seuil à 10 minutes" && git push -u origin feature/seuil-haut
+cd ~/byte-layers/git/gitlab-mr/statuspage && git switch -c feature/seuil-bas && echo 'Seuil : 2 minutes' > seuil.txt && git add seuil.txt && git commit -m "Fixe le seuil à 2 minutes" && git push -u origin feature/seuil-bas
+cd ~/byte-layers/git/gitlab-mr/statuspage && git switch main && git switch -c feature/seuil-haut && echo 'Seuil : 10 minutes' > seuil.txt && git add seuil.txt && git commit -m "Fixe le seuil à 10 minutes" && git push -u origin feature/seuil-haut
 ```
 
 Sur GitLab, ouvrez une merge request pour chacune, vers `main`, puis fusionnez celle de `feature/seuil-bas`.
@@ -32,31 +32,31 @@ Deux boutons vous proposent de résoudre : **Resolve conflicts** dans le navigat
 Sur la branche en conflit, récupérez `main` et fusionnez-la. Le conflit est attendu :
 
 ```exec
-cd ~/layers-git/gitlab-mr/statuspage && git fetch
-cd ~/layers-git/gitlab-mr/statuspage && git merge origin/main
+cd ~/byte-layers/git/gitlab-mr/statuspage && git fetch
+cd ~/byte-layers/git/gitlab-mr/statuspage && git merge origin/main
 ```
 
-Ouvrez le fichier avec votre éditeur, en donnant son chemin complet, par exemple `code ~/layers-git/gitlab-mr/statuspage/seuil.txt`. Faites-lui contenir une seule ligne, `Seuil : 5 minutes`, sans aucun marqueur, puis sauvegardez-le.
+Ouvrez le fichier avec votre éditeur, en donnant son chemin complet, par exemple `code ~/byte-layers/git/gitlab-mr/statuspage/seuil.txt`. Faites-lui contenir une seule ligne, `Seuil : 5 minutes`, sans aucun marqueur, puis sauvegardez-le.
 
 Si vous n'arrivez vraiment pas à éditer ce fichier, cette commande écrit le résultat à votre place :
 
 ```exec
-echo 'Seuil : 5 minutes' > ~/layers-git/gitlab-mr/statuspage/seuil.txt
+echo 'Seuil : 5 minutes' > ~/byte-layers/git/gitlab-mr/statuspage/seuil.txt
 ```
 
 Terminez la fusion et publiez. `--no-edit` garde le message proposé par Git :
 
 ```exec
-cd ~/layers-git/gitlab-mr/statuspage && git add seuil.txt && git commit --no-edit
-cd ~/layers-git/gitlab-mr/statuspage && git push
+cd ~/byte-layers/git/gitlab-mr/statuspage && git add seuil.txt && git commit --no-edit
+cd ~/byte-layers/git/gitlab-mr/statuspage && git push
 ```
 
 Rechargez la merge request : le blocage a disparu. Cliquez sur **Merge**.
 
 ```verify
-C=$(cat ~/layers-git/gitlab-mr/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-mr/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-mr/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-mr/url."
   exit 1
 fi
 case "$C" in

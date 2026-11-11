@@ -10,13 +10,13 @@ Certains fichiers ne doivent jamais entrer dans un dépôt : un mot de passe, de
 Le fichier `.env` sert souvent à stocker des valeurs de configuration, parfois secrètes. Créez-en un, avec une valeur factice :
 
 ```exec
-cd ~/layers-git/l1 && echo 'TOKEN=valeur-de-demonstration' > .env
+cd ~/byte-layers/git/l1 && echo 'TOKEN=valeur-de-demonstration' > .env
 ```
 
 L'option `--short` de `git status` donne une version courte de l'état, où `??` signifie non suivi :
 
 ```exec
-cd ~/layers-git/l1 && git status --short
+cd ~/byte-layers/git/l1 && git status --short
 ```
 
 La ligne qui apparaît concerne votre fichier sensible :
@@ -32,13 +32,13 @@ Le fichier est listé parmi ceux à ajouter, et un `git add .`, qui prépare tou
 Le fichier `.gitignore` liste ce que Git doit ignorer, à raison d'un motif par ligne. Créez-le :
 
 ```exec
-cd ~/layers-git/l1 && echo '.env' > .gitignore
+cd ~/byte-layers/git/l1 && echo '.env' > .gitignore
 ```
 
 Regardez de nouveau l'état du dépôt :
 
 ```exec
-cd ~/layers-git/l1 && git status --short
+cd ~/byte-layers/git/l1 && git status --short
 ```
 
 Le fichier `.env` a disparu de la liste, et c'est `.gitignore` qui apparaît à sa place :
@@ -50,8 +50,8 @@ Le fichier `.env` a disparu de la liste, et c'est `.gitignore` qui apparaît à 
 Enregistrez ce fichier : il fait partie du projet, et toute l'équipe profitera ainsi des mêmes règles.
 
 ```exec
-cd ~/layers-git/l1 && git add .gitignore
-cd ~/layers-git/l1 && git commit -m "Ignore le fichier .env"
+cd ~/byte-layers/git/l1 && git add .gitignore
+cd ~/byte-layers/git/l1 && git commit -m "Ignore le fichier .env"
 ```
 
 `.gitignore` accepte aussi des motifs comme `*.log` pour tous les journaux, ou `node_modules/` pour un dossier entier.
@@ -59,7 +59,7 @@ cd ~/layers-git/l1 && git commit -m "Ignore le fichier .env"
 > ⚠️ **`.gitignore` n'agit que sur les fichiers non suivis.** Un fichier déjà enregistré dans un commit reste suivi même si vous l'ajoutez ensuite à `.gitignore`, et un secret enregistré reste lisible dans l'historique. Si cela arrive, considérez le secret comme compromis et remplacez-le.
 
 ```verify
-D=~/layers-git/l1
+D=~/byte-layers/git/l1
 if ! git -C "$D" check-ignore -q .env; then
   echo "Git n'ignore pas .env. Vérifiez le contenu de .gitignore."
   exit 1
@@ -69,7 +69,7 @@ if ! git -C "$D" ls-tree --name-only HEAD | grep -qx .gitignore; then
   exit 1
 fi
 if [ -n "$(git -C "$D" log --all --oneline -- .env)" ]; then
-  echo ".env est entré dans l'historique. Supprimez ~/layers-git/l1 et reprenez le cours depuis la création du dépôt."
+  echo ".env est entré dans l'historique. Supprimez ~/byte-layers/git/l1 et reprenez le cours depuis la création du dépôt."
   exit 1
 fi
 echo ".env est ignoré, et .gitignore est enregistré."
@@ -80,12 +80,12 @@ echo ".env est ignoré, et .gitignore est enregistré."
 Ce dossier ne servira plus. Revenez d'abord dans votre dossier personnel, car on ne supprime pas le dossier où l'on se trouve, puis effacez-le avec `rm -rf`, où `-r` parcourt ses sous-dossiers et `-f` ne demande aucune confirmation. L'historique vivant dans `.git`, cette commande l'efface aussi, définitivement.
 
 ```exec
-cd ~ && rm -rf ~/layers-git/l1
+cd ~ && rm -rf ~/byte-layers/git/l1
 ```
 
 ```verify
-if [ -e ~/layers-git/l1 ]; then
-  echo "Le dossier ~/layers-git/l1 existe encore."
+if [ -e ~/byte-layers/git/l1 ]; then
+  echo "Le dossier ~/byte-layers/git/l1 existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

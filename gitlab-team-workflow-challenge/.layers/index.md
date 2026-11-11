@@ -21,7 +21,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 
 - **Ce qu'il faut savoir** : ce qu'enseigne [Livrer du code avec les merge requests](https://byte-layers.com/fr/skills/gitlab-merge-requests).
 - **Ce qu'il faut avoir** : un compte gratuit sur [gitlab.com](https://gitlab.com/) et Git. Les vérifications utilisent `curl`, livré avec Git Bash sous Windows.
-- **Un dossier de travail** : `~/layers-git/gitlab-challenge` est créé pour vous, et la dernière tâche le supprime.
+- **Un dossier de travail** : `~/byte-layers/git/gitlab-challenge` est créé pour vous, et la dernière tâche le supprime.
 - **L'ordre compte** : chaque tâche reprend l'état laissé par la précédente.
 
 # Tâche 1 : un projet protégé
@@ -29,10 +29,10 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 ## Créer le projet et protéger main
 
 ```setup
-mkdir -p ~/layers-git/gitlab-challenge
+mkdir -p ~/byte-layers/git/gitlab-challenge
 ```
 
-Créez un projet public nommé `statuspage-challenge`, avec un README. Écrivez son adresse de clonage dans `~/layers-git/gitlab-challenge/url`. Interdisez tout envoi direct sur `main`.
+Créez un projet public nommé `statuspage-challenge`, avec un README. Écrivez son adresse de clonage dans `~/byte-layers/git/gitlab-challenge/url`. Interdisez tout envoi direct sur `main`.
 
 **Critères :**
 
@@ -44,9 +44,9 @@ Le réglage se trouve dans **Settings**, **Repository**, **Protected branches**.
 ```
 
 ```verify
-C=$(cat ~/layers-git/gitlab-challenge/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-challenge/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-challenge/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-challenge/url."
   exit 1
 fi
 case "$C" in
@@ -72,7 +72,7 @@ fi
 ```
 
 ````solution
-Créez le projet, et enregistrez son adresse avec `echo 'adresse' > ~/layers-git/gitlab-challenge/url`. Dans **Protected branches**, réglez **Allowed to push and merge** sur **No one** pour `main`.
+Créez le projet, et enregistrez son adresse avec `echo 'adresse' > ~/byte-layers/git/gitlab-challenge/url`. Dans **Protected branches**, réglez **Allowed to push and merge** sur **No one** pour `main`.
 ````
 
 # Tâche 2 : livrer par merge request
@@ -92,9 +92,9 @@ Une phrase à placer dans le message du commit relie celui-ci à l'issue.
 ```
 
 ```verify
-C=$(cat ~/layers-git/gitlab-challenge/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-challenge/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-challenge/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-challenge/url."
   exit 1
 fi
 case "$C" in
@@ -138,9 +138,9 @@ La seconde merge request sera bloquée. Fusionnez `main` dans sa branche, sur vo
 ```
 
 ```verify
-C=$(cat ~/layers-git/gitlab-challenge/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-challenge/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-challenge/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-challenge/url."
   exit 1
 fi
 case "$C" in
@@ -180,9 +180,9 @@ Une fois la branche `main` à jour sur votre poste, un tag se crée puis se publ
 ```
 
 ```verify
-C=$(cat ~/layers-git/gitlab-challenge/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-challenge/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-challenge/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-challenge/url."
   exit 1
 fi
 case "$C" in
@@ -206,13 +206,13 @@ Sur `main` à jour, lancez `git tag -a v1.0 -m "Version 1.0"` puis `git push ori
 
 ## Supprimer le dossier du challenge
 
-Supprimez le dossier `~/layers-git/gitlab-challenge`. Vous pouvez aussi supprimer le projet sur GitLab.
+Supprimez le dossier `~/byte-layers/git/gitlab-challenge`. Vous pouvez aussi supprimer le projet sur GitLab.
 
-**Critère :** le dossier `~/layers-git/gitlab-challenge` n'existe plus.
+**Critère :** le dossier `~/byte-layers/git/gitlab-challenge` n'existe plus.
 
 ```verify
-if [ -e ~/layers-git/gitlab-challenge ]; then
-  echo "Le dossier ~/layers-git/gitlab-challenge existe encore."
+if [ -e ~/byte-layers/git/gitlab-challenge ]; then
+  echo "Le dossier ~/byte-layers/git/gitlab-challenge existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé. Challenge terminé."
@@ -220,6 +220,6 @@ echo "Le dossier est supprimé. Challenge terminé."
 
 ````solution
 ```bash
-cd ~ && rm -rf ~/layers-git/gitlab-challenge
+cd ~ && rm -rf ~/byte-layers/git/gitlab-challenge
 ```
 ````

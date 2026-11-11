@@ -22,17 +22,37 @@ Depuis la page du groupe, cliquez sur **New project**, puis **Create blank proje
 Validez avec **Create project**.
 
 > 💡 **Remarque.** Tout est public ici : le nom de votre groupe et l'adresse `user.email` de vos commits sont visibles. Si besoin, utilisez un pseudo et l'adresse *no-reply* que GitLab fournit dans **Edit profile**.
- Sur la page du projet, le bouton **Code** donne son adresse de clonage. Copiez celle de **Clone with SSH**, puis enregistrez-la dans ce fichier, en remplaçant l'exemple par votre adresse. Les vérifications de ce lab en auront besoin :
 
-```bash
-mkdir -p ~/layers-git/gitlab-first
-echo 'git@gitlab.com:demo-votre-nom/statuspage.git' > ~/layers-git/gitlab-first/url
+## 02.3 - Préparer le dossier du lab
+
+Tous les labs de byte_layers rangent leurs fichiers sous `~/byte-layers`, un dossier par sujet. Celui-ci travaille dans `~/byte-layers/git/gitlab-first`. Créez-le : `mkdir -p` crée le dossier et, au besoin, les dossiers parents qui manquent.
+
+```exec
+mkdir -p ~/byte-layers/git/gitlab-first
+```
+
+## 02.4 - Noter l'adresse du projet pour les vérifications
+
+Sur la page du projet, le bouton **Code** donne son adresse de clonage. Copiez celle de **Clone with SSH** : elle ressemble à `git@gitlab.com:demo-votre-nom/statuspage.git`.
+
+Les boutons de vérification de ce lab ont besoin de connaître votre projet. Vous leur donnez son adresse en l'écrivant dans un fichier nommé `url`, dans le dossier du lab. Cette étape sert seulement aux vérifications : Git, lui, n'en a pas besoin.
+
+La commande `echo` affiche le texte entre apostrophes, et `>` envoie ce texte dans le fichier au lieu de l'écran. Remplacez l'adresse d'exemple par la vôtre avant de lancer la commande :
+
+```exec
+echo 'git@gitlab.com:demo-votre-nom/statuspage.git' > ~/byte-layers/git/gitlab-first/url
+```
+
+Vérifiez que le fichier contient bien votre adresse. `cat` affiche le contenu d'un fichier :
+
+```exec
+cat ~/byte-layers/git/gitlab-first/url
 ```
 
 ```verify
-C=$(cat ~/layers-git/gitlab-first/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-first/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-first/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-first/url."
   exit 1
 fi
 case "$C" in
@@ -48,7 +68,7 @@ fi
 echo "Le projet existe et il est public."
 ```
 
-## 02.3 - Donner un rôle à un membre
+## 02.5 - Donner un rôle à un membre
 
 Dans le menu du projet, ouvrez **Manage**, puis **Members**. Le bouton **Invite members** ajoute une personne avec un **rôle**, qui définit ce qu'elle peut faire :
 

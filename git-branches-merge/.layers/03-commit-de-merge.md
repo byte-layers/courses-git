@@ -10,23 +10,23 @@ Dans une équipe, `main` avance pendant que vous travaillez. Les deux lignes d'h
 `git switch -c` crée une branche et s'y place d'un coup, ce qui remplace `git branch` suivi de `git switch`. Ajoutez l'état de l'API sur une nouvelle branche :
 
 ```exec
-cd ~/layers-git/l2 && git switch -c feature/api
-cd ~/layers-git/l2 && echo '<p>API : OK</p>' >> index.html
-cd ~/layers-git/l2 && git add index.html && git commit -m "Affiche l'état de l'API"
+cd ~/byte-layers/git/l2 && git switch -c feature/api
+cd ~/byte-layers/git/l2 && echo '<p>API : OK</p>' >> index.html
+cd ~/byte-layers/git/l2 && git add index.html && git commit -m "Affiche l'état de l'API"
 ```
 
 Revenez sur `main` et enregistrez-y un autre changement, sur un autre fichier. Il simule le travail d'un collègue arrivé entre-temps :
 
 ```exec
-cd ~/layers-git/l2 && git switch main
-cd ~/layers-git/l2 && echo '## Contacts' >> runbook.md
-cd ~/layers-git/l2 && git add runbook.md && git commit -m "Ajoute les contacts"
+cd ~/byte-layers/git/l2 && git switch main
+cd ~/byte-layers/git/l2 && echo '## Contacts' >> runbook.md
+cd ~/byte-layers/git/l2 && git add runbook.md && git commit -m "Ajoute les contacts"
 ```
 
 Le graphe dessine maintenant une fourche, puisque chaque branche possède un commit que l'autre n'a pas :
 
 ```exec
-cd ~/layers-git/l2 && git log --oneline --all --graph
+cd ~/byte-layers/git/l2 && git log --oneline --all --graph
 ```
 
 Les deux lignes partent du même commit :
@@ -44,7 +44,7 @@ Les deux lignes partent du même commit :
 Fusionnez `feature/api` dans `main`. Git doit cette fois créer un nouveau commit, et il vous propose normalement d'en relire le message dans un éditeur. L'option `--no-edit` accepte directement ce message :
 
 ```exec
-cd ~/layers-git/l2 && git merge --no-edit feature/api
+cd ~/byte-layers/git/l2 && git merge --no-edit feature/api
 ```
 
 Git ne dit plus `Fast-forward`, et sa réponse nomme la stratégie de fusion utilisée :
@@ -58,7 +58,7 @@ Merge made by the 'ort' strategy.
 Sur le graphe, les deux lignes se rejoignent :
 
 ```exec
-cd ~/layers-git/l2 && git log --oneline --all --graph
+cd ~/byte-layers/git/l2 && git log --oneline --all --graph
 ```
 
 Le commit de merge apparaît tout en haut :
@@ -84,11 +84,11 @@ Cette animation montre la création de ce commit à deux parents :
 Supprimez la branche, désormais fusionnée :
 
 ```exec
-cd ~/layers-git/l2 && git branch -d feature/api
+cd ~/byte-layers/git/l2 && git branch -d feature/api
 ```
 
 ```verify
-D=~/layers-git/l2
+D=~/byte-layers/git/l2
 if [ "$(git -C "$D" rev-list --parents -n 1 HEAD | wc -w | tr -d ' ')" != "3" ]; then
   echo "Le dernier commit de main devrait être un commit de merge, avec deux parents."
   exit 1

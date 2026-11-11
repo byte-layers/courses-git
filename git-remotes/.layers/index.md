@@ -25,7 +25,7 @@ Si vous pensez déjà savoir tout cela, tentez directement le challenge [Échang
 
 Cinq étapes à suivre dans l'ordre, environ une heure en tout. Il ne vous faut **ni compte ni réseau** : le serveur sera un simple dossier de votre machine, et vous jouerez deux personnes, chacune dans son dossier.
 
-Vos fichiers vivent dans `~/layers-git/l3`. Chaque commande de travail commence par `cd` vers le bon poste, pour le bouton qui l'exécute et parce qu'ici vous passez sans cesse d'un poste à l'autre. La dernière étape supprime ce dossier.
+Vos fichiers vivent dans `~/byte-layers/git/l3`. Chaque commande de travail commence par `cd` vers le bon poste, pour le bouton qui l'exécute et parce qu'ici vous passez sans cesse d'un poste à l'autre. La dernière étape supprime ce dossier.
 
 Votre terminal peut afficher les messages en français, et les identifiants de commit seront différents des exemples.
 

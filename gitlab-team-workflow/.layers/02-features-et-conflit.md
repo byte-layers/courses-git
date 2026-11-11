@@ -10,19 +10,19 @@ Chaque personne développe sa user story en même temps que l'autre. Les deux mo
 Le poste A part de `develop` :
 
 ```exec
-cd ~/layers-git/gitlab-team/poste-a && git switch -c feature/1-u1 develop
-cd ~/layers-git/gitlab-team/poste-a && mkdir -p src && echo 'U1' > src/U1.txt && echo 'Hello world U1 !' > src/log.txt
-cd ~/layers-git/gitlab-team/poste-a && git add src && git commit -m "Ajoute U1" -m "Closes #1"
-cd ~/layers-git/gitlab-team/poste-a && git push -u origin feature/1-u1
+cd ~/byte-layers/git/gitlab-team/poste-a && git switch -c feature/1-u1 develop
+cd ~/byte-layers/git/gitlab-team/poste-a && mkdir -p src && echo 'U1' > src/U1.txt && echo 'Hello world U1 !' > src/log.txt
+cd ~/byte-layers/git/gitlab-team/poste-a && git add src && git commit -m "Ajoute U1" -m "Closes #1"
+cd ~/byte-layers/git/gitlab-team/poste-a && git push -u origin feature/1-u1
 ```
 
 Pendant ce temps, le poste B récupère `develop` depuis le serveur, et crée sa propre branche à partir du même point :
 
 ```exec
-cd ~/layers-git/gitlab-team/poste-b && git fetch && git switch -c feature/2-u2 origin/develop
-cd ~/layers-git/gitlab-team/poste-b && mkdir -p src && echo 'U2' > src/U2.txt && echo 'Hello from U2 !' > src/log.txt
-cd ~/layers-git/gitlab-team/poste-b && git add src && git commit -m "Ajoute U2" -m "Closes #2"
-cd ~/layers-git/gitlab-team/poste-b && git push -u origin feature/2-u2
+cd ~/byte-layers/git/gitlab-team/poste-b && git fetch && git switch -c feature/2-u2 origin/develop
+cd ~/byte-layers/git/gitlab-team/poste-b && mkdir -p src && echo 'U2' > src/U2.txt && echo 'Hello from U2 !' > src/log.txt
+cd ~/byte-layers/git/gitlab-team/poste-b && git add src && git commit -m "Ajoute U2" -m "Closes #2"
+cd ~/byte-layers/git/gitlab-team/poste-b && git push -u origin feature/2-u2
 ```
 
 ## 02.2 - Ouvrir les deux merge requests et fusionner U1
@@ -34,26 +34,26 @@ Sur GitLab, ouvrez une merge request vers `develop` pour chacune des deux branch
 Sur le poste B, fusionnez `develop` dans la branche. Le conflit est attendu :
 
 ```exec
-cd ~/layers-git/gitlab-team/poste-b && git fetch
-cd ~/layers-git/gitlab-team/poste-b && git merge origin/develop
+cd ~/byte-layers/git/gitlab-team/poste-b && git fetch
+cd ~/byte-layers/git/gitlab-team/poste-b && git merge origin/develop
 ```
 
-Ouvrez `~/layers-git/gitlab-team/poste-b/src/log.txt` dans votre éditeur, et gardez les deux lignes, sans marqueur. Si vous n'y arrivez pas, cette commande écrit le résultat à votre place :
+Ouvrez `~/byte-layers/git/gitlab-team/poste-b/src/log.txt` dans votre éditeur, et gardez les deux lignes, sans marqueur. Si vous n'y arrivez pas, cette commande écrit le résultat à votre place :
 
 ```exec
-printf 'Hello world U1 !\nHello from U2 !\n' > ~/layers-git/gitlab-team/poste-b/src/log.txt
+printf 'Hello world U1 !\nHello from U2 !\n' > ~/byte-layers/git/gitlab-team/poste-b/src/log.txt
 ```
 
 Terminez la fusion, publiez, puis fusionnez la merge request sur GitLab :
 
 ```exec
-cd ~/layers-git/gitlab-team/poste-b && git add src/log.txt && git commit --no-edit && git push
+cd ~/byte-layers/git/gitlab-team/poste-b && git add src/log.txt && git commit --no-edit && git push
 ```
 
 ```verify
-C=$(cat ~/layers-git/gitlab-team/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-team/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-team/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-team/url."
   exit 1
 fi
 case "$C" in

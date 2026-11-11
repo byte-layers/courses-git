@@ -10,7 +10,7 @@ Gitflow sépare ce qui est en production, sur `main`, de ce qui se prépare, sur
 Ce dépôt part d'un commit sur `main`, publié sur un serveur local :
 
 ```exec
-mkdir -p ~/layers-git/l5-release/depot && cd ~/layers-git/l5-release/depot && git init -b main
+mkdir -p ~/byte-layers/git/l5-release/depot && cd ~/byte-layers/git/l5-release/depot && git init -b main
 echo '<h1>Statut</h1>' > index.html && git add index.html && git commit -m "État initial"
 git init --bare -b main ../serveur.git
 git remote add origin ../serveur.git
@@ -20,12 +20,12 @@ git push -u origin main
 Créez `develop` à partir de `main`, et publiez-la, pour que toute l'équipe parte de la même base :
 
 ```exec
-cd ~/layers-git/l5-release/depot && git switch -c develop
-cd ~/layers-git/l5-release/depot && git push -u origin develop
+cd ~/byte-layers/git/l5-release/depot && git switch -c develop
+cd ~/byte-layers/git/l5-release/depot && git push -u origin develop
 ```
 
 ```verify
-if ! git -C ~/layers-git/l5-release/serveur.git show-ref --verify --quiet refs/heads/develop; then
+if ! git -C ~/byte-layers/git/l5-release/serveur.git show-ref --verify --quiet refs/heads/develop; then
   echo "Le serveur n'a pas la branche develop. Vérifiez votre identité avec git config --global user.name, puis reprenez cette section."
   exit 1
 fi
@@ -37,16 +37,16 @@ echo "Les branches main et develop existent sur le serveur."
 Une fonctionnalité part toujours de `develop` :
 
 ```exec
-cd ~/layers-git/l5-release/depot && git switch -c feature/api
-cd ~/layers-git/l5-release/depot && echo '<p>API : OK</p>' >> index.html && git commit -am "Affiche l'état de l'API"
+cd ~/byte-layers/git/l5-release/depot && git switch -c feature/api
+cd ~/byte-layers/git/l5-release/depot && echo '<p>API : OK</p>' >> index.html && git commit -am "Affiche l'état de l'API"
 ```
 
 Fusionnez-la dans `develop`. Comme `develop` n'a pas bougé, Git ferait une avance rapide (*fast-forward*), et la trace de la branche disparaîtrait. L'option `--no-ff` (*no fast-forward*) force la création d'un commit de merge, qui garde dans l'historique les contours de chaque fonctionnalité :
 
 ```exec
-cd ~/layers-git/l5-release/depot && git switch develop
-cd ~/layers-git/l5-release/depot && git merge --no-ff --no-edit feature/api
-cd ~/layers-git/l5-release/depot && git log --oneline --all --graph
+cd ~/byte-layers/git/l5-release/depot && git switch develop
+cd ~/byte-layers/git/l5-release/depot && git merge --no-ff --no-edit feature/api
+cd ~/byte-layers/git/l5-release/depot && git log --oneline --all --graph
 ```
 
 Le commit de merge garde la trace de la fonctionnalité :
@@ -62,14 +62,14 @@ Le commit de merge garde la trace de la fonctionnalité :
 Faites de même pour une seconde fonctionnalité, puis supprimez les branches terminées et publiez `develop` :
 
 ```exec
-cd ~/layers-git/l5-release/depot && git switch -c feature/db
-cd ~/layers-git/l5-release/depot && echo '<p>Base : OK</p>' >> index.html && git commit -am "Affiche l'état de la base"
-cd ~/layers-git/l5-release/depot && git switch develop && git merge --no-ff --no-edit feature/db
-cd ~/layers-git/l5-release/depot && git branch -d feature/api feature/db && git push
+cd ~/byte-layers/git/l5-release/depot && git switch -c feature/db
+cd ~/byte-layers/git/l5-release/depot && echo '<p>Base : OK</p>' >> index.html && git commit -am "Affiche l'état de la base"
+cd ~/byte-layers/git/l5-release/depot && git switch develop && git merge --no-ff --no-edit feature/db
+cd ~/byte-layers/git/l5-release/depot && git branch -d feature/api feature/db && git push
 ```
 
 ```verify
-D=~/layers-git/l5-release
+D=~/byte-layers/git/l5-release
 if [ "$(git -C "$D/serveur.git" rev-list --merges --count develop)" -lt 2 ]; then
   echo "develop devrait contenir deux commits de merge sur le serveur."
   exit 1

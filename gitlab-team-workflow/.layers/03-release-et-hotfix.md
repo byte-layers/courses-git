@@ -25,14 +25,14 @@ gitGraph
 Ouvrez une merge request de `develop` vers `main`. `develop` étant la branche par défaut, cliquez sur **Change branches** sur le formulaire pour choisir la cible `main`. **Décochez** **Delete source branch**, car `develop` doit rester. Fusionnez-la. Mettez ensuite à jour le poste A, et posez le tag de la version :
 
 ```exec
-cd ~/layers-git/gitlab-team/poste-a && git fetch && git switch main && git pull
-cd ~/layers-git/gitlab-team/poste-a && git tag -a v1.0.0 -m "Version 1.0.0" && git push origin v1.0.0
+cd ~/byte-layers/git/gitlab-team/poste-a && git fetch && git switch main && git pull
+cd ~/byte-layers/git/gitlab-team/poste-a && git tag -a v1.0.0 -m "Version 1.0.0" && git push origin v1.0.0
 ```
 
 ```verify
-C=$(cat ~/layers-git/gitlab-team/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-team/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-team/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-team/url."
   exit 1
 fi
 case "$C" in
@@ -57,9 +57,9 @@ echo "La version 1.0.0 est publiée sur main."
 Un bug est signalé en production. Le correctif part du tag, et doit rejoindre `main` et `develop` :
 
 ```exec
-cd ~/layers-git/gitlab-team/poste-a && git switch -c hotfix/1.0.1 v1.0.0
-cd ~/layers-git/gitlab-team/poste-a && echo 'Correctif urgent' > src/hotfix.txt && git add src/hotfix.txt && git commit -m "Corrige le bug en production"
-cd ~/layers-git/gitlab-team/poste-a && git push -u origin hotfix/1.0.1
+cd ~/byte-layers/git/gitlab-team/poste-a && git switch -c hotfix/1.0.1 v1.0.0
+cd ~/byte-layers/git/gitlab-team/poste-a && echo 'Correctif urgent' > src/hotfix.txt && git add src/hotfix.txt && git commit -m "Corrige le bug en production"
+cd ~/byte-layers/git/gitlab-team/poste-a && git push -u origin hotfix/1.0.1
 ```
 
 ## 03.3 - Publier le correctif et le reporter dans develop
@@ -67,16 +67,16 @@ cd ~/layers-git/gitlab-team/poste-a && git push -u origin hotfix/1.0.1
 Sur GitLab, ouvrez une merge request de `hotfix/1.0.1` vers `main`, avec **Change branches** pour choisir cette cible, en décochant **Delete source branch**, et fusionnez-la. Taguez ensuite la nouvelle version :
 
 ```exec
-cd ~/layers-git/gitlab-team/poste-a && git switch main && git pull
-cd ~/layers-git/gitlab-team/poste-a && git tag -a v1.0.1 -m "Version 1.0.1" && git push origin v1.0.1
+cd ~/byte-layers/git/gitlab-team/poste-a && git switch main && git pull
+cd ~/byte-layers/git/gitlab-team/poste-a && git tag -a v1.0.1 -m "Version 1.0.1" && git push origin v1.0.1
 ```
 
 Ouvrez enfin une merge request de `hotfix/1.0.1` vers `develop`, cette fois avec **Delete source branch** coché, et fusionnez-la.
 
 ```verify
-C=$(cat ~/layers-git/gitlab-team/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-team/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-team/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-team/url."
   exit 1
 fi
 case "$C" in
@@ -101,12 +101,12 @@ echo "Le correctif est sur main et sur develop."
 Vous pouvez aussi supprimer le projet sur GitLab, depuis **Settings**, **General**, **Advanced**, **Delete project**.
 
 ```exec
-cd ~ && rm -rf ~/layers-git/gitlab-team
+cd ~ && rm -rf ~/byte-layers/git/gitlab-team
 ```
 
 ```verify
-if [ -e ~/layers-git/gitlab-team ]; then
-  echo "Le dossier ~/layers-git/gitlab-team existe encore."
+if [ -e ~/byte-layers/git/gitlab-team ]; then
+  echo "Le dossier ~/byte-layers/git/gitlab-team existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

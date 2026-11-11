@@ -21,7 +21,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 
 - **Ce qu'il faut savoir** : ce qu'enseignent [Annuler ses erreurs avec Git](https://byte-layers.com/fr/skills/git-undo) et [Rebase et cherry-pick](https://byte-layers.com/fr/skills/git-rebase-cherry-pick).
 - **Ce qu'il faut avoir** : Git 2.28 ou plus récent, votre identité réglée, et un terminal (Git Bash sous Windows).
-- **Un dépôt abîmé** : `~/layers-git/l4-challenge/depot` et son serveur `serveur.git` sont créés pour vous à l'ouverture. Regardez son historique avant de commencer. La dernière tâche supprime tout.
+- **Un dépôt abîmé** : `~/byte-layers/git/l4-challenge/depot` et son serveur `serveur.git` sont créés pour vous à l'ouverture. Regardez son historique avant de commencer. La dernière tâche supprime tout.
 - **L'ordre compte** : chaque tâche reprend l'état laissé par la précédente.
 
 # Tâche 1 : un message à corriger
@@ -29,7 +29,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 ## Corriger le message du dernier commit
 
 ```setup
-D=~/layers-git/l4-challenge
+D=~/byte-layers/git/l4-challenge
 if [ ! -d "$D/depot/.git" ]; then
   mkdir -p "$D/depot" && git init -q --bare -b main "$D/serveur.git"
   cd "$D/depot" && git init -q -b main
@@ -61,7 +61,7 @@ Une option de `git commit` remplace le dernier commit au lieu d'en créer un nou
 ```
 
 ```verify
-D=~/layers-git/l4-challenge/depot
+D=~/byte-layers/git/l4-challenge/depot
 if git -C "$D" log --format=%s main | grep -q "astrinte"; then
   echo "Le message fautif est encore dans l'historique de main."
   exit 1
@@ -75,7 +75,7 @@ echo "Le message est corrigé."
 
 ````solution
 ```bash
-cd ~/layers-git/l4-challenge/depot && git commit --amend -m "Ajoute la procédure d'astreinte"
+cd ~/byte-layers/git/l4-challenge/depot && git commit --amend -m "Ajoute la procédure d'astreinte"
 ```
 ````
 
@@ -99,7 +99,7 @@ La commande qui crée un commit inverse accepte un hash.
 ```
 
 ```verify
-S=~/layers-git/l4-challenge/serveur.git
+S=~/byte-layers/git/l4-challenge/serveur.git
 if git -C "$S" show main:index.html | grep -q "PANNE"; then
   echo "index.html contient encore PANNE sur le serveur."
   exit 1
@@ -115,8 +115,8 @@ echo "Le commit est annulé sur le serveur, et l'historique est intact."
 Lisez le hash du commit avec `git log --oneline`, puis lancez `git revert --no-edit <hash>` et `git push`. La commande ci-dessous retrouve ce hash automatiquement :
 
 ```bash
-cd ~/layers-git/l4-challenge/depot && git revert --no-edit $(git log --format=%h --grep="Ajoute le bandeau" main | head -n 1)
-cd ~/layers-git/l4-challenge/depot && git push
+cd ~/byte-layers/git/l4-challenge/depot && git revert --no-edit $(git log --format=%h --grep="Ajoute le bandeau" main | head -n 1)
+cd ~/byte-layers/git/l4-challenge/depot && git push
 ```
 ````
 
@@ -141,7 +141,7 @@ Git tient un journal de tous les déplacements de `HEAD`.
 ```
 
 ```verify
-D=~/layers-git/l4-challenge/depot
+D=~/byte-layers/git/l4-challenge/depot
 if ! git -C "$D" show-ref --verify --quiet refs/heads/recuperation; then
   echo "La branche recuperation n'existe pas."
   exit 1
@@ -161,7 +161,7 @@ echo "Le commit perdu est retrouvé."
 Lisez le hash du commit avec `git reflog`, puis lancez `git branch recuperation <hash>`. La commande ci-dessous retrouve ce hash automatiquement :
 
 ```bash
-cd ~/layers-git/l4-challenge/depot && git branch recuperation $(git log -g --format=%h --grep="Ajoute le plan de reprise" | head -n 1)
+cd ~/byte-layers/git/l4-challenge/depot && git branch recuperation $(git log -g --format=%h --grep="Ajoute le plan de reprise" | head -n 1)
 ```
 ````
 
@@ -181,7 +181,7 @@ Une fusion amènerait les deux commits. Une autre commande en prend un seul.
 ```
 
 ```verify
-D=~/layers-git/l4-challenge/depot
+D=~/byte-layers/git/l4-challenge/depot
 if ! git -C "$D" show main:titre.txt >/dev/null 2>&1; then
   echo "main ne contient pas titre.txt."
   exit 1
@@ -195,7 +195,7 @@ echo "Seul le correctif est reporté."
 
 ````solution
 ```bash
-cd ~/layers-git/l4-challenge/depot && git switch main && git cherry-pick fix/page~1
+cd ~/byte-layers/git/l4-challenge/depot && git switch main && git cherry-pick fix/page~1
 ```
 ````
 
@@ -203,13 +203,13 @@ cd ~/layers-git/l4-challenge/depot && git switch main && git cherry-pick fix/pag
 
 ## Supprimer le dossier du challenge
 
-Supprimez le dossier `~/layers-git/l4-challenge` et tout ce qu'il contient. Vérifiez d'abord que votre terminal ne se trouve pas dedans.
+Supprimez le dossier `~/byte-layers/git/l4-challenge` et tout ce qu'il contient. Vérifiez d'abord que votre terminal ne se trouve pas dedans.
 
-**Critère :** le dossier `~/layers-git/l4-challenge` n'existe plus.
+**Critère :** le dossier `~/byte-layers/git/l4-challenge` n'existe plus.
 
 ```verify
-if [ -e ~/layers-git/l4-challenge ]; then
-  echo "Le dossier ~/layers-git/l4-challenge existe encore."
+if [ -e ~/byte-layers/git/l4-challenge ]; then
+  echo "Le dossier ~/byte-layers/git/l4-challenge existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé. Challenge terminé."
@@ -217,6 +217,6 @@ echo "Le dossier est supprimé. Challenge terminé."
 
 ````solution
 ```bash
-cd ~ && rm -rf ~/layers-git/l4-challenge
+cd ~ && rm -rf ~/byte-layers/git/l4-challenge
 ```
 ````

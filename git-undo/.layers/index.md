@@ -25,7 +25,7 @@ Si vous pensez déjà savoir tout cela, tentez directement le challenge [Répare
 
 Six étapes à suivre dans l'ordre, environ une heure en tout, chacune pour une situation différente. La première crée un petit projet `statuspage`.
 
-Vos fichiers vivent dans `~/layers-git/l4-undo`, et chaque commande commence par `cd ~/layers-git/l4-undo &&` pour le bouton qui l'exécute. Quand vous tapez vous-même vos commandes, un seul `cd` suffit. La dernière étape supprime ce dossier.
+Vos fichiers vivent dans `~/byte-layers/git/l4-undo`, et chaque commande commence par `cd ~/byte-layers/git/l4-undo &&` pour le bouton qui l'exécute. Quand vous tapez vous-même vos commandes, un seul `cd` suffit. La dernière étape supprime ce dossier.
 
 Votre terminal peut afficher les messages en français, et les identifiants de commit seront différents des exemples.
 

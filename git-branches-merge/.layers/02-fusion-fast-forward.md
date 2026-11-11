@@ -10,7 +10,7 @@ Le travail de `feature/db` est terminé, et il doit rejoindre `main`. C'est le c
 `--all` montre toutes les branches, et `--graph` dessine leurs liens. Cette commande vous servira à chaque étape, gardez-la sous la main :
 
 ```exec
-cd ~/layers-git/l2 && git log --oneline --all --graph
+cd ~/byte-layers/git/l2 && git log --oneline --all --graph
 ```
 
 Les commits forment encore une seule ligne, et `feature/db` est simplement en avance d'un commit sur `main` :
@@ -25,7 +25,7 @@ Les commits forment encore une seule ligne, et `feature/db` est simplement en av
 `git merge` amène sur la branche **où vous êtes** le travail de la branche que vous nommez. Vous êtes sur `main` et vous lui amenez `feature/db` :
 
 ```exec
-cd ~/layers-git/l2 && git merge feature/db
+cd ~/byte-layers/git/l2 && git merge feature/db
 ```
 
 Le mot important de la réponse est `Fast-forward` :
@@ -40,7 +40,7 @@ Fast-forward
 **Fast-forward**, ou « avance rapide », signifie que Git n'a rien eu à réunir : `main` n'avait pas bougé, et Git l'a simplement avancée jusqu'au dernier commit de `feature/db`. Le graphe le montre :
 
 ```exec
-cd ~/layers-git/l2 && git log --oneline --all --graph
+cd ~/byte-layers/git/l2 && git log --oneline --all --graph
 ```
 
 Les deux noms désignent maintenant le même commit :
@@ -55,7 +55,7 @@ L'animation montre que rien n'est réuni : seul le nom `main` se déplace.
 ![Animation : git merge feature/db en fast-forward, le nom main avance de C1 à C2 sans nouveau commit](assets/merge-fast-forward.gif)
 
 ```verify
-D=~/layers-git/l2
+D=~/byte-layers/git/l2
 if ! git -C "$D" merge-base --is-ancestor feature/db main 2>/dev/null; then
   echo "feature/db n'est pas encore fusionnée dans main. Lancez git merge feature/db depuis main."
   exit 1
@@ -72,7 +72,7 @@ echo "main contient le travail de feature/db."
 La branche a joué son rôle. La supprimer retire seulement ce nom, et les commits restent dans `main`. L'option `-d` n'accepte de supprimer qu'une branche déjà fusionnée, ce qui vous protège d'une perte :
 
 ```exec
-cd ~/layers-git/l2 && git branch -d feature/db
+cd ~/byte-layers/git/l2 && git branch -d feature/db
 ```
 
 Git confirme la suppression et rappelle le commit que désignait la branche :
@@ -82,7 +82,7 @@ Deleted branch feature/db (was cf259c4).
 ```
 
 ```verify
-D=~/layers-git/l2
+D=~/byte-layers/git/l2
 if git -C "$D" show-ref --verify --quiet refs/heads/feature/db; then
   echo "La branche feature/db existe encore. Lancez git branch -d feature/db."
   exit 1

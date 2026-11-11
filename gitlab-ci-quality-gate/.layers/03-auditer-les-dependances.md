@@ -10,8 +10,8 @@ Les dépendances peuvent contenir des failles connues. Le `package.json` de ce p
 `allow_failure: true` signale l'échec sans arrêter le pipeline, ce qui convient pour commencer à traiter un existant. `--audit-level=high` n'échoue qu'à partir des failles graves, `--json` donne le format, et `>` l'écrit dans un fichier conservé en artefact :
 
 ```exec
-cd ~/layers-git/ci-quality/calculatrice && git switch main && git pull
-cat > ~/layers-git/ci-quality/calculatrice/.gitlab-ci.yml <<'EOF'
+cd ~/byte-layers/git/ci-quality/calculatrice && git switch main && git pull
+cat > ~/byte-layers/git/ci-quality/calculatrice/.gitlab-ci.yml <<'EOF'
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
@@ -46,15 +46,15 @@ EOF
 Pour aller vite, vous poussez directement en tant que Maintainer. En équipe, ce changement passerait par une merge request :
 
 ```exec
-cd ~/layers-git/ci-quality/calculatrice && git add .gitlab-ci.yml && git commit -m "Ajoute un audit des dépendances" && git push
+cd ~/byte-layers/git/ci-quality/calculatrice && git add .gitlab-ci.yml && git commit -m "Ajoute un audit des dépendances" && git push
 ```
 
 Sur la page du pipeline, le job `audit` affiche un point d'exclamation orange : il a trouvé des failles, et le pipeline reste vert. Téléchargez `audit.json` depuis la page du job.
 
 ```verify
-C=$(cat ~/layers-git/ci-quality/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-quality/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-quality/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-quality/url."
   exit 1
 fi
 case "$C" in
@@ -80,12 +80,12 @@ echo "L'audit signale sans bloquer."
 Vous pouvez aussi supprimer le projet sur GitLab, depuis **Settings**, **General**, **Advanced**, **Delete project**.
 
 ```exec
-cd ~ && rm -rf ~/layers-git/ci-quality
+cd ~ && rm -rf ~/byte-layers/git/ci-quality
 ```
 
 ```verify
-if [ -e ~/layers-git/ci-quality ]; then
-  echo "Le dossier ~/layers-git/ci-quality existe encore."
+if [ -e ~/byte-layers/git/ci-quality ]; then
+  echo "Le dossier ~/byte-layers/git/ci-quality existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

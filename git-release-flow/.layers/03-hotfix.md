@@ -10,8 +10,8 @@ Un bug est signalé en production. Imaginez que `develop` contienne déjà du tr
 La commande `git switch -c` accepte un point de départ, ici le tag de la version en production. Le correctif se résume ici au numéro de version, qui passe à `1.0.1` :
 
 ```exec
-cd ~/layers-git/l5-release/depot && git switch -c hotfix/1.0.1 v1.0.0
-cd ~/layers-git/l5-release/depot && echo '1.0.1' > VERSION && git commit -am "Corrige la version en production"
+cd ~/byte-layers/git/l5-release/depot && git switch -c hotfix/1.0.1 v1.0.0
+cd ~/byte-layers/git/l5-release/depot && echo '1.0.1' > VERSION && git commit -am "Corrige la version en production"
 ```
 
 ## 03.2 - Publier le correctif dans main
@@ -19,14 +19,14 @@ cd ~/layers-git/l5-release/depot && echo '1.0.1' > VERSION && git commit -am "Co
 Vous reprenez les gestes de la release : fusion dans `main`, tag, publication.
 
 ```exec
-cd ~/layers-git/l5-release/depot && git switch main
-cd ~/layers-git/l5-release/depot && git merge --no-ff --no-edit hotfix/1.0.1
-cd ~/layers-git/l5-release/depot && git tag -a v1.0.1 -m "Version 1.0.1"
-cd ~/layers-git/l5-release/depot && git push origin main v1.0.1
+cd ~/byte-layers/git/l5-release/depot && git switch main
+cd ~/byte-layers/git/l5-release/depot && git merge --no-ff --no-edit hotfix/1.0.1
+cd ~/byte-layers/git/l5-release/depot && git tag -a v1.0.1 -m "Version 1.0.1"
+cd ~/byte-layers/git/l5-release/depot && git push origin main v1.0.1
 ```
 
 ```verify
-S=~/layers-git/l5-release/serveur.git
+S=~/byte-layers/git/l5-release/serveur.git
 if [ "$(git -C "$S" show v1.0.1:VERSION 2>/dev/null)" != "1.0.1" ]; then
   echo "Le tag v1.0.1 devrait exister sur le serveur, avec VERSION à 1.0.1."
   exit 1
@@ -39,13 +39,13 @@ echo "La version 1.0.1 est publiée."
 Sans cette étape, le bug reviendrait à la prochaine version. Fusionnez le hotfix dans `develop`, supprimez la branche, et publiez :
 
 ```exec
-cd ~/layers-git/l5-release/depot && git switch develop
-cd ~/layers-git/l5-release/depot && git merge --no-ff --no-edit hotfix/1.0.1
-cd ~/layers-git/l5-release/depot && git branch -d hotfix/1.0.1 && git push
+cd ~/byte-layers/git/l5-release/depot && git switch develop
+cd ~/byte-layers/git/l5-release/depot && git merge --no-ff --no-edit hotfix/1.0.1
+cd ~/byte-layers/git/l5-release/depot && git branch -d hotfix/1.0.1 && git push
 ```
 
 ```verify
-S=~/layers-git/l5-release/serveur.git
+S=~/byte-layers/git/l5-release/serveur.git
 if [ "$(git -C "$S" show develop:VERSION 2>/dev/null)" != "1.0.1" ]; then
   echo "develop devrait contenir le correctif sur le serveur."
   exit 1
@@ -58,12 +58,12 @@ echo "develop contient le correctif."
 Ce dossier ne servira plus, et vous pouvez le supprimer depuis votre dossier personnel. `rm -rf` efface le dossier et son contenu sans demander de confirmation :
 
 ```exec
-cd ~ && rm -rf ~/layers-git/l5-release
+cd ~ && rm -rf ~/byte-layers/git/l5-release
 ```
 
 ```verify
-if [ -e ~/layers-git/l5-release ]; then
-  echo "Le dossier ~/layers-git/l5-release existe encore."
+if [ -e ~/byte-layers/git/l5-release ]; then
+  echo "Le dossier ~/byte-layers/git/l5-release existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

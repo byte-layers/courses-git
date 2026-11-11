@@ -19,9 +19,9 @@ flowchart LR
 ````
 
 ```verify
-C=$(cat ~/layers-git/gitlab-plan/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-plan/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-plan/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-plan/url."
   exit 1
 fi
 case "$C" in
@@ -51,12 +51,12 @@ Les deux accueillent de la documentation, et le choix dépend de qui la lit et d
 Vous pouvez aussi supprimer le projet sur GitLab, depuis **Settings**, **General**, **Advanced**, **Delete project**.
 
 ```exec
-cd ~ && rm -rf ~/layers-git/gitlab-plan
+cd ~ && rm -rf ~/byte-layers/git/gitlab-plan
 ```
 
 ```verify
-if [ -e ~/layers-git/gitlab-plan ]; then
-  echo "Le dossier ~/layers-git/gitlab-plan existe encore."
+if [ -e ~/byte-layers/git/gitlab-plan ]; then
+  echo "Le dossier ~/byte-layers/git/gitlab-plan existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

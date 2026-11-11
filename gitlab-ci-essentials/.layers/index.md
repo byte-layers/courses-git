@@ -24,7 +24,7 @@ Ce cours s'adresse aux personnes qui ont écrit un premier pipeline, ce qu'ensei
 
 Cinq étapes, environ une heure. Le pipeline évolue à chaque étape : les commandes remplacent à chaque fois le fichier en entier, pour que vous puissiez comparer ce qui change. un compte gratuit sur [gitlab.com](https://gitlab.com/) et Git. Les vérifications utilisent `curl`, livré avec Git Bash sous Windows.
 
-Vos fichiers vivent dans `~/layers-git/ci-essentials`, et le projet doit rester **public**.
+Vos fichiers vivent dans `~/byte-layers/git/ci-essentials`, et le projet doit rester **public**.
 
 Sur gitlab.com, les jobs sont exécutés par des **runners partagés** : vous n'avez rien à installer. Si un job échoue en vous demandant de valider votre compte, suivez le lien affiché : GitLab demande par exemple un numéro de téléphone ou une carte bancaire, qui ne sera pas débitée. Les minutes de calcul sont limitées, et le détail se trouve sur la [page des tarifs](https://about.gitlab.com/pricing/).
 

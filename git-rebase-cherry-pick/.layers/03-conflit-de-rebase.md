@@ -10,17 +10,17 @@ Un rebase rejoue vos commits un par un, et chacun peut entrer en conflit. La ré
 Deux changements portent sur le même fichier, l'un sur une branche, l'autre sur `main` :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git switch -c feature/seuil
-cd ~/layers-git/l4-rebase/depot && echo 'Seuil : 2 minutes' > seuil.txt && git add seuil.txt && git commit -m "Fixe le seuil à 2 minutes"
-cd ~/layers-git/l4-rebase/depot && git switch main
-cd ~/layers-git/l4-rebase/depot && echo 'Seuil : 10 minutes' > seuil.txt && git add seuil.txt && git commit -m "Fixe le seuil à 10 minutes"
+cd ~/byte-layers/git/l4-rebase/depot && git switch -c feature/seuil
+cd ~/byte-layers/git/l4-rebase/depot && echo 'Seuil : 2 minutes' > seuil.txt && git add seuil.txt && git commit -m "Fixe le seuil à 2 minutes"
+cd ~/byte-layers/git/l4-rebase/depot && git switch main
+cd ~/byte-layers/git/l4-rebase/depot && echo 'Seuil : 10 minutes' > seuil.txt && git add seuil.txt && git commit -m "Fixe le seuil à 10 minutes"
 ```
 
 Replacez la branche au-dessus de `main`. Le conflit est attendu :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git switch feature/seuil
-cd ~/layers-git/l4-rebase/depot && git rebase main
+cd ~/byte-layers/git/l4-rebase/depot && git switch feature/seuil
+cd ~/byte-layers/git/l4-rebase/depot && git rebase main
 ```
 
 Git s'arrête sur le commit qui pose problème. La mention `add/add` indique que les deux côtés ont créé le même fichier :
@@ -35,7 +35,7 @@ hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
 Regardez le fichier, qui contient les marqueurs habituels :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && cat seuil.txt
+cd ~/byte-layers/git/l4-rebase/depot && cat seuil.txt
 ```
 
 Les deux versions sont encadrées par les marqueurs :
@@ -52,25 +52,25 @@ Seuil : 2 minutes
 
 ## 03.2 - Écrire le résultat et poursuivre avec --continue
 
-L'équipe tranche pour **5 minutes**. Ouvrez le fichier avec votre éditeur, en donnant son chemin complet, par exemple `code ~/layers-git/l4-rebase/depot/seuil.txt`, `notepad ~/layers-git/l4-rebase/depot/seuil.txt` ou `nano ~/layers-git/l4-rebase/depot/seuil.txt`. Faites en sorte que le fichier contienne une seule ligne, `Seuil : 5 minutes`, sans aucun marqueur, puis sauvegardez-le.
+L'équipe tranche pour **5 minutes**. Ouvrez le fichier avec votre éditeur, en donnant son chemin complet, par exemple `code ~/byte-layers/git/l4-rebase/depot/seuil.txt`, `notepad ~/byte-layers/git/l4-rebase/depot/seuil.txt` ou `nano ~/byte-layers/git/l4-rebase/depot/seuil.txt`. Faites en sorte que le fichier contienne une seule ligne, `Seuil : 5 minutes`, sans aucun marqueur, puis sauvegardez-le.
 
 Si vous n'arrivez vraiment pas à éditer ce fichier, cette commande écrit le résultat à votre place :
 
 ```exec
-echo 'Seuil : 5 minutes' > ~/layers-git/l4-rebase/depot/seuil.txt
+echo 'Seuil : 5 minutes' > ~/byte-layers/git/l4-rebase/depot/seuil.txt
 ```
 
 Marquez le fichier comme résolu, puis demandez à Git de continuer. L'option `-c core.editor=true` accepte le message du commit sans ouvrir d'éditeur, pour le bouton qui exécute la commande. Au quotidien, tapez simplement `git rebase --continue` : si Vim s'ouvre, quittez avec `:wq` puis Entrée :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git add seuil.txt
-cd ~/layers-git/l4-rebase/depot && git -c core.editor=true rebase --continue
+cd ~/byte-layers/git/l4-rebase/depot && git add seuil.txt
+cd ~/byte-layers/git/l4-rebase/depot && git -c core.editor=true rebase --continue
 ```
 
 Si vous préférez renoncer en plein milieu, `git rebase --abort` remet la branche exactement dans son état d'avant.
 
 ```verify
-D=~/layers-git/l4-rebase/depot
+D=~/byte-layers/git/l4-rebase/depot
 if [ -d "$D/.git/rebase-merge" ] || [ -d "$D/.git/rebase-apply" ]; then
   echo "Le rebase est encore en cours. Lancez git add seuil.txt, puis git -c core.editor=true rebase --continue."
   exit 1

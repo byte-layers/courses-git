@@ -10,9 +10,9 @@ description: "Les modes --soft, par défaut et --hard, et ce que chacun garde"
 Ajoutez un commit, que vous allez retirer de trois façons différentes :
 
 ```exec
-cd ~/layers-git/l4-undo && echo '<p>Base : OK</p>' >> index.html
-cd ~/layers-git/l4-undo && git commit -am "Affiche l'état de la base"
-cd ~/layers-git/l4-undo && git log --oneline
+cd ~/byte-layers/git/l4-undo && echo '<p>Base : OK</p>' >> index.html
+cd ~/byte-layers/git/l4-undo && git commit -am "Affiche l'état de la base"
+cd ~/byte-layers/git/l4-undo && git log --oneline
 ```
 
 La notation `HEAD~1` désigne le commit juste avant celui où vous êtes.
@@ -22,8 +22,8 @@ La notation `HEAD~1` désigne le commit juste avant celui où vous êtes.
 Avec `--soft`, le commit disparaît et son contenu reste dans la zone de préparation, prêt à être enregistré autrement :
 
 ```exec
-cd ~/layers-git/l4-undo && git reset --soft HEAD~1
-cd ~/layers-git/l4-undo && git status --short
+cd ~/byte-layers/git/l4-undo && git reset --soft HEAD~1
+cd ~/byte-layers/git/l4-undo && git status --short
 ```
 
 Le `M` en première colonne montre que le changement est préparé :
@@ -35,7 +35,7 @@ M  index.html
 Refaites le commit, avec un autre message :
 
 ```exec
-cd ~/layers-git/l4-undo && git commit -m "Affiche la base"
+cd ~/byte-layers/git/l4-undo && git commit -m "Affiche la base"
 ```
 
 ## 03.3 - Défaire le commit et garder le travail dans les fichiers avec --mixed
@@ -43,8 +43,8 @@ cd ~/layers-git/l4-undo && git commit -m "Affiche la base"
 Sans option, `git reset` utilise le mode `--mixed` : le commit disparaît, et le changement reste dans vos fichiers, non préparé :
 
 ```exec
-cd ~/layers-git/l4-undo && git reset HEAD~1
-cd ~/layers-git/l4-undo && git status --short
+cd ~/byte-layers/git/l4-undo && git reset HEAD~1
+cd ~/byte-layers/git/l4-undo && git status --short
 ```
 
 Le `M` est maintenant en deuxième colonne :
@@ -56,7 +56,7 @@ Le `M` est maintenant en deuxième colonne :
 Refaites encore le commit :
 
 ```exec
-cd ~/layers-git/l4-undo && git commit -am "Affiche la base"
+cd ~/byte-layers/git/l4-undo && git commit -am "Affiche la base"
 ```
 
 ## 03.4 - Tout effacer avec --hard
@@ -64,8 +64,8 @@ cd ~/layers-git/l4-undo && git commit -am "Affiche la base"
 Avec `--hard`, le commit disparaît, et vos fichiers reviennent à l'état du commit visé :
 
 ```exec
-cd ~/layers-git/l4-undo && git reset --hard HEAD~1
-cd ~/layers-git/l4-undo && cat index.html
+cd ~/byte-layers/git/l4-undo && git reset --hard HEAD~1
+cd ~/byte-layers/git/l4-undo && cat index.html
 ```
 
 La ligne sur la base a disparu :
@@ -90,7 +90,7 @@ Cette animation montre où se retrouve le changement avec chaque mode :
 ![Animation : git reset --soft laisse le changement en zone de préparation, git reset le laisse dans le dossier de travail, git reset --hard l'efface](assets/reset-modes.gif)
 
 ```verify
-D=~/layers-git/l4-undo
+D=~/byte-layers/git/l4-undo
 if grep -q "Base : OK" "$D/index.html"; then
   echo "index.html contient encore la ligne sur la base. Lancez git reset --hard HEAD~1."
   exit 1

@@ -10,7 +10,7 @@ Séparer les étapes rend un échec plus lisible. Vous allez isoler l'installati
 Remplacez le contenu du pipeline par ces deux stages :
 
 ```exec
-cat > ~/layers-git/ci-first/calculatrice/.gitlab-ci.yml <<'EOF'
+cat > ~/byte-layers/git/ci-first/calculatrice/.gitlab-ci.yml <<'EOF'
 stages:
   - build
   - test
@@ -28,7 +28,7 @@ tests:
   script:
     - npm test
 EOF
-cd ~/layers-git/ci-first/calculatrice && git add .gitlab-ci.yml && git commit -m "Sépare installation et tests" && git push
+cd ~/byte-layers/git/ci-first/calculatrice && git add .gitlab-ci.yml && git commit -m "Sépare installation et tests" && git push
 ```
 
 Le mot-clé `default` applique ici la même image à tous les jobs. Sur GitLab, le job `installation` réussit, et le job `tests` échoue :
@@ -44,7 +44,7 @@ Chaque job démarre dans un environnement neuf : les paquets installés par le p
 Un **artefact** est un fichier produit par un job et conservé par GitLab. Les jobs des stages suivants le reçoivent automatiquement. Complétez le job `installation` :
 
 ```exec
-cat > ~/layers-git/ci-first/calculatrice/.gitlab-ci.yml <<'EOF'
+cat > ~/byte-layers/git/ci-first/calculatrice/.gitlab-ci.yml <<'EOF'
 stages:
   - build
   - test
@@ -66,7 +66,7 @@ tests:
   script:
     - npm test
 EOF
-cd ~/layers-git/ci-first/calculatrice && git add .gitlab-ci.yml && git commit -m "Transmet les dépendances au job de tests" && git push
+cd ~/byte-layers/git/ci-first/calculatrice && git add .gitlab-ci.yml && git commit -m "Transmet les dépendances au job de tests" && git push
 ```
 
 `expire_in` limite la durée de conservation sur GitLab. Le pipeline réussit cette fois, avec ses deux stages.
@@ -74,9 +74,9 @@ cd ~/layers-git/ci-first/calculatrice && git add .gitlab-ci.yml && git commit -m
 > 💡 **Remarque.** Ce transfert sert à montrer l'isolation des jobs. Pour des dépendances, on préfère le cache.
 
 ```verify
-C=$(cat ~/layers-git/ci-first/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-first/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-first/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-first/url."
   exit 1
 fi
 case "$C" in
@@ -102,12 +102,12 @@ echo "Le pipeline à deux stages réussit."
 Vous pouvez aussi supprimer le projet sur GitLab, depuis **Settings**, **General**, **Advanced**, **Delete project**.
 
 ```exec
-cd ~ && rm -rf ~/layers-git/ci-first
+cd ~ && rm -rf ~/byte-layers/git/ci-first
 ```
 
 ```verify
-if [ -e ~/layers-git/ci-first ]; then
-  echo "Le dossier ~/layers-git/ci-first existe encore."
+if [ -e ~/byte-layers/git/ci-first ]; then
+  echo "Le dossier ~/byte-layers/git/ci-first existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

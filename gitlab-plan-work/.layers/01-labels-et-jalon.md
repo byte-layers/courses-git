@@ -6,8 +6,8 @@ description: "Classer les tâches et fixer une échéance"
 Avant de créer des tâches, on prépare la façon de les classer. Créez un nouveau projet public nommé `statuspage-plan`, dans votre groupe ou votre espace personnel, avec **+**, **New project/repository**, **Create blank project**, et un README, puis copiez son adresse **Clone with SSH** dans ce fichier :
 
 ```bash
-mkdir -p ~/layers-git/gitlab-plan
-echo 'git@gitlab.com:demo-votre-nom/statuspage-plan.git' > ~/layers-git/gitlab-plan/url
+mkdir -p ~/byte-layers/git/gitlab-plan
+echo 'git@gitlab.com:demo-votre-nom/statuspage-plan.git' > ~/byte-layers/git/gitlab-plan/url
 ```
 
 ## 01.1 - Créer des labels

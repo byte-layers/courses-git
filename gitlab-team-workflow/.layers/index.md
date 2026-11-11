@@ -21,6 +21,6 @@ Dans ce lab, deux personnes font vivre un projet selon **Gitflow**, un modèle d
 
 > 💡 **Remarque.** Gitflow convient surtout aux livraisons par versions. Ce lab l'utilise pour pratiquer les merge requests, sans en faire la norme.
 
-**Vos fichiers** vivent dans `~/layers-git/gitlab-team`, et le projet doit rester **public**.
+**Vos fichiers** vivent dans `~/byte-layers/git/gitlab-team`, et le projet doit rester **public**.
 
 **Sous Windows**, tapez les commandes dans le terminal **Git Bash**, livré avec Git.

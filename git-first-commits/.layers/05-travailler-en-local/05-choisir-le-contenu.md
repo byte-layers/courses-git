@@ -10,14 +10,14 @@ Vous connaissez maintenant les zones de Git, et vous allez vous en servir. Dans 
 Ajoutez un runbook, la fiche des procédures à suivre en cas d'incident, et faites apparaître l'API sur la page de statut. Le simple `>` crée ou remplace un fichier, alors que `>>` ajoute une ligne à la fin :
 
 ```exec
-cd ~/layers-git/l1 && echo '# Runbook' > runbook.md
-cd ~/layers-git/l1 && echo '<p>API : OK</p>' >> index.html
+cd ~/byte-layers/git/l1 && echo '# Runbook' > runbook.md
+cd ~/byte-layers/git/l1 && echo '<p>API : OK</p>' >> index.html
 ```
 
 Regardez comment Git classe ces deux changements :
 
 ```exec
-cd ~/layers-git/l1 && git status
+cd ~/byte-layers/git/l1 && git status
 ```
 
 Le fichier `index.html`, déjà suivi, est *modified*, et le fichier `runbook.md`, tout neuf, est *untracked* :
@@ -40,7 +40,7 @@ La commande `git restore` que suggère Git annule un changement. Elle sera au pr
 `git diff` montre ce que vous avez changé dans les fichiers suivis et pas encore préparés :
 
 ```exec
-cd ~/layers-git/l1 && git diff
+cd ~/byte-layers/git/l1 && git diff
 ```
 
 Les premières lignes désignent le fichier, la ligne `@@` situe le passage, et ensuite les lignes précédées de `+` sont ajoutées, celles précédées de `-` retirées. Si la sortie remplit l'écran, appuyez sur `q` pour la quitter.
@@ -79,13 +79,13 @@ Quand une ligne est modifiée plutôt qu'ajoutée, Git affiche l'ancienne versio
 Le runbook et l'affichage de l'API sont deux sujets : on parle d'un **commit partiel** quand on n'enregistre qu'une partie des changements en cours. Enregistrez-les séparément, en commençant par préparer le runbook seul.
 
 ```exec
-cd ~/layers-git/l1 && git add runbook.md
+cd ~/byte-layers/git/l1 && git add runbook.md
 ```
 
 `git status` montre alors les deux états côte à côte, ce qui entrera dans le commit et ce qui restera à l'écart :
 
 ```exec
-cd ~/layers-git/l1 && git status
+cd ~/byte-layers/git/l1 && git status
 ```
 
 La sortie sépare bien les deux fichiers :
@@ -104,24 +104,24 @@ Changes not staged for commit:
 Avant d'enregistrer, vous pouvez relire exactement ce qui entrera dans le commit. `git diff` seul ne montre toujours pas le runbook, et il faut lui ajouter `--staged` pour voir le contenu de la zone de préparation :
 
 ```exec
-cd ~/layers-git/l1 && git diff --staged
+cd ~/byte-layers/git/l1 && git diff --staged
 ```
 
 Enregistrez maintenant le runbook dans son propre commit :
 
 ```exec
-cd ~/layers-git/l1 && git commit -m "Ajoute le runbook"
+cd ~/byte-layers/git/l1 && git commit -m "Ajoute le runbook"
 ```
 
 Le changement sur `index.html` est resté dans votre dossier, sans être enregistré. Préparez-le et enregistrez-le à son tour, dans son propre commit :
 
 ```exec
-cd ~/layers-git/l1 && git add index.html
-cd ~/layers-git/l1 && git commit -m "Affiche l'état de l'API"
+cd ~/byte-layers/git/l1 && git add index.html
+cd ~/byte-layers/git/l1 && git commit -m "Affiche l'état de l'API"
 ```
 
 ```verify
-D=~/layers-git/l1
+D=~/byte-layers/git/l1
 SEUL_R=0; SEUL_I=0
 for C in $(git -C "$D" rev-list HEAD); do
   L=$(git -C "$D" show --name-only --format= "$C")

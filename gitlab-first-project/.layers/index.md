@@ -19,6 +19,6 @@ Dans ce lab, vous créez un groupe et un projet sur GitLab, vous donnez des droi
 
 **Ce qu'il faut** : un compte gratuit sur [gitlab.com](https://gitlab.com/) et Git. Les vérifications utilisent `curl`, livré avec Git Bash sous Windows. Si votre organisation a sa propre instance GitLab, remplacez `gitlab.com` par son adresse.
 
-**Vos fichiers** vivent dans `~/layers-git/gitlab-first`. La dernière étape supprime ce dossier. Sur GitLab, votre projet doit rester **public** pendant le lab : les boutons de vérification lisent son état sans se connecter.
+**Vos fichiers** vivent dans `~/byte-layers/git/gitlab-first`. La dernière étape supprime ce dossier. Sur GitLab, votre projet doit rester **public** pendant le lab : les boutons de vérification lisent son état sans se connecter.
 
 **Sous Windows**, tapez les commandes dans le terminal **Git Bash**, livré avec Git.

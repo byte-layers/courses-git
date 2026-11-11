@@ -21,6 +21,6 @@ Ce cours s'adresse aux personnes qui savent créer un projet GitLab et utiliser 
 
 ## Comment ça se passe
 
-Cinq étapes, environ une heure. Vous travaillez sur un projet GitLab public, `statuspage-mr`, et dans le dossier `~/layers-git/gitlab-mr`. un compte gratuit sur [gitlab.com](https://gitlab.com/) et Git. Les vérifications utilisent `curl`, livré avec Git Bash sous Windows.
+Cinq étapes, environ une heure. Vous travaillez sur un projet GitLab public, `statuspage-mr`, et dans le dossier `~/byte-layers/git/gitlab-mr`. un compte gratuit sur [gitlab.com](https://gitlab.com/) et Git. Les vérifications utilisent `curl`, livré avec Git Bash sous Windows.
 
 **Sous Windows**, tapez les commandes dans le terminal **Git Bash**, livré avec Git.

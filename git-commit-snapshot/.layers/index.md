@@ -24,7 +24,7 @@ Un **commit** enregistre l'état complet du projet à un instant donné, ce qu'o
 Créez un petit dépôt de deux commits. Ce sont les commandes du cours en prérequis, et le second commit ne change que `index.html`.
 
 ```exec
-mkdir -p ~/layers-git/l1-snapshot && cd ~/layers-git/l1-snapshot && git init -b main
+mkdir -p ~/byte-layers/git/l1-snapshot && cd ~/byte-layers/git/l1-snapshot && git init -b main
 echo '# Runbook' > runbook.md && echo '<h1>Statut des services</h1>' > index.html
 git add runbook.md index.html && git commit -m "État initial"
 echo '<p>API : OK</p>' >> index.html && git add index.html && git commit -m "Affiche l'état de l'API"
@@ -33,7 +33,7 @@ echo '<p>API : OK</p>' >> index.html && git add index.html && git commit -m "Aff
 `git cat-file -p` affiche le contenu brut d'un objet de Git, et `HEAD` désigne l'endroit où vous êtes, ici le dernier commit de votre branche :
 
 ```exec
-cd ~/layers-git/l1-snapshot && git cat-file -p HEAD
+cd ~/byte-layers/git/l1-snapshot && git cat-file -p HEAD
 ```
 
 Tout le commit tient en ces quelques lignes, et aucune ne décrit une différence :
@@ -59,8 +59,8 @@ Affiche l'état de l'API
 Tout instantané n'est pas pour autant une copie de tous les fichiers. `git ls-tree` liste le contenu de l'instantané d'un commit, et `HEAD~1` désigne le commit juste avant `HEAD` :
 
 ```exec
-cd ~/layers-git/l1-snapshot && git ls-tree HEAD
-cd ~/layers-git/l1-snapshot && git ls-tree HEAD~1
+cd ~/byte-layers/git/l1-snapshot && git ls-tree HEAD
+cd ~/byte-layers/git/l1-snapshot && git ls-tree HEAD~1
 ```
 
 Chaque fichier est désigné par le hash de son contenu, et Git nomme **blob** ce contenu stocké. Les deux premières lignes viennent du commit récent, les deux suivantes du précédent. Le hash de `index.html` change, et celui de `runbook.md` est identique puisque ce fichier n'a pas changé : Git réutilise le même blob et ne le stocke qu'une fois.
@@ -81,7 +81,7 @@ Le hash d'un commit est calculé à partir de tout ce que vous venez de lire : l
 Ce dossier ne sert plus, et vous pouvez le supprimer depuis votre dossier personnel :
 
 ```exec
-cd ~ && rm -rf ~/layers-git/l1-snapshot
+cd ~ && rm -rf ~/byte-layers/git/l1-snapshot
 ```
 
 ## Récap
