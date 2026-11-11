@@ -36,7 +36,7 @@ flowchart LR
 Créez un serveur local et votre dépôt, publié dessus. Ce sont les commandes du cours en prérequis :
 
 ```exec
-mkdir -p ~/layers-git/l3-tracking/moi && cd ~/layers-git/l3-tracking/moi && git init -b main
+mkdir -p ~/byte-layers/git/l3-tracking/moi && cd ~/byte-layers/git/l3-tracking/moi && git init -b main
 echo '# Runbook' > runbook.md && git add runbook.md && git commit -m "État initial"
 git init --bare -b main ../serveur.git
 git remote add origin ../serveur.git
@@ -46,29 +46,29 @@ git push -u origin main
 Un collègue clone ce dépôt, ajoute un commit et le publie :
 
 ```exec
-cd ~/layers-git/l3-tracking && git clone serveur.git collegue
-cd ~/layers-git/l3-tracking/collegue && echo 'Alerte' >> runbook.md && git commit -am "Ajoute une alerte" && git push
+cd ~/byte-layers/git/l3-tracking && git clone serveur.git collegue
+cd ~/byte-layers/git/l3-tracking/collegue && echo 'Alerte' >> runbook.md && git commit -am "Ajoute une alerte" && git push
 ```
 
 De votre côté, `origin/main` n'a pas bougé. `git rev-parse` affiche le hash, l'identifiant du commit, désigné par un nom. `git ls-remote` interroge réellement le serveur, sans mettre `origin/main` à jour :
 
 ```exec
-cd ~/layers-git/l3-tracking/moi && git rev-parse origin/main
-cd ~/layers-git/l3-tracking/moi && git ls-remote origin main
+cd ~/byte-layers/git/l3-tracking/moi && git rev-parse origin/main
+cd ~/byte-layers/git/l3-tracking/moi && git ls-remote origin main
 ```
 
 Les deux hash sont différents : votre mémoire du serveur est en retard. `git status` ne le sait pas encore, et annonce que tout est à jour :
 
 ```exec
-cd ~/layers-git/l3-tracking/moi && git status
+cd ~/byte-layers/git/l3-tracking/moi && git status
 ```
 
 Mettez cette mémoire à jour avec `git fetch`, puis relancez la première commande et `git status` :
 
 ```exec
-cd ~/layers-git/l3-tracking/moi && git fetch
-cd ~/layers-git/l3-tracking/moi && git rev-parse origin/main
-cd ~/layers-git/l3-tracking/moi && git status
+cd ~/byte-layers/git/l3-tracking/moi && git fetch
+cd ~/byte-layers/git/l3-tracking/moi && git rev-parse origin/main
+cd ~/byte-layers/git/l3-tracking/moi && git status
 ```
 
 Le hash d'`origin/main` est maintenant celui du serveur, et votre branche `main` n'a pas bougé. Vous comprenez maintenant le message `behind` de `git status` : il compare `main` à `origin/main`.
@@ -78,7 +78,7 @@ Le hash d'`origin/main` est maintenant celui du serveur, et votre branche `main`
 Ce dossier ne sert plus, et vous pouvez le supprimer depuis votre dossier personnel :
 
 ```exec
-cd ~ && rm -rf ~/layers-git/l3-tracking
+cd ~ && rm -rf ~/byte-layers/git/l3-tracking
 ```
 
 ## Récap

@@ -10,7 +10,7 @@ Votre branche est partie d'un commit de `main`, et `main` a avancé depuis. Vous
 Ce dépôt a une branche `feature/db` déjà publiée, et un commit sur `main` arrivé après sa création :
 
 ```exec
-mkdir -p ~/layers-git/l4-rebase/depot && cd ~/layers-git/l4-rebase/depot && git init -b main
+mkdir -p ~/byte-layers/git/l4-rebase/depot && cd ~/byte-layers/git/l4-rebase/depot && git init -b main
 echo '<h1>Statut des services</h1>' > index.html && echo '# Runbook' > runbook.md
 git add index.html runbook.md && git commit -m "État initial"
 git init --bare -b main ../serveur.git
@@ -24,7 +24,7 @@ git switch main && echo 'Alerte' >> runbook.md && git commit -am "Complète le r
 Regardez le graphe, qui dessine une fourche :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git log --oneline --all --graph
+cd ~/byte-layers/git/l4-rebase/depot && git log --oneline --all --graph
 ```
 
 Votre branche et `main` ont chacune un commit que l'autre n'a pas :
@@ -37,7 +37,7 @@ Votre branche et `main` ont chacune un commit que l'autre n'a pas :
 ```
 
 ```verify
-D=~/layers-git/l4-rebase/depot
+D=~/byte-layers/git/l4-rebase/depot
 if ! git -C "$D" show-ref --verify --quiet refs/heads/feature/db; then
   echo "La branche feature/db n'existe pas. Vérifiez votre identité avec git config --global user.name, puis relancez la commande de cette section."
   exit 1
@@ -50,8 +50,8 @@ echo "Le dépôt de départ est prêt."
 Placez-vous sur la branche à déplacer, puis nommez celle sur laquelle la replacer :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git switch feature/db
-cd ~/layers-git/l4-rebase/depot && git rebase main
+cd ~/byte-layers/git/l4-rebase/depot && git switch feature/db
+cd ~/byte-layers/git/l4-rebase/depot && git rebase main
 ```
 
 Git confirme avoir rejoué votre commit :
@@ -63,7 +63,7 @@ Successfully rebased and updated refs/heads/feature/db.
 Le graphe a changé de forme :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git log --oneline --all --graph
+cd ~/byte-layers/git/l4-rebase/depot && git log --oneline --all --graph
 ```
 
 Vos commits s'alignent maintenant sur ceux de `main` :
@@ -85,7 +85,7 @@ Cette animation montre ce qui vient de se passer :
 > 💡 **Remarque.** En équipe, votre `main` locale peut être en retard. Lancez d'abord `git fetch`, puis `git rebase origin/main`.
 
 ```verify
-D=~/layers-git/l4-rebase/depot
+D=~/byte-layers/git/l4-rebase/depot
 if ! git -C "$D" merge-base --is-ancestor main feature/db; then
   echo "feature/db n'est pas au-dessus de main. Lancez git rebase main depuis feature/db."
   exit 1

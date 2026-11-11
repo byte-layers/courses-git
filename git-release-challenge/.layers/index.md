@@ -21,7 +21,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 
 - **Ce qu'il faut savoir** : ce qu'enseignent [Livrer des versions avec Gitflow](https://byte-layers.com/fr/labs/git-release-flow) et [Rebase et cherry-pick](https://byte-layers.com/fr/skills/git-rebase-cherry-pick).
 - **Ce qu'il faut avoir** : Git 2.28 ou plus récent, votre identité réglée, et un terminal (Git Bash sous Windows).
-- **Un dépôt de départ** : `~/layers-git/l5-challenge/depot` et son serveur `serveur.git` sont créés pour vous à l'ouverture. Le fichier `runbook.md` contient une erreur de seuil, que vous corrigerez plus tard. La dernière tâche supprime tout.
+- **Un dépôt de départ** : `~/byte-layers/git/l5-challenge/depot` et son serveur `serveur.git` sont créés pour vous à l'ouverture. Le fichier `runbook.md` contient une erreur de seuil, que vous corrigerez plus tard. La dernière tâche supprime tout.
 - **L'ordre compte** : chaque tâche reprend l'état laissé par la précédente.
 
 # Tâche 1 : publier la version 1
@@ -29,7 +29,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 ## Taguer v1.0 et créer sa branche de maintenance
 
 ```setup
-D=~/layers-git/l5-challenge
+D=~/byte-layers/git/l5-challenge
 if [ ! -d "$D/depot/.git" ]; then
   mkdir -p "$D/depot" && git init -q --bare -b main "$D/serveur.git"
   cd "$D/depot" && git init -q -b main
@@ -52,7 +52,7 @@ Un tag ne part pas sur le serveur tout seul, il faut le nommer.
 ```
 
 ```verify
-S=~/layers-git/l5-challenge/serveur.git
+S=~/byte-layers/git/l5-challenge/serveur.git
 if ! git -C "$S" rev-parse -q --verify refs/tags/v1.0 >/dev/null; then
   echo "Le serveur n'a pas le tag v1.0."
   exit 1
@@ -66,9 +66,9 @@ echo "La version 1 est publiée, avec sa branche de maintenance."
 
 ````solution
 ```bash
-cd ~/layers-git/l5-challenge/depot && git tag -a v1.0 -m "Version 1.0"
-cd ~/layers-git/l5-challenge/depot && git branch version/1.x v1.0
-cd ~/layers-git/l5-challenge/depot && git push origin v1.0 version/1.x
+cd ~/byte-layers/git/l5-challenge/depot && git tag -a v1.0 -m "Version 1.0"
+cd ~/byte-layers/git/l5-challenge/depot && git branch version/1.x v1.0
+cd ~/byte-layers/git/l5-challenge/depot && git push origin v1.0 version/1.x
 ```
 ````
 
@@ -89,7 +89,7 @@ Le geste est le même qu'à la tâche précédente, après un commit sur `main`.
 ```
 
 ```verify
-S=~/layers-git/l5-challenge/serveur.git
+S=~/byte-layers/git/l5-challenge/serveur.git
 if ! git -C "$S" show main:feature2.txt >/dev/null 2>&1; then
   echo "main sur le serveur ne contient pas feature2.txt."
   exit 1
@@ -107,9 +107,9 @@ echo "La version 2 est publiée."
 
 ````solution
 ```bash
-cd ~/layers-git/l5-challenge/depot && echo 'Nouveauté' > feature2.txt && git add feature2.txt && git commit -m "Ajoute la fonctionnalité 2"
-cd ~/layers-git/l5-challenge/depot && git tag -a v2.0 -m "Version 2.0" && git branch version/2.x v2.0
-cd ~/layers-git/l5-challenge/depot && git push origin main v2.0 version/2.x
+cd ~/byte-layers/git/l5-challenge/depot && echo 'Nouveauté' > feature2.txt && git add feature2.txt && git commit -m "Ajoute la fonctionnalité 2"
+cd ~/byte-layers/git/l5-challenge/depot && git tag -a v2.0 -m "Version 2.0" && git branch version/2.x v2.0
+cd ~/byte-layers/git/l5-challenge/depot && git push origin main v2.0 version/2.x
 ```
 ````
 
@@ -129,7 +129,7 @@ Placez-vous d'abord sur la bonne branche.
 ```
 
 ```verify
-S=~/layers-git/l5-challenge/serveur.git
+S=~/byte-layers/git/l5-challenge/serveur.git
 if ! git -C "$S" show v2.1:runbook.md 2>/dev/null | grep -qx "Seuil : 5 minutes"; then
   echo "Le tag v2.1 devrait exister sur le serveur et contenir la ligne Seuil : 5 minutes."
   exit 1
@@ -143,9 +143,9 @@ echo "La version 2.1 est publiée."
 
 ````solution
 ```bash
-cd ~/layers-git/l5-challenge/depot && git switch version/2.x
-cd ~/layers-git/l5-challenge/depot && printf '# Runbook\n\nSeuil : 5 minutes\n' > runbook.md && git commit -am "Corrige le seuil"
-cd ~/layers-git/l5-challenge/depot && git tag -a v2.1 -m "Version 2.1" && git push origin version/2.x v2.1
+cd ~/byte-layers/git/l5-challenge/depot && git switch version/2.x
+cd ~/byte-layers/git/l5-challenge/depot && printf '# Runbook\n\nSeuil : 5 minutes\n' > runbook.md && git commit -am "Corrige le seuil"
+cd ~/byte-layers/git/l5-challenge/depot && git tag -a v2.1 -m "Version 2.1" && git push origin version/2.x v2.1
 ```
 ````
 
@@ -165,7 +165,7 @@ Une commande reporte un commit précis sur la branche où vous êtes. `version/2
 ```
 
 ```verify
-S=~/layers-git/l5-challenge/serveur.git
+S=~/byte-layers/git/l5-challenge/serveur.git
 if ! git -C "$S" show v1.1:runbook.md 2>/dev/null | grep -qx "Seuil : 5 minutes"; then
   echo "Le tag v1.1 devrait exister sur le serveur et contenir la ligne Seuil : 5 minutes."
   exit 1
@@ -187,9 +187,9 @@ echo "La correction est reportée sur les deux lignes."
 
 ````solution
 ```bash
-cd ~/layers-git/l5-challenge/depot && git switch version/1.x && git cherry-pick version/2.x
-cd ~/layers-git/l5-challenge/depot && git tag -a v1.1 -m "Version 1.1" && git push origin version/1.x v1.1
-cd ~/layers-git/l5-challenge/depot && git switch main && git cherry-pick version/2.x && git push origin main
+cd ~/byte-layers/git/l5-challenge/depot && git switch version/1.x && git cherry-pick version/2.x
+cd ~/byte-layers/git/l5-challenge/depot && git tag -a v1.1 -m "Version 1.1" && git push origin version/1.x v1.1
+cd ~/byte-layers/git/l5-challenge/depot && git switch main && git cherry-pick version/2.x && git push origin main
 ```
 ````
 
@@ -197,13 +197,13 @@ cd ~/layers-git/l5-challenge/depot && git switch main && git cherry-pick version
 
 ## Supprimer le dossier du challenge
 
-Supprimez le dossier `~/layers-git/l5-challenge` et tout ce qu'il contient. Vérifiez d'abord que votre terminal ne se trouve pas dedans.
+Supprimez le dossier `~/byte-layers/git/l5-challenge` et tout ce qu'il contient. Vérifiez d'abord que votre terminal ne se trouve pas dedans.
 
-**Critère :** le dossier `~/layers-git/l5-challenge` n'existe plus.
+**Critère :** le dossier `~/byte-layers/git/l5-challenge` n'existe plus.
 
 ```verify
-if [ -e ~/layers-git/l5-challenge ]; then
-  echo "Le dossier ~/layers-git/l5-challenge existe encore."
+if [ -e ~/byte-layers/git/l5-challenge ]; then
+  echo "Le dossier ~/byte-layers/git/l5-challenge existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé. Challenge terminé."
@@ -211,6 +211,6 @@ echo "Le dossier est supprimé. Challenge terminé."
 
 ````solution
 ```bash
-cd ~ && rm -rf ~/layers-git/l5-challenge
+cd ~ && rm -rf ~/byte-layers/git/l5-challenge
 ```
 ````

@@ -22,7 +22,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 
 - **Ce qu'il faut savoir** : ce qu'enseignent [Les essentiels de GitLab CI](https://byte-layers.com/fr/skills/gitlab-ci-essentials) et [Bloquer une merge request qui casse les tests](https://byte-layers.com/fr/labs/gitlab-ci-quality-gate).
 - **Ce qu'il faut avoir** : un compte gratuit sur [gitlab.com](https://gitlab.com/) et Git. Les vérifications utilisent `curl`, livré avec Git Bash sous Windows.
-- **Un dossier de travail** : `~/layers-git/ci-challenge` est créé pour vous, et la dernière tâche le supprime.
+- **Un dossier de travail** : `~/byte-layers/git/ci-challenge` est créé pour vous, et la dernière tâche le supprime.
 - **L'ordre compte** : chaque tâche reprend l'état laissé par la précédente.
 
 # Tâche 1 : le projet à tester
@@ -30,13 +30,13 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 ## Créer le projet et y publier le code
 
 ```setup
-mkdir -p ~/layers-git/ci-challenge
+mkdir -p ~/byte-layers/git/ci-challenge
 ```
 
-Créez un projet public nommé `calculatrice-challenge`, avec un README. Écrivez son adresse de clonage dans `~/layers-git/ci-challenge/url`, clonez-le dans `~/layers-git/ci-challenge/calculatrice`, puis publiez-y le code de départ, avec cette commande :
+Créez un projet public nommé `calculatrice-challenge`, avec un README. Écrivez son adresse de clonage dans `~/byte-layers/git/ci-challenge/url`, clonez-le dans `~/byte-layers/git/ci-challenge/calculatrice`, puis publiez-y le code de départ, avec cette commande :
 
 ```bash
-cd ~/layers-git/ci-challenge/calculatrice
+cd ~/byte-layers/git/ci-challenge/calculatrice
 cat > package.json <<'EOF'
 {
   "name": "calculatrice",
@@ -64,9 +64,9 @@ git add . && git commit -m "Ajoute la calculatrice et ses tests" && git push
 **Critère :** `test.js` est sur la branche `main` du projet.
 
 ```verify
-C=$(cat ~/layers-git/ci-challenge/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-challenge/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-challenge/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-challenge/url."
   exit 1
 fi
 case "$C" in
@@ -99,9 +99,9 @@ Chaque job démarre dans un environnement neuf : le job de tests doit aussi inst
 ```
 
 ```verify
-C=$(cat ~/layers-git/ci-challenge/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-challenge/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-challenge/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-challenge/url."
   exit 1
 fi
 case "$C" in
@@ -167,9 +167,9 @@ Un mot-clé autorise un job à échouer, et un autre, sous `artifacts`, précise
 ```
 
 ```verify
-C=$(cat ~/layers-git/ci-challenge/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-challenge/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-challenge/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-challenge/url."
   exit 1
 fi
 case "$C" in
@@ -224,9 +224,9 @@ Sans `allow_failure: true`, un job manuel défini dans `rules` laisse le pipelin
 ```
 
 ```verify
-C=$(cat ~/layers-git/ci-challenge/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-challenge/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-challenge/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-challenge/url."
   exit 1
 fi
 case "$C" in
@@ -273,13 +273,13 @@ livrer:
 
 ## Supprimer le dossier du challenge
 
-Supprimez le dossier `~/layers-git/ci-challenge`. Vous pouvez aussi supprimer le projet sur GitLab.
+Supprimez le dossier `~/byte-layers/git/ci-challenge`. Vous pouvez aussi supprimer le projet sur GitLab.
 
-**Critère :** le dossier `~/layers-git/ci-challenge` n'existe plus.
+**Critère :** le dossier `~/byte-layers/git/ci-challenge` n'existe plus.
 
 ```verify
-if [ -e ~/layers-git/ci-challenge ]; then
-  echo "Le dossier ~/layers-git/ci-challenge existe encore."
+if [ -e ~/byte-layers/git/ci-challenge ]; then
+  echo "Le dossier ~/byte-layers/git/ci-challenge existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé. Challenge terminé."
@@ -287,6 +287,6 @@ echo "Le dossier est supprimé. Challenge terminé."
 
 ````solution
 ```bash
-cd ~ && rm -rf ~/layers-git/ci-challenge
+cd ~ && rm -rf ~/byte-layers/git/ci-challenge
 ```
 ````

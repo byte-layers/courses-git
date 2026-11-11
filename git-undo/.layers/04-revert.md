@@ -10,8 +10,8 @@ Quand un commit est publié, le retirer avec `git reset` obligerait vos collègu
 Imaginez que ce commit soit déjà publié et qu'il casse la page en production :
 
 ```exec
-cd ~/layers-git/l4-undo && echo 'PANNE' > index.html
-cd ~/layers-git/l4-undo && git commit -am "Refond la page"
+cd ~/byte-layers/git/l4-undo && echo 'PANNE' > index.html
+cd ~/byte-layers/git/l4-undo && git commit -am "Refond la page"
 ```
 
 ## 04.2 - Annuler ce commit avec un commit inverse
@@ -19,8 +19,8 @@ cd ~/layers-git/l4-undo && git commit -am "Refond la page"
 `git revert` prend le commit à annuler, ici `HEAD`, et `--no-edit` accepte le message proposé :
 
 ```exec
-cd ~/layers-git/l4-undo && git revert --no-edit HEAD
-cd ~/layers-git/l4-undo && git log --oneline
+cd ~/byte-layers/git/l4-undo && git revert --no-edit HEAD
+cd ~/byte-layers/git/l4-undo && git log --oneline
 ```
 
 L'historique a gagné une ligne, et rien n'a disparu. En voici le début :
@@ -33,11 +33,11 @@ e4ea1c3 Refond la page
 La page a retrouvé son contenu :
 
 ```exec
-cd ~/layers-git/l4-undo && cat index.html
+cd ~/byte-layers/git/l4-undo && cat index.html
 ```
 
 ```verify
-D=~/layers-git/l4-undo
+D=~/byte-layers/git/l4-undo
 if grep -q "PANNE" "$D/index.html"; then
   echo "index.html contient encore PANNE. Lancez git revert --no-edit HEAD."
   exit 1

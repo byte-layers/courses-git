@@ -22,6 +22,6 @@ Dans ce lab, le pipeline devient un garde-fou : une merge request qui casse les 
 
 Sur gitlab.com, les jobs sont exécutés par des **runners partagés** : vous n'avez rien à installer. Si un job échoue en vous demandant de valider votre compte, suivez le lien affiché : GitLab demande par exemple un numéro de téléphone ou une carte bancaire, qui ne sera pas débitée. Les minutes de calcul sont limitées, et le détail se trouve sur la [page des tarifs](https://about.gitlab.com/pricing/).
 
-**Vos fichiers** vivent dans `~/layers-git/ci-quality`, et le projet doit rester **public**.
+**Vos fichiers** vivent dans `~/byte-layers/git/ci-quality`, et le projet doit rester **public**.
 
 **Sous Windows**, tapez les commandes dans le terminal **Git Bash**, livré avec Git.

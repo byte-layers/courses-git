@@ -20,7 +20,7 @@ Dans ce schéma, chaque commit désigne son parent, c'est-à-dire le commit qui 
 Créez un dépôt qui contient une page et un runbook, avec un seul commit. `mkdir -p` crée le dossier, et la construction `cat > fichier <<'EOF'` écrit dans le fichier tout ce qui suit, jusqu'à la ligne `EOF`.
 
 ```exec
-mkdir -p ~/layers-git/l2 && cd ~/layers-git/l2 && git init -b main
+mkdir -p ~/byte-layers/git/l2 && cd ~/byte-layers/git/l2 && git init -b main
 echo '<h1>Statut des services</h1>' > index.html
 cat > runbook.md <<'EOF'
 # Runbook
@@ -31,9 +31,9 @@ git add index.html runbook.md && git commit -m "État initial"
 ```
 
 ```verify
-D=~/layers-git/l2
+D=~/byte-layers/git/l2
 if ! git -C "$D" rev-parse HEAD >/dev/null 2>&1; then
-  echo "Le dépôt ~/layers-git/l2 n'a pas de commit. Vérifiez votre identité avec git config --global user.name, puis relancez la commande de cette section."
+  echo "Le dépôt ~/byte-layers/git/l2 n'a pas de commit. Vérifiez votre identité avec git config --global user.name, puis relancez la commande de cette section."
   exit 1
 fi
 if [ "$(git -C "$D" symbolic-ref --short HEAD)" != "main" ]; then
@@ -48,7 +48,7 @@ echo "Le dépôt de départ est prêt."
 `git branch` sans argument liste les branches, et l'astérisque marque celle où vous êtes :
 
 ```exec
-cd ~/layers-git/l2 && git branch
+cd ~/byte-layers/git/l2 && git branch
 ```
 
 Vous n'avez pour l'instant qu'une seule branche :
@@ -60,13 +60,13 @@ Vous n'avez pour l'instant qu'une seule branche :
 Créez une branche pour ajouter l'état de la base de données à la page. Le préfixe `feature/` n'a rien d'obligatoire : c'est une convention répandue, qui range les branches par type de travail.
 
 ```exec
-cd ~/layers-git/l2 && git branch feature/db
+cd ~/byte-layers/git/l2 && git branch feature/db
 ```
 
 Créer une branche ne vous y place pas. Dans un terminal, `git log --oneline` affiche à côté des commits les noms qui pointent vers eux :
 
 ```exec
-cd ~/layers-git/l2 && git log --oneline
+cd ~/byte-layers/git/l2 && git log --oneline
 ```
 
 Les deux branches désignent le même commit, et `HEAD` indique où vous vous trouvez : toujours sur `main`.
@@ -78,7 +78,7 @@ Les deux branches désignent le même commit, et `HEAD` indique où vous vous tr
 Placez-vous sur la nouvelle branche :
 
 ```exec
-cd ~/layers-git/l2 && git switch feature/db
+cd ~/byte-layers/git/l2 && git switch feature/db
 ```
 
 Git confirme le changement de branche :
@@ -92,14 +92,14 @@ Switched to branch 'feature/db'
 Ajoutez une ligne à la page, et enregistrez-la sur cette branche :
 
 ```exec
-cd ~/layers-git/l2 && echo '<p>Base de données : OK</p>' >> index.html
-cd ~/layers-git/l2 && git add index.html && git commit -m "Affiche l'état de la base"
+cd ~/byte-layers/git/l2 && echo '<p>Base de données : OK</p>' >> index.html
+cd ~/byte-layers/git/l2 && git add index.html && git commit -m "Affiche l'état de la base"
 ```
 
 Regardez le contenu de la page, qui contient maintenant les deux lignes :
 
 ```exec
-cd ~/layers-git/l2 && cat index.html
+cd ~/byte-layers/git/l2 && cat index.html
 ```
 
 Vous retrouvez la ligne ajoutée sous le titre :
@@ -112,8 +112,8 @@ Vous retrouvez la ligne ajoutée sous le titre :
 Revenez sur `main` et relisez le même fichier :
 
 ```exec
-cd ~/layers-git/l2 && git switch main
-cd ~/layers-git/l2 && cat index.html
+cd ~/byte-layers/git/l2 && git switch main
+cd ~/byte-layers/git/l2 && cat index.html
 ```
 
 La ligne ajoutée a disparu de votre dossier :
@@ -132,7 +132,7 @@ Cette animation reprend ces gestes : `HEAD` change de branche, le commit fait av
 > ⚠️ **Avant de changer de branche, regardez `git status`.** Si vos changements non enregistrés touchent des fichiers qui diffèrent sur l'autre branche, `git switch` refuse pour ne rien écraser. Enregistrez-les d'abord. Et avant de faire un commit, vérifiez que vous êtes sur la bonne branche : `git status` l'indique sur sa première ligne.
 
 ```verify
-D=~/layers-git/l2
+D=~/byte-layers/git/l2
 if [ "$(git -C "$D" symbolic-ref --short HEAD)" != "main" ]; then
   echo "Revenez sur main avec git switch main."
   exit 1

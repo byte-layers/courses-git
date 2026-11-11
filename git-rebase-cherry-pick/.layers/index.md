@@ -25,7 +25,7 @@ Si vous pensez déjà savoir tout cela, tentez directement le challenge [Répare
 
 Quatre étapes à suivre dans l'ordre, environ une heure en tout. La première crée un petit projet `statuspage`, avec un serveur local.
 
-Vos fichiers vivent dans `~/layers-git/l4-rebase`, et chaque commande commence par `cd ~/layers-git/l4-rebase/depot &&` pour le bouton qui l'exécute. La dernière étape supprime ce dossier.
+Vos fichiers vivent dans `~/byte-layers/git/l4-rebase`, et chaque commande commence par `cd ~/byte-layers/git/l4-rebase/depot &&` pour le bouton qui l'exécute. La dernière étape supprime ce dossier.
 
 Votre terminal peut afficher les messages en français, et les identifiants de commit seront différents des exemples.
 

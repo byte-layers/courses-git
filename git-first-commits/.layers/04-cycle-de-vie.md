@@ -18,7 +18,7 @@ Git range votre travail dans trois zones, et chaque commande fait passer des cha
 Vous pouvez constater que les deux dernières existent bien, en listant le contenu de `.git` :
 
 ```exec
-cd ~/layers-git/l1 && ls .git
+cd ~/byte-layers/git/l1 && ls .git
 ```
 
 Le fichier `index` et le dossier `objects`, où sont rangés les commits, figurent dans la réponse :

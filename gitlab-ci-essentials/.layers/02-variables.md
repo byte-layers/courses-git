@@ -10,7 +10,7 @@ Une **variable** évite d'écrire une valeur en dur. GitLab en fournit beaucoup,
 `$CI_COMMIT_SHORT_SHA` est une variable **prédéfinie**, remplie par GitLab avec le début du hash du commit. `variables:` déclare les vôtres dans le fichier :
 
 ```exec
-cat > ~/layers-git/ci-essentials/calculatrice/.gitlab-ci.yml <<'EOF'
+cat > ~/byte-layers/git/ci-essentials/calculatrice/.gitlab-ci.yml <<'EOF'
 stages:
   - test
 
@@ -27,15 +27,15 @@ tests:
     - npm install
     - npm test
 EOF
-cd ~/layers-git/ci-essentials/calculatrice && git add .gitlab-ci.yml && git commit -m "Affiche le contexte du pipeline" && git push
+cd ~/byte-layers/git/ci-essentials/calculatrice && git add .gitlab-ci.yml && git commit -m "Affiche le contexte du pipeline" && git push
 ```
 
 La trace du job, dans **Build**, **Jobs**, affiche la phrase avec ses valeurs réelles.
 
 ```verify
-C=$(cat ~/layers-git/ci-essentials/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-essentials/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-essentials/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-essentials/url."
   exit 1
 fi
 case "$C" in

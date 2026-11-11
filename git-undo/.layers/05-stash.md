@@ -10,21 +10,21 @@ Vous êtes au milieu d'un changement, et une urgence vous oblige à travailler s
 Commencez un changement sur le runbook :
 
 ```exec
-cd ~/layers-git/l4-undo && echo 'Procédure en cours de rédaction' >> runbook.md
-cd ~/layers-git/l4-undo && git status --short
+cd ~/byte-layers/git/l4-undo && echo 'Procédure en cours de rédaction' >> runbook.md
+cd ~/byte-layers/git/l4-undo && git status --short
 ```
 
 `git stash` range ce changement et remet le fichier à l'état du dernier commit :
 
 ```exec
-cd ~/layers-git/l4-undo && git stash
-cd ~/layers-git/l4-undo && git status --short
+cd ~/byte-layers/git/l4-undo && git stash
+cd ~/byte-layers/git/l4-undo && git status --short
 ```
 
 `git status --short` n'affiche plus rien. `git stash list` montre ce qui est rangé :
 
 ```exec
-cd ~/layers-git/l4-undo && git stash list
+cd ~/byte-layers/git/l4-undo && git stash list
 ```
 
 Votre travail y figure, sous un nom généré par Git :
@@ -38,26 +38,26 @@ stash@{0}: WIP on main: a0e9968 Revert "Refond la page"
 Votre dossier étant propre, faites le correctif urgent :
 
 ```exec
-cd ~/layers-git/l4-undo && echo '<p>Maintenance ce soir</p>' >> index.html
-cd ~/layers-git/l4-undo && git commit -am "Annonce la maintenance"
+cd ~/byte-layers/git/l4-undo && echo '<p>Maintenance ce soir</p>' >> index.html
+cd ~/byte-layers/git/l4-undo && git commit -am "Annonce la maintenance"
 ```
 
 `git stash pop` remet votre travail en place et le retire de la liste :
 
 ```exec
-cd ~/layers-git/l4-undo && git stash pop
+cd ~/byte-layers/git/l4-undo && git stash pop
 ```
 
 Votre changement est revenu. Terminez-le avec un commit, qui servira à l'étape suivante :
 
 ```exec
-cd ~/layers-git/l4-undo && git commit -am "Ajoute une procédure"
+cd ~/byte-layers/git/l4-undo && git commit -am "Ajoute une procédure"
 ```
 
 > 💡 **Remarque.** Par défaut, `git stash` ne prend pas les fichiers nouveaux, non suivis. L'option `-u` les inclut.
 
 ```verify
-D=~/layers-git/l4-undo
+D=~/byte-layers/git/l4-undo
 if [ -n "$(git -C "$D" stash list)" ]; then
   echo "La liste de git stash n'est pas vide. Lancez git stash pop."
   exit 1

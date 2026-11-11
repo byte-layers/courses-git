@@ -22,6 +22,6 @@ Dans ce lab, vous faites tester automatiquement une petite calculatrice JavaScri
 
 Sur gitlab.com, les jobs sont exécutés par des **runners partagés** : vous n'avez rien à installer. Si un job échoue en vous demandant de valider votre compte, suivez le lien affiché : GitLab demande par exemple un numéro de téléphone ou une carte bancaire, qui ne sera pas débitée. Les minutes de calcul sont limitées, et le détail se trouve sur la [page des tarifs](https://about.gitlab.com/pricing/).
 
-**Vos fichiers** vivent dans `~/layers-git/ci-first`, et le projet doit rester **public**. Vous complétez vous-même le fichier du pipeline à partir de ses `# TODO` : la solution est disponible en dernier recours.
+**Vos fichiers** vivent dans `~/byte-layers/git/ci-first`, et le projet doit rester **public**. Vous complétez vous-même le fichier du pipeline à partir de ses `# TODO` : la solution est disponible en dernier recours.
 
 **Sous Windows**, tapez les commandes dans le terminal **Git Bash**, livré avec Git.

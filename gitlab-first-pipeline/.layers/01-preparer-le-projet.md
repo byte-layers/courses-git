@@ -10,14 +10,14 @@ Le pipeline a besoin de code à tester : une fonction d'addition et son test, é
 Créez un projet public nommé `calculatrice-ci`, avec un README, puis enregistrez son adresse en remplaçant l'exemple :
 
 ```bash
-mkdir -p ~/layers-git/ci-first
-echo 'git@gitlab.com:demo-votre-nom/calculatrice-ci.git' > ~/layers-git/ci-first/url
+mkdir -p ~/byte-layers/git/ci-first
+echo 'git@gitlab.com:demo-votre-nom/calculatrice-ci.git' > ~/byte-layers/git/ci-first/url
 ```
 
 Clonez-le ensuite :
 
 ```exec
-cd ~/layers-git/ci-first && git clone "$(cat url)" calculatrice
+cd ~/byte-layers/git/ci-first && git clone "$(cat url)" calculatrice
 ```
 
 ## 01.2 - Ajouter le code et ses tests
@@ -25,7 +25,7 @@ cd ~/layers-git/ci-first && git clone "$(cat url)" calculatrice
 Cette commande crée quatre fichiers, puis les publie : `package.json` déclare les dépendances, `operations.js` contient le code, `test.js` son test, et `.gitignore` écarte les paquets téléchargés.
 
 ```exec
-cd ~/layers-git/ci-first/calculatrice
+cd ~/byte-layers/git/ci-first/calculatrice
 cat > package.json <<'EOF'
 {
   "name": "calculatrice",
@@ -51,9 +51,9 @@ git add . && git commit -m "Ajoute la calculatrice et ses tests" && git push
 ```
 
 ```verify
-C=$(cat ~/layers-git/ci-first/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-first/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-first/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-first/url."
   exit 1
 fi
 case "$C" in

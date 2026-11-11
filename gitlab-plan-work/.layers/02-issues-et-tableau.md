@@ -18,9 +18,9 @@ Dans le menu du projet, ouvrez **Work items**, puis **New item**, et choisissez 
 Assignez-vous la première avec le champ **Assignee**.
 
 ```verify
-C=$(cat ~/layers-git/gitlab-plan/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-plan/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-plan/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-plan/url."
   exit 1
 fi
 case "$C" in
@@ -57,9 +57,9 @@ Un **tableau** (*issue board*) affiche les issues en colonnes, façon kanban. Da
 Faites glisser l'issue `U1` de la colonne **Open** vers la colonne `en cours`. GitLab lui ajoute le label correspondant : déplacer une carte, c'est modifier l'issue.
 
 ```verify
-C=$(cat ~/layers-git/gitlab-plan/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-plan/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-plan/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-plan/url."
   exit 1
 fi
 case "$C" in

@@ -10,16 +10,16 @@ Le projet commence par son organisation : les branches `main` et `develop`, prot
 Créez un projet public nommé `statuspage-team`, avec un README. Copiez son adresse **Clone with SSH** dans ce fichier, en remplaçant l'exemple :
 
 ```bash
-mkdir -p ~/layers-git/gitlab-team
-echo 'git@gitlab.com:demo-votre-nom/statuspage-team.git' > ~/layers-git/gitlab-team/url
+mkdir -p ~/byte-layers/git/gitlab-team
+echo 'git@gitlab.com:demo-votre-nom/statuspage-team.git' > ~/byte-layers/git/gitlab-team/url
 ```
 
 Clonez-le dans deux dossiers, et donnez une identité au second, qui joue une autre personne. **À deux** : A invite B au projet, avec **Manage**, **Members** et le rôle **Maintainer**. B écrit le même fichier `url`. Chacun ne clone alors que son propre dossier, et B saute le `git config` :
 
 ```exec
-cd ~/layers-git/gitlab-team && git clone "$(cat url)" poste-a
-cd ~/layers-git/gitlab-team && git clone "$(cat url)" poste-b
-cd ~/layers-git/gitlab-team/poste-b && git config user.name "Sam Durand" && git config user.email "sam@example.com"
+cd ~/byte-layers/git/gitlab-team && git clone "$(cat url)" poste-a
+cd ~/byte-layers/git/gitlab-team && git clone "$(cat url)" poste-b
+cd ~/byte-layers/git/gitlab-team/poste-b && git config user.name "Sam Durand" && git config user.email "sam@example.com"
 ```
 
 ## 01.2 - Créer develop et protéger les branches
@@ -27,7 +27,7 @@ cd ~/layers-git/gitlab-team/poste-b && git config user.name "Sam Durand" && git 
 Depuis le poste A, créez `develop` et publiez-la :
 
 ```exec
-cd ~/layers-git/gitlab-team/poste-a && git switch -c develop && git push -u origin develop
+cd ~/byte-layers/git/gitlab-team/poste-a && git switch -c develop && git push -u origin develop
 ```
 
 Sur GitLab, ouvrez **Settings**, **Repository**, puis faites trois réglages :
@@ -37,9 +37,9 @@ Sur GitLab, ouvrez **Settings**, **Repository**, puis faites trois réglages :
 3. sur la ligne `main`, réglez **Allowed to push and merge** sur **No one**.
 
 ```verify
-C=$(cat ~/layers-git/gitlab-team/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-team/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-team/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-team/url."
   exit 1
 fi
 case "$C" in

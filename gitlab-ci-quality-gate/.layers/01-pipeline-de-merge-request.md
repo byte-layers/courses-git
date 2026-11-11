@@ -10,20 +10,20 @@ Pour qu'une merge request soit contrôlée, le pipeline doit tourner sur elle, e
 Créez un projet public nommé `calculatrice-qualite`, avec un README, puis enregistrez son adresse en remplaçant l'exemple :
 
 ```bash
-mkdir -p ~/layers-git/ci-quality
-echo 'git@gitlab.com:demo-votre-nom/calculatrice-qualite.git' > ~/layers-git/ci-quality/url
+mkdir -p ~/byte-layers/git/ci-quality
+echo 'git@gitlab.com:demo-votre-nom/calculatrice-qualite.git' > ~/byte-layers/git/ci-quality/url
 ```
 
 Clonez-le :
 
 ```exec
-cd ~/layers-git/ci-quality && git clone "$(cat url)" calculatrice
+cd ~/byte-layers/git/ci-quality && git clone "$(cat url)" calculatrice
 ```
 
 Cette commande crée le code à tester, puis le publie :
 
 ```exec
-cd ~/layers-git/ci-quality/calculatrice
+cd ~/byte-layers/git/ci-quality/calculatrice
 cat > package.json <<'EOF'
 {
   "name": "calculatrice",
@@ -53,7 +53,7 @@ git add . && git commit -m "Ajoute la calculatrice et ses tests" && git push
 Le bloc `workflow: rules:` choisit quand un pipeline est créé : ici sur les merge requests, et sur la branche par défaut, ce qui évite un pipeline en double à chaque envoi :
 
 ```exec
-cat > ~/layers-git/ci-quality/calculatrice/.gitlab-ci.yml <<'EOF'
+cat > ~/byte-layers/git/ci-quality/calculatrice/.gitlab-ci.yml <<'EOF'
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
@@ -71,7 +71,7 @@ tests:
     - npm install
     - npm test
 EOF
-cd ~/layers-git/ci-quality/calculatrice && git add .gitlab-ci.yml && git commit -m "Lance le pipeline sur les merge requests" && git push
+cd ~/byte-layers/git/ci-quality/calculatrice && git add .gitlab-ci.yml && git commit -m "Lance le pipeline sur les merge requests" && git push
 ```
 
 ## 01.3 - Interdire la fusion si le pipeline échoue
@@ -79,9 +79,9 @@ cd ~/layers-git/ci-quality/calculatrice && git add .gitlab-ci.yml && git commit 
 Ouvrez **Settings**, **Merge requests**, et dans la partie **Merge checks**, cochez **Pipelines must succeed**, puis enregistrez.
 
 ```verify
-C=$(cat ~/layers-git/ci-quality/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-quality/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-quality/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-quality/url."
   exit 1
 fi
 case "$C" in

@@ -21,7 +21,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 
 - **Ce qu'il faut savoir** : ce qu'enseigne [Enregistrer son travail avec Git](https://byte-layers.com/fr/skills/git-first-commits).
 - **Ce qu'il faut avoir** : Git 2.28 ou plus récent, votre identité déjà réglée, et un terminal (Git Bash sous Windows).
-- **Un dossier de travail** : `~/layers-git/l1-challenge` est créé pour vous, et la dernière tâche le supprime.
+- **Un dossier de travail** : `~/byte-layers/git/l1-challenge` est créé pour vous, et la dernière tâche le supprime.
 - **L'ordre compte** : chaque tâche reprend le dépôt de la précédente.
 
 # Tâche 1 : un dépôt et ses deux premiers fichiers
@@ -29,14 +29,14 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 ## Créer le dépôt statuspage avec une page et un runbook
 
 ```setup
-mkdir -p ~/layers-git/l1-challenge
+mkdir -p ~/byte-layers/git/l1-challenge
 ```
 
-Créez un dépôt Git dans `~/layers-git/l1-challenge/statuspage`, puis enregistrez-y une page de statut et un runbook.
+Créez un dépôt Git dans `~/byte-layers/git/l1-challenge/statuspage`, puis enregistrez-y une page de statut et un runbook.
 
 **Critères :**
 
-- le dossier `~/layers-git/l1-challenge/statuspage` est un dépôt Git, sur la branche `main` ;
+- le dossier `~/byte-layers/git/l1-challenge/statuspage` est un dépôt Git, sur la branche `main` ;
 - il contient au moins un commit ;
 - le dernier commit contient les fichiers `index.html` et `runbook.md`, avec le contenu de votre choix ;
 - il ne reste aucun changement en attente.
@@ -50,7 +50,7 @@ Un fichier vide ne suffit pas à rendre un commit parlant : `echo 'du texte' > f
 ```
 
 ```verify
-D=~/layers-git/l1-challenge/statuspage
+D=~/byte-layers/git/l1-challenge/statuspage
 if ! git -C "$D" rev-parse --git-dir >/dev/null 2>&1; then
   echo "$D n'est pas un dépôt Git."
   exit 1
@@ -78,8 +78,8 @@ echo "Le dépôt et ses deux fichiers sont enregistrés."
 
 ````solution
 ```bash
-mkdir -p ~/layers-git/l1-challenge/statuspage
-cd ~/layers-git/l1-challenge/statuspage && git init -b main
+mkdir -p ~/byte-layers/git/l1-challenge/statuspage
+cd ~/byte-layers/git/l1-challenge/statuspage && git init -b main
 echo '<h1>Statut</h1>' > index.html && echo '# Runbook' > runbook.md
 git add index.html runbook.md && git commit -m "Ajoute la page et le runbook"
 ```
@@ -107,7 +107,7 @@ Ce fichier s'appelle `.gitignore`, et il s'enregistre comme les autres.
 ```
 
 ```verify
-D=~/layers-git/l1-challenge/statuspage
+D=~/byte-layers/git/l1-challenge/statuspage
 if [ ! -f "$D"/.env ]; then
   echo "Le fichier .env n'existe pas."
   exit 1
@@ -129,9 +129,9 @@ echo ".env est ignoré, et la règle est enregistrée."
 
 ````solution
 ```bash
-cd ~/layers-git/l1-challenge/statuspage && echo 'TOKEN=demo' > .env
-cd ~/layers-git/l1-challenge/statuspage && echo '.env' > .gitignore
-cd ~/layers-git/l1-challenge/statuspage && git add .gitignore && git commit -m "Ignore le fichier .env"
+cd ~/byte-layers/git/l1-challenge/statuspage && echo 'TOKEN=demo' > .env
+cd ~/byte-layers/git/l1-challenge/statuspage && echo '.env' > .gitignore
+cd ~/byte-layers/git/l1-challenge/statuspage && git add .gitignore && git commit -m "Ignore le fichier .env"
 ```
 ````
 
@@ -156,7 +156,7 @@ La commande qui prépare accepte un nom de fichier précis.
 ```
 
 ```verify
-D=~/layers-git/l1-challenge/statuspage
+D=~/byte-layers/git/l1-challenge/statuspage
 if [ "$(git -C "$D" log -1 --name-only --format= HEAD)" != "runbook.md" ]; then
   echo "Le dernier commit devrait modifier runbook.md, et lui seul."
   exit 1
@@ -174,8 +174,8 @@ echo "Le commit est ciblé, et index.html attend son tour."
 
 ````solution
 ```bash
-cd ~/layers-git/l1-challenge/statuspage && echo '<p>API : OK</p>' >> index.html && echo 'Alerte au bout de : 5 minutes' >> runbook.md
-cd ~/layers-git/l1-challenge/statuspage && git add runbook.md && git commit -m "Ajoute le seuil d'alerte"
+cd ~/byte-layers/git/l1-challenge/statuspage && echo '<p>API : OK</p>' >> index.html && echo 'Alerte au bout de : 5 minutes' >> runbook.md
+cd ~/byte-layers/git/l1-challenge/statuspage && git add runbook.md && git commit -m "Ajoute le seuil d'alerte"
 ```
 ````
 
@@ -183,11 +183,11 @@ cd ~/layers-git/l1-challenge/statuspage && git add runbook.md && git commit -m "
 
 ## Écrire l'identifiant du tout premier commit dans un fichier
 
-Retrouvez dans l'historique le hash du tout premier commit, celui qui n'a pas de parent, et écrivez-le dans le fichier `~/layers-git/l1-challenge/premier-commit.txt`. Ce fichier est en dehors du dépôt. Le hash court comme le hash complet sont acceptés.
+Retrouvez dans l'historique le hash du tout premier commit, celui qui n'a pas de parent, et écrivez-le dans le fichier `~/byte-layers/git/l1-challenge/premier-commit.txt`. Ce fichier est en dehors du dépôt. Le hash court comme le hash complet sont acceptés.
 
 **Critères :**
 
-- le fichier `~/layers-git/l1-challenge/premier-commit.txt` existe ;
+- le fichier `~/byte-layers/git/l1-challenge/premier-commit.txt` existe ;
 - il contient le hash du tout premier commit du dépôt, sur au moins 7 caractères.
 
 ```hint
@@ -199,7 +199,7 @@ L'historique se lit du plus récent au plus ancien : le premier commit est tout 
 ```
 
 ```verify
-D=~/layers-git/l1-challenge
+D=~/byte-layers/git/l1-challenge
 F="$D"/premier-commit.txt
 if [ ! -s "$F" ]; then
   echo "Le fichier premier-commit.txt n'existe pas, ou il est vide."
@@ -219,7 +219,7 @@ esac
 
 ````solution
 ```bash
-cd ~/layers-git/l1-challenge/statuspage && git log --format=%h --reverse | head -n 1 > ../premier-commit.txt
+cd ~/byte-layers/git/l1-challenge/statuspage && git log --format=%h --reverse | head -n 1 > ../premier-commit.txt
 ```
 ````
 
@@ -227,13 +227,13 @@ cd ~/layers-git/l1-challenge/statuspage && git log --format=%h --reverse | head 
 
 ## Supprimer le dossier du challenge
 
-Supprimez le dossier `~/layers-git/l1-challenge` et tout ce qu'il contient. Vérifiez d'abord que votre terminal ne se trouve pas dedans.
+Supprimez le dossier `~/byte-layers/git/l1-challenge` et tout ce qu'il contient. Vérifiez d'abord que votre terminal ne se trouve pas dedans.
 
-**Critère :** le dossier `~/layers-git/l1-challenge` n'existe plus.
+**Critère :** le dossier `~/byte-layers/git/l1-challenge` n'existe plus.
 
 ```verify
-if [ -e ~/layers-git/l1-challenge ]; then
-  echo "Le dossier ~/layers-git/l1-challenge existe encore."
+if [ -e ~/byte-layers/git/l1-challenge ]; then
+  echo "Le dossier ~/byte-layers/git/l1-challenge existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé. Challenge terminé."
@@ -241,6 +241,6 @@ echo "Le dossier est supprimé. Challenge terminé."
 
 ````solution
 ```bash
-cd ~ && rm -rf ~/layers-git/l1-challenge
+cd ~ && rm -rf ~/byte-layers/git/l1-challenge
 ```
 ````

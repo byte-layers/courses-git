@@ -10,7 +10,7 @@ Tous les jobs n'ont pas à tourner à chaque envoi. Le mot-clé `rules` fixe les
 Ce job n'existe que sur la branche par défaut, et n'est lancé que sur décision humaine. C'est la différence entre livraison et déploiement continus. Le job se contente ici d'un message :
 
 ```exec
-cat > ~/layers-git/ci-essentials/calculatrice/.gitlab-ci.yml <<'EOF'
+cat > ~/byte-layers/git/ci-essentials/calculatrice/.gitlab-ci.yml <<'EOF'
 stages:
   - test
   - livraison
@@ -46,7 +46,7 @@ livrer:
       when: manual
       allow_failure: true
 EOF
-cd ~/layers-git/ci-essentials/calculatrice && git add .gitlab-ci.yml && git commit -m "Ajoute une livraison manuelle sur la branche principale" && git push
+cd ~/byte-layers/git/ci-essentials/calculatrice && git add .gitlab-ci.yml && git commit -m "Ajoute une livraison manuelle sur la branche principale" && git push
 ```
 
 Sur la page du pipeline, le job `livrer` affiche un bouton de lecture : il attend votre clic. `allow_failure: true` évite que le pipeline reste bloqué en attendant ce clic. Sur une autre branche, il n'apparaîtrait pas.
@@ -54,9 +54,9 @@ Sur la page du pipeline, le job `livrer` affiche un bouton de lecture : il atten
 > 💡 **Remarque.** Dans d'anciens pipelines, vous verrez `only:` et `except:`. Pour un nouveau pipeline, on préfère `rules:`, plus expressif.
 
 ```verify
-C=$(cat ~/layers-git/ci-essentials/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-essentials/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-essentials/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-essentials/url."
   exit 1
 fi
 case "$C" in
@@ -82,12 +82,12 @@ echo "La livraison attend votre décision."
 Vous pouvez aussi supprimer le projet sur GitLab, depuis **Settings**, **General**, **Advanced**, **Delete project**.
 
 ```exec
-cd ~ && rm -rf ~/layers-git/ci-essentials
+cd ~ && rm -rf ~/byte-layers/git/ci-essentials
 ```
 
 ```verify
-if [ -e ~/layers-git/ci-essentials ]; then
-  echo "Le dossier ~/layers-git/ci-essentials existe encore."
+if [ -e ~/byte-layers/git/ci-essentials ]; then
+  echo "Le dossier ~/byte-layers/git/ci-essentials existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

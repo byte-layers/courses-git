@@ -10,23 +10,23 @@ Une collègue arrive sur le projet. Elle ne recommence pas à zéro : elle fait 
 Le dossier `poste-b` représente la machine de cette collègue. `git clone` prend l'adresse du dépôt et le nom du dossier à créer :
 
 ```exec
-cd ~/layers-git/l3 && git clone ~/layers-git/l3/serveur.git poste-b
+cd ~/byte-layers/git/l3 && git clone ~/byte-layers/git/l3/serveur.git poste-b
 ```
 
 Le clone a tout fait à la fois : il a copié l'historique, extrait les fichiers, et déclaré le serveur sous le nom `origin`. Vérifiez-le :
 
 ```exec
-cd ~/layers-git/l3/poste-b && ls && git remote -v
+cd ~/byte-layers/git/l3/poste-b && ls && git remote -v
 ```
 
 Comme vous jouez deux personnes sur une seule machine, donnez à ce dépôt sa propre identité. Sans `--global`, le réglage ne vaut que pour ce dépôt, et vous ne touchez pas à votre identité habituelle :
 
 ```exec
-cd ~/layers-git/l3/poste-b && git config user.name "Sam Durand" && git config user.email "sam@example.com"
+cd ~/byte-layers/git/l3/poste-b && git config user.name "Sam Durand" && git config user.email "sam@example.com"
 ```
 
 ```verify
-D=~/layers-git/l3/poste-b
+D=~/byte-layers/git/l3/poste-b
 if [ ! -f "$D/index.html" ]; then
   echo "poste-b n'a pas le fichier index.html. Lancez git clone."
   exit 1
@@ -43,7 +43,7 @@ echo "Le second poste a sa copie, et sa propre identité."
 L'option `-a` de `git branch` montre toutes les branches connues de ce dépôt :
 
 ```exec
-cd ~/layers-git/l3/poste-b && git branch -a
+cd ~/byte-layers/git/l3/poste-b && git branch -a
 ```
 
 À côté de votre branche `main`, Git garde une trace des branches du serveur, sous le préfixe `remotes/origin/` :

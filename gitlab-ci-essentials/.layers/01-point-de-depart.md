@@ -10,20 +10,20 @@ Vous partez d'un pipeline simple, avec un seul job qui installe les dépendances
 Créez un projet public nommé `calculatrice-essentiels`, avec un README, puis enregistrez son adresse en remplaçant l'exemple :
 
 ```bash
-mkdir -p ~/layers-git/ci-essentials
-echo 'git@gitlab.com:demo-votre-nom/calculatrice-essentiels.git' > ~/layers-git/ci-essentials/url
+mkdir -p ~/byte-layers/git/ci-essentials
+echo 'git@gitlab.com:demo-votre-nom/calculatrice-essentiels.git' > ~/byte-layers/git/ci-essentials/url
 ```
 
 Clonez-le :
 
 ```exec
-cd ~/layers-git/ci-essentials && git clone "$(cat url)" calculatrice
+cd ~/byte-layers/git/ci-essentials && git clone "$(cat url)" calculatrice
 ```
 
 Cette commande crée le code à tester, puis le publie :
 
 ```exec
-cd ~/layers-git/ci-essentials/calculatrice
+cd ~/byte-layers/git/ci-essentials/calculatrice
 cat > package.json <<'EOF'
 {
   "name": "calculatrice",
@@ -53,7 +53,7 @@ git add . && git commit -m "Ajoute la calculatrice et ses tests" && git push
 À chaque pipeline, le job réinstalle ses dépendances, ce qui est lent, et vous allez l'améliorer :
 
 ```exec
-cat > ~/layers-git/ci-essentials/calculatrice/.gitlab-ci.yml <<'EOF'
+cat > ~/byte-layers/git/ci-essentials/calculatrice/.gitlab-ci.yml <<'EOF'
 stages:
   - test
 
@@ -66,13 +66,13 @@ tests:
     - npm install
     - npm test
 EOF
-cd ~/layers-git/ci-essentials/calculatrice && git add .gitlab-ci.yml && git commit -m "Ajoute le pipeline de départ" && git push
+cd ~/byte-layers/git/ci-essentials/calculatrice && git add .gitlab-ci.yml && git commit -m "Ajoute le pipeline de départ" && git push
 ```
 
 ```verify
-C=$(cat ~/layers-git/ci-essentials/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-essentials/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-essentials/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-essentials/url."
   exit 1
 fi
 case "$C" in

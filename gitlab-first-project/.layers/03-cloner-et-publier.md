@@ -7,31 +7,48 @@ Le projet existe sur le serveur. Vous le récupérez maintenant sur votre poste 
 
 ## 03.1 - Cloner le projet
 
-`git clone` lit ici l'adresse que vous venez d'enregistrer :
+`git clone` copie le projet du serveur dans un nouveau dossier, ici `statuspage`. Plutôt que de recopier l'adresse, la commande la lit dans le fichier `url` de l'étape précédente : `$(cat url)` est remplacé par le contenu du fichier avant que `git clone` ne s'exécute.
 
 ```exec
-cd ~/layers-git/gitlab-first && git clone "$(cat url)" statuspage
-cd ~/layers-git/gitlab-first/statuspage && ls
+cd ~/byte-layers/git/gitlab-first && git clone "$(cat url)" statuspage
+```
+
+Listez le contenu du dossier cloné avec `ls` :
+
+```exec
+cd ~/byte-layers/git/gitlab-first/statuspage && ls
 ```
 
 Vous retrouvez le fichier `README.md` créé par GitLab.
 
 ## 03.2 - Publier un premier commit
 
-Ajoutez une page, enregistrez-la, puis envoyez-la sur GitLab :
+Vous allez faire le cycle complet en trois commandes : créer un fichier, l'enregistrer dans un commit, puis l'envoyer sur GitLab.
+
+D'abord, créez la page `index.html`. Comme à l'étape précédente, `echo` et `>` écrivent le texte dans le fichier :
 
 ```exec
-cd ~/layers-git/gitlab-first/statuspage && echo '<h1>Statut des services</h1>' > index.html
-cd ~/layers-git/gitlab-first/statuspage && git add index.html && git commit -m "Ajoute la page de statut"
-cd ~/layers-git/gitlab-first/statuspage && git push
+cd ~/byte-layers/git/gitlab-first/statuspage && echo '<h1>Statut des services</h1>' > index.html
+```
+
+Ensuite, `git add` prépare le fichier et `git commit` l'enregistre dans l'historique de votre dépôt local, avec un message :
+
+```exec
+cd ~/byte-layers/git/gitlab-first/statuspage && git add index.html && git commit -m "Ajoute la page de statut"
+```
+
+Le commit n'existe encore que sur votre poste. `git push` l'envoie sur GitLab :
+
+```exec
+cd ~/byte-layers/git/gitlab-first/statuspage && git push
 ```
 
 Rechargez la page du projet sur GitLab : `index.html` apparaît, avec le message de votre commit.
 
 ```verify
-C=$(cat ~/layers-git/gitlab-first/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/gitlab-first/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/gitlab-first/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/gitlab-first/url."
   exit 1
 fi
 case "$C" in
@@ -52,12 +69,12 @@ echo "Votre commit est sur GitLab."
 Ce dossier local ne servira plus. Vous pouvez aussi supprimer le projet sur GitLab, depuis **Settings**, **General**, **Advanced**, **Delete project**.
 
 ```exec
-cd ~ && rm -rf ~/layers-git/gitlab-first
+cd ~ && rm -rf ~/byte-layers/git/gitlab-first
 ```
 
 ```verify
-if [ -e ~/layers-git/gitlab-first ]; then
-  echo "Le dossier ~/layers-git/gitlab-first existe encore."
+if [ -e ~/byte-layers/git/gitlab-first ]; then
+  echo "Le dossier ~/byte-layers/git/gitlab-first existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

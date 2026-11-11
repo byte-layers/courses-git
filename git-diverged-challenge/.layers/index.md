@@ -21,7 +21,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 
 - **Ce qu'il faut savoir** : ce qu'enseigne [Partager son travail avec un dépôt distant](https://byte-layers.com/fr/skills/git-remotes).
 - **Ce qu'il faut avoir** : Git 2.28 ou plus récent, votre identité réglée, et un terminal (Git Bash sous Windows).
-- **Un serveur de départ** : le dépôt `~/layers-git/l3-challenge/serveur.git` est créé pour vous à l'ouverture, avec un premier commit. Un collègue y publiera du travail pendant la tâche 2. La dernière tâche supprime tout.
+- **Un serveur de départ** : le dépôt `~/byte-layers/git/l3-challenge/serveur.git` est créé pour vous à l'ouverture, avec un premier commit. Un collègue y publiera du travail pendant la tâche 2. La dernière tâche supprime tout.
 - **L'ordre compte** : chaque tâche reprend l'état laissé par la précédente.
 
 # Tâche 1 : rejoindre le projet
@@ -29,7 +29,7 @@ Si vous êtes bloqué, les **indices** se dévoilent un par un, et la **solution
 ## Cloner le serveur et publier un premier fichier
 
 ```setup
-D=~/layers-git/l3-challenge
+D=~/byte-layers/git/l3-challenge
 if [ ! -d "$D/serveur.git" ]; then
   mkdir -p "$D" && git init -q --bare -b main "$D/serveur.git"
   T=$(mktemp -d) && git init -q -b main "$T"
@@ -41,11 +41,11 @@ if [ ! -d "$D/serveur.git" ]; then
 fi
 ```
 
-Clonez le dépôt `~/layers-git/l3-challenge/serveur.git` dans `~/layers-git/l3-challenge/moi`. Ajoutez-y un fichier `runbook.md`, et publiez-le.
+Clonez le dépôt `~/byte-layers/git/l3-challenge/serveur.git` dans `~/byte-layers/git/l3-challenge/moi`. Ajoutez-y un fichier `runbook.md`, et publiez-le.
 
 **Critères :**
 
-- le dossier `~/layers-git/l3-challenge/moi` est un clone du serveur ;
+- le dossier `~/byte-layers/git/l3-challenge/moi` est un clone du serveur ;
 - la branche `main` du serveur contient `runbook.md`.
 
 ```hint
@@ -53,7 +53,7 @@ La commande de clonage prend l'adresse du dépôt, puis le nom du dossier à cr�
 ```
 
 ```verify
-D=~/layers-git/l3-challenge
+D=~/byte-layers/git/l3-challenge
 case "$(git -C "$D/moi" remote get-url origin 2>/dev/null)" in
   *serveur.git|*serveur.git/) ;;
   *) echo "$D/moi n'est pas un clone de serveur.git."; exit 1 ;;
@@ -67,8 +67,8 @@ echo "Votre fichier est sur le serveur."
 
 ````solution
 ```bash
-cd ~/layers-git/l3-challenge && git clone serveur.git moi
-cd ~/layers-git/l3-challenge/moi && echo '# Runbook' > runbook.md && git add runbook.md && git commit -m "Ajoute le runbook" && git push
+cd ~/byte-layers/git/l3-challenge && git clone serveur.git moi
+cd ~/byte-layers/git/l3-challenge/moi && echo '# Runbook' > runbook.md && git add runbook.md && git commit -m "Ajoute le runbook" && git push
 ```
 ````
 
@@ -77,7 +77,7 @@ cd ~/layers-git/l3-challenge/moi && echo '# Runbook' > runbook.md && git add run
 ## Réunir votre commit et celui du collègue
 
 ```setup
-D=~/layers-git/l3-challenge
+D=~/byte-layers/git/l3-challenge
 if [ -d "$D/serveur.git" ] && [ ! -f "$D/.collegue-fait" ] && git -C "$D/serveur.git" rev-parse -q --verify main >/dev/null; then
   T=$(mktemp -d) && git clone -q "$D/serveur.git" "$T/c"
   echo '<p>API : OK</p>' >> "$T/c/index.html"
@@ -105,7 +105,7 @@ Quand les historiques divergent, `git pull` demande une option pour savoir comme
 ```
 
 ```verify
-D=~/layers-git/l3-challenge
+D=~/byte-layers/git/l3-challenge
 S="$D/serveur.git"
 if [ "$(git -C "$S" log --format=%s main | grep -c "Affiche l'état de l'API")" -lt 1 ]; then
   echo "Le commit du collègue n'est plus sur le serveur. Il a été écrasé, ou la tâche n'a pas commencé."
@@ -124,8 +124,8 @@ echo "Les deux travaux sont sur le serveur."
 
 ````solution
 ```bash
-cd ~/layers-git/l3-challenge/moi && echo 'Alerte au bout de : 5 minutes' >> runbook.md && git commit -am "Ajoute le seuil d'alerte"
-cd ~/layers-git/l3-challenge/moi && git pull --no-rebase --no-edit && git push
+cd ~/byte-layers/git/l3-challenge/moi && echo 'Alerte au bout de : 5 minutes' >> runbook.md && git commit -am "Ajoute le seuil d'alerte"
+cd ~/byte-layers/git/l3-challenge/moi && git pull --no-rebase --no-edit && git push
 ```
 ````
 
@@ -145,7 +145,7 @@ La première publication d'une branche demande une option, qui retient le lien p
 ```
 
 ```verify
-D=~/layers-git/l3-challenge
+D=~/byte-layers/git/l3-challenge
 if ! git -C "$D/serveur.git" show-ref --verify --quiet refs/heads/feature/contacts; then
   echo "Le serveur n'a pas la branche feature/contacts."
   exit 1
@@ -163,9 +163,9 @@ echo "La branche est publiée et reliée."
 
 ````solution
 ```bash
-cd ~/layers-git/l3-challenge/moi && git switch -c feature/contacts
-cd ~/layers-git/l3-challenge/moi && echo '## Contacts' >> runbook.md && git commit -am "Ajoute les contacts"
-cd ~/layers-git/l3-challenge/moi && git push -u origin feature/contacts
+cd ~/byte-layers/git/l3-challenge/moi && git switch -c feature/contacts
+cd ~/byte-layers/git/l3-challenge/moi && echo '## Contacts' >> runbook.md && git commit -am "Ajoute les contacts"
+cd ~/byte-layers/git/l3-challenge/moi && git push -u origin feature/contacts
 ```
 ````
 
@@ -173,13 +173,13 @@ cd ~/layers-git/l3-challenge/moi && git push -u origin feature/contacts
 
 ## Supprimer le dossier du challenge
 
-Supprimez le dossier `~/layers-git/l3-challenge` et tout ce qu'il contient. Vérifiez d'abord que votre terminal ne se trouve pas dedans.
+Supprimez le dossier `~/byte-layers/git/l3-challenge` et tout ce qu'il contient. Vérifiez d'abord que votre terminal ne se trouve pas dedans.
 
-**Critère :** le dossier `~/layers-git/l3-challenge` n'existe plus.
+**Critère :** le dossier `~/byte-layers/git/l3-challenge` n'existe plus.
 
 ```verify
-if [ -e ~/layers-git/l3-challenge ]; then
-  echo "Le dossier ~/layers-git/l3-challenge existe encore."
+if [ -e ~/byte-layers/git/l3-challenge ]; then
+  echo "Le dossier ~/byte-layers/git/l3-challenge existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé. Challenge terminé."
@@ -187,6 +187,6 @@ echo "Le dossier est supprimé. Challenge terminé."
 
 ````solution
 ```bash
-cd ~ && rm -rf ~/layers-git/l3-challenge
+cd ~ && rm -rf ~/byte-layers/git/l3-challenge
 ```
 ````

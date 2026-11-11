@@ -10,11 +10,11 @@ Un correctif se trouve sur une branche dont vous ne voulez pas le reste. `git ch
 La branche `fix/page` contient un correctif, puis un essai sans intérêt :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git switch main
-cd ~/layers-git/l4-rebase/depot && git switch -c fix/page
-cd ~/layers-git/l4-rebase/depot && echo '<p>Pied de page</p>' >> index.html && git commit -am "Corrige la page"
-cd ~/layers-git/l4-rebase/depot && echo 'essai' > essai.txt && git add essai.txt && git commit -m "Ajoute un essai"
-cd ~/layers-git/l4-rebase/depot && git log --oneline -n 2
+cd ~/byte-layers/git/l4-rebase/depot && git switch main
+cd ~/byte-layers/git/l4-rebase/depot && git switch -c fix/page
+cd ~/byte-layers/git/l4-rebase/depot && echo '<p>Pied de page</p>' >> index.html && git commit -am "Corrige la page"
+cd ~/byte-layers/git/l4-rebase/depot && echo 'essai' > essai.txt && git add essai.txt && git commit -m "Ajoute un essai"
+cd ~/byte-layers/git/l4-rebase/depot && git log --oneline -n 2
 ```
 
 ## 04.2 - Reporter le correctif sur main avec git cherry-pick
@@ -22,8 +22,8 @@ cd ~/layers-git/l4-rebase/depot && git log --oneline -n 2
 Revenez sur `main`, et reportez uniquement le correctif. En temps normal, vous copieriez son hash depuis `git log`. Ici, `fix/page~1` désigne le commit juste avant le dernier de cette branche, ce qui marche à l'identique chez vous :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && git switch main
-cd ~/layers-git/l4-rebase/depot && git cherry-pick fix/page~1
+cd ~/byte-layers/git/l4-rebase/depot && git switch main
+cd ~/byte-layers/git/l4-rebase/depot && git cherry-pick fix/page~1
 ```
 
 Git crée un nouveau commit sur `main`, avec les mêmes modifications et un autre hash :
@@ -37,7 +37,7 @@ Git crée un nouveau commit sur `main`, avec les mêmes modifications et un autr
 `main` contient le correctif, sans `essai.txt` :
 
 ```exec
-cd ~/layers-git/l4-rebase/depot && ls
+cd ~/byte-layers/git/l4-rebase/depot && ls
 ```
 
 Le cas le plus courant est celui d'un correctif à reporter sur une ancienne version encore maintenue. Cette animation montre la copie du seul commit choisi :
@@ -45,7 +45,7 @@ Le cas le plus courant est celui d'un correctif à reporter sur une ancienne ver
 ![Animation : git cherry-pick F1 copie uniquement ce commit sur main sous la forme d'un nouveau commit F1', sans F2](assets/cherry-pick.gif)
 
 ```verify
-D=~/layers-git/l4-rebase/depot
+D=~/byte-layers/git/l4-rebase/depot
 if ! git -C "$D" show main:index.html | grep -q "Pied de page"; then
   echo "main ne contient pas le correctif. Lancez git cherry-pick fix/page~1 depuis main."
   exit 1
@@ -64,12 +64,12 @@ echo "Le correctif est sur main, sans l'essai."
 Ce dossier ne servira plus, et vous pouvez le supprimer depuis votre dossier personnel. `rm -rf` efface le dossier et son contenu sans demander de confirmation :
 
 ```exec
-cd ~ && rm -rf ~/layers-git/l4-rebase
+cd ~ && rm -rf ~/byte-layers/git/l4-rebase
 ```
 
 ```verify
-if [ -e ~/layers-git/l4-rebase ]; then
-  echo "Le dossier ~/layers-git/l4-rebase existe encore."
+if [ -e ~/byte-layers/git/l4-rebase ]; then
+  echo "Le dossier ~/byte-layers/git/l4-rebase existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

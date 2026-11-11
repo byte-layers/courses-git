@@ -10,15 +10,15 @@ Les branches restent sur votre machine tant que vous ne les publiez pas. En publ
 Sur `poste-b`, créez une branche avec un commit :
 
 ```exec
-cd ~/layers-git/l3/poste-b && git switch -c feature/contacts
-cd ~/layers-git/l3/poste-b && echo '## Contacts' >> runbook.md
-cd ~/layers-git/l3/poste-b && git commit -am "Ajoute les contacts"
+cd ~/byte-layers/git/l3/poste-b && git switch -c feature/contacts
+cd ~/byte-layers/git/l3/poste-b && echo '## Contacts' >> runbook.md
+cd ~/byte-layers/git/l3/poste-b && git commit -am "Ajoute les contacts"
 ```
 
 Le serveur ne connaît pas encore cette branche, et `-u` crée le lien avec `origin`, comme lors du premier envoi de `main` :
 
 ```exec
-cd ~/layers-git/l3/poste-b && git push -u origin feature/contacts
+cd ~/byte-layers/git/l3/poste-b && git push -u origin feature/contacts
 ```
 
 Le serveur possède maintenant cette branche :
@@ -33,14 +33,14 @@ branch 'feature/contacts' set up to track 'origin/feature/contacts'.
 Sur `poste-a`, `git fetch` découvre la nouvelle branche :
 
 ```exec
-cd ~/layers-git/l3/poste-a && git fetch
-cd ~/layers-git/l3/poste-a && git branch -a
+cd ~/byte-layers/git/l3/poste-a && git fetch
+cd ~/byte-layers/git/l3/poste-a && git branch -a
 ```
 
 Elle apparaît sous `remotes/origin/`, mais vous n'avez pas encore de branche locale à ce nom. `git switch` la crée pour vous, reliée au serveur :
 
 ```exec
-cd ~/layers-git/l3/poste-a && git switch feature/contacts
+cd ~/byte-layers/git/l3/poste-a && git switch feature/contacts
 ```
 
 Git crée la branche locale et la relie au serveur :
@@ -51,7 +51,7 @@ branch 'feature/contacts' set up to track 'origin/feature/contacts'.
 ```
 
 ```verify
-D=~/layers-git/l3
+D=~/byte-layers/git/l3
 if ! git -C "$D/serveur.git" show-ref --verify --quiet refs/heads/feature/contacts; then
   echo "Le serveur n'a pas la branche feature/contacts."
   exit 1
@@ -68,12 +68,12 @@ echo "La branche est partagée entre les deux postes."
 Ce dossier ne servira plus, et vous pouvez le supprimer depuis votre dossier personnel. `rm -rf` efface le dossier et son contenu sans demander de confirmation :
 
 ```exec
-cd ~ && rm -rf ~/layers-git/l3
+cd ~ && rm -rf ~/byte-layers/git/l3
 ```
 
 ```verify
-if [ -e ~/layers-git/l3 ]; then
-  echo "Le dossier ~/layers-git/l3 existe encore."
+if [ -e ~/byte-layers/git/l3 ]; then
+  echo "Le dossier ~/byte-layers/git/l3 existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

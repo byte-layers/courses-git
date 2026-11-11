@@ -10,7 +10,7 @@ Chaque pipeline retélécharge les dépendances. Un **cache** les conserve pour 
 La clé `key` identifie le cache. `$CI_COMMIT_REF_SLUG` est le nom de la branche adapté aux URL, ce qui donne un cache par branche :
 
 ```exec
-cat > ~/layers-git/ci-essentials/calculatrice/.gitlab-ci.yml <<'EOF'
+cat > ~/byte-layers/git/ci-essentials/calculatrice/.gitlab-ci.yml <<'EOF'
 stages:
   - test
 
@@ -31,15 +31,15 @@ tests:
     - npm install
     - npm test
 EOF
-cd ~/layers-git/ci-essentials/calculatrice && git add .gitlab-ci.yml && git commit -m "Ajoute un cache pour les dépendances" && git push
+cd ~/byte-layers/git/ci-essentials/calculatrice && git add .gitlab-ci.yml && git commit -m "Ajoute un cache pour les dépendances" && git push
 ```
 
 Le job garde `npm install`, car un cache peut être absent. Au prochain passage, la trace indique que le cache a été extrait, et l'installation est plus rapide. Pour constater le gain, relancez le job avec son bouton **Retry**.
 
 ```verify
-C=$(cat ~/layers-git/ci-essentials/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-essentials/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-essentials/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-essentials/url."
   exit 1
 fi
 case "$C" in

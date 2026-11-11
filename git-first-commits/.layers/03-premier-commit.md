@@ -9,34 +9,34 @@ Vous créez maintenant le dépôt du projet `statuspage`, vous y ajoutez la page
 
 Un **dépôt** (en anglais *repository*, ou *repo*) est un dossier dont Git suit l'historique. Créez le dossier avec `mkdir -p`, puis demandez à Git de l'initialiser. Une **branche** est une ligne d'historique, et un dépôt en a au moins une : l'option `-b main` nomme `main` la première. Sur des dépôts plus anciens, vous la verrez souvent nommée `master`.
 
-Dans ce cours, chaque commande commence par `cd ~/layers-git/l1 &&`, pour que le bouton qui l'exécute marche où que soit votre terminal. Quand vous taperez vous-même vos commandes, un seul `cd` dans le dossier suffira pour toute une séance.
+Dans ce cours, chaque commande commence par `cd ~/byte-layers/git/l1 &&`, pour que le bouton qui l'exécute marche où que soit votre terminal. Quand vous taperez vous-même vos commandes, un seul `cd` dans le dossier suffira pour toute une séance.
 
 ```exec
-mkdir -p ~/layers-git/l1
-cd ~/layers-git/l1 && git init -b main
+mkdir -p ~/byte-layers/git/l1
+cd ~/byte-layers/git/l1 && git init -b main
 ```
 
 Git confirme qu'il a créé un dépôt vide. Si votre terminal affiche ses messages en français, le sens reste le même que dans ce cours.
 
 ```text
-Initialized empty Git repository in /home/john/layers-git/l1/.git/
+Initialized empty Git repository in /home/john/byte-layers/git/l1/.git/
 ```
 
 Tout l'historique tient dans un dossier caché nommé `.git`, créé à l'instant. L'option `-a` de `ls` montre les fichiers cachés :
 
 ```exec
-cd ~/layers-git/l1 && ls -a
+cd ~/byte-layers/git/l1 && ls -a
 ```
 
 Vous voyez `.git`, ainsi que `.` et `..`, les raccourcis habituels vers le dossier courant et son parent.
 
 ```verify
-if ! git -C ~/layers-git/l1 rev-parse --git-dir >/dev/null 2>&1; then
-  echo "~/layers-git/l1 n'est pas un dépôt Git. Lancez git init dans ce dossier."
+if ! git -C ~/byte-layers/git/l1 rev-parse --git-dir >/dev/null 2>&1; then
+  echo "~/byte-layers/git/l1 n'est pas un dépôt Git. Lancez git init dans ce dossier."
   exit 1
 fi
-if [ "$(git -C ~/layers-git/l1 symbolic-ref --short HEAD)" != "main" ]; then
-  echo "La branche n'est pas main. Supprimez ~/layers-git/l1 et relancez git init -b main."
+if [ "$(git -C ~/byte-layers/git/l1 symbolic-ref --short HEAD)" != "main" ]; then
+  echo "La branche n'est pas main. Supprimez ~/byte-layers/git/l1 et relancez git init -b main."
   exit 1
 fi
 echo "Le dépôt existe, sur la branche main."
@@ -47,7 +47,7 @@ echo "Le dépôt existe, sur la branche main."
 Demandez à Git ce qu'il voit dans ce dépôt encore vide :
 
 ```exec
-cd ~/layers-git/l1 && git status
+cd ~/byte-layers/git/l1 && git status
 ```
 
 Il répond qu'il n'y a encore aucune version, et rien à enregistrer :
@@ -63,13 +63,13 @@ nothing to commit (create/copy files and use "git add" to track)
 Créez maintenant la page de statut. La commande `echo` écrit un texte, et `>` l'envoie dans un fichier.
 
 ```exec
-cd ~/layers-git/l1 && echo '<h1>Statut des services</h1>' > index.html
+cd ~/byte-layers/git/l1 && echo '<h1>Statut des services</h1>' > index.html
 ```
 
 Redemandez l'état du dépôt, et regardez ce qui a changé :
 
 ```exec
-cd ~/layers-git/l1 && git status
+cd ~/byte-layers/git/l1 && git status
 ```
 
 Git voit le fichier, mais il le classe en *untracked*, c'est-à-dire **non suivi** : il sait qu'il existe, et ne l'enregistrera pas tant que vous ne le lui demanderez pas.
@@ -89,13 +89,13 @@ Enregistrer une version se fait en deux gestes. `git add` place le fichier dans 
 Préparez le fichier :
 
 ```exec
-cd ~/layers-git/l1 && git add index.html
+cd ~/byte-layers/git/l1 && git add index.html
 ```
 
 `git status` confirme que le fichier est prêt à entrer dans le prochain commit :
 
 ```exec
-cd ~/layers-git/l1 && git status
+cd ~/byte-layers/git/l1 && git status
 ```
 
 Le fichier figure désormais dans la section des changements à enregistrer :
@@ -109,7 +109,7 @@ Changes to be committed:
 Enregistrez maintenant ce commit. L'option `-m` donne son **message**, la phrase qui dit ce que cette version apporte, plutôt qu'un simple « modifs ». Gardez les guillemets doubles, car une apostrophe française poserait problème entre des apostrophes simples :
 
 ```exec
-cd ~/layers-git/l1 && git commit -m "Ajoute la page de statut"
+cd ~/byte-layers/git/l1 && git commit -m "Ajoute la page de statut"
 ```
 
 Git affiche la branche, le début de l'identifiant du commit, son message, et ce qu'il contient. L'identifiant, ici `1f7561a`, sera différent chez vous :
@@ -129,7 +129,7 @@ Vous venez d'enregistrer votre premier commit, sur la branche `main`.
 Regardez ce que contient votre commit. `git show` affiche le dernier commit. Si la sortie remplit l'écran, appuyez sur `q` pour la quitter.
 
 ```exec
-cd ~/layers-git/l1 && git show
+cd ~/byte-layers/git/l1 && git show
 ```
 
 Le haut de la réponse dit qui a fait ce commit, quand et pourquoi. Le bas, appelé **diff**, montre ce qui a changé : chaque ligne ajoutée commence par `+`.
@@ -163,7 +163,7 @@ flowchart LR
 Le code `1f7561a` est le numéro de ce commit, et il sera différent chez vous. Git le calcule à partir du contenu du commit. Pour rester lisibles, les schémas de ce parcours remplacent souvent ces numéros par `C1`, `C2`, `C3` : retenez qu'un vrai commit porte toujours un numéro comme celui-ci.
 
 ```verify
-D=~/layers-git/l1
+D=~/byte-layers/git/l1
 if ! git -C "$D" rev-parse HEAD >/dev/null 2>&1; then
   echo "Il n'y a encore aucun commit. Lancez git add, puis git commit."
   exit 1
@@ -191,8 +191,8 @@ Dans Git, les branches permettent d'organiser le contenu et le travail, et vous 
 Regardez-le en pratique, avec un deuxième commit. Ajoutez une ligne à la page, et regardez ce que Git voit, avant tout enregistrement :
 
 ```exec
-cd ~/layers-git/l1 && echo '<p>Tous les services fonctionnent</p>' >> index.html
-cd ~/layers-git/l1 && git diff
+cd ~/byte-layers/git/l1 && echo '<p>Tous les services fonctionnent</p>' >> index.html
+cd ~/byte-layers/git/l1 && git diff
 ```
 
 La commande `git diff` montre ce qui a changé depuis le dernier commit, et la nouvelle ligne est précédée d'un `+` :
@@ -210,8 +210,8 @@ index 94d6643..b4d0979 100644
 Enregistrez ce changement, puis affichez l'historique. L'option `--oneline` résume chaque commit en une ligne :
 
 ```exec
-cd ~/layers-git/l1 && git add index.html && git commit -m "Ajoute le résumé de l'état"
-cd ~/layers-git/l1 && git log --oneline
+cd ~/byte-layers/git/l1 && git add index.html && git commit -m "Ajoute le résumé de l'état"
+cd ~/byte-layers/git/l1 && git log --oneline
 ```
 
 Le nouveau commit apparaît en haut, et le repère `main` est maintenant sur lui :
@@ -226,7 +226,7 @@ Cette animation montre ce qui vient de se passer. Le commit `C2` est créé, il 
 ![Animation : git commit crée C2, dont le parent est C1, puis la branche main passe de C1 à C2](assets/commit-et-branche.gif)
 
 ```verify
-D=~/layers-git/l1
+D=~/byte-layers/git/l1
 if [ "$(git -C "$D" rev-list --count HEAD 2>/dev/null)" -lt 2 ]; then
   echo "Votre historique devrait contenir deux commits. Lancez git add, puis git commit."
   exit 1

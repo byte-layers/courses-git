@@ -10,9 +10,9 @@ Vous allez introduire un bug, et voir le garde-fou fonctionner.
 Cette branche change l'addition en soustraction :
 
 ```exec
-cd ~/layers-git/ci-quality/calculatrice && git pull && git switch -c fix/calcul
-cd ~/layers-git/ci-quality/calculatrice && sed 's/(+x) + (+y)/(+x) - (+y)/' operations.js > operations.tmp && mv operations.tmp operations.js
-cd ~/layers-git/ci-quality/calculatrice && git add operations.js && git commit -m "Modifie le calcul" && git push -u origin fix/calcul
+cd ~/byte-layers/git/ci-quality/calculatrice && git pull && git switch -c fix/calcul
+cd ~/byte-layers/git/ci-quality/calculatrice && sed 's/(+x) + (+y)/(+x) - (+y)/' operations.js > operations.tmp && mv operations.tmp operations.js
+cd ~/byte-layers/git/ci-quality/calculatrice && git add operations.js && git commit -m "Modifie le calcul" && git push -u origin fix/calcul
 ```
 
 Ouvrez une merge request de `fix/calcul` vers `main`. Le pipeline échoue, et GitLab affiche que la fusion est bloquée, avec le message `Merge blocked` et le bouton **Merge** indisponible.
@@ -22,15 +22,15 @@ Ouvrez une merge request de `fix/calcul` vers `main`. Le pipeline échoue, et Gi
 `git revert` annule le dernier commit en en créant un nouveau. Une fois celui-ci publié, le pipeline réussit, et le bouton **Merge** redevient disponible :
 
 ```exec
-cd ~/layers-git/ci-quality/calculatrice && git revert --no-edit HEAD && git push
+cd ~/byte-layers/git/ci-quality/calculatrice && git revert --no-edit HEAD && git push
 ```
 
 Fusionnez la merge request. Après ce revert, son onglet **Changes** est vide : la fusion ne sert ici qu'à clore l'exercice.
 
 ```verify
-C=$(cat ~/layers-git/ci-quality/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-quality/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-quality/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-quality/url."
   exit 1
 fi
 case "$C" in

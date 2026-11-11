@@ -10,9 +10,9 @@ Vos deux postes sont identiques. Le second va maintenant ajouter un fichier et l
 Depuis `poste-b`, ajoutez le runbook, la fiche des procédures en cas d'incident, et enregistrez-le. `git status` signale que vous êtes en avance sur le serveur :
 
 ```exec
-cd ~/layers-git/l3/poste-b && echo '# Runbook' > runbook.md
-cd ~/layers-git/l3/poste-b && git add runbook.md && git commit -m "Ajoute le runbook"
-cd ~/layers-git/l3/poste-b && git status
+cd ~/byte-layers/git/l3/poste-b && echo '# Runbook' > runbook.md
+cd ~/byte-layers/git/l3/poste-b && git add runbook.md && git commit -m "Ajoute le runbook"
+cd ~/byte-layers/git/l3/poste-b && git status
 ```
 
 Le début de la réponse dit combien de commits restent à publier :
@@ -26,11 +26,11 @@ Your branch is ahead of 'origin/main' by 1 commit.
 Le clone a déjà relié `main` à `origin/main`, donc un simple `git push` suffit :
 
 ```exec
-cd ~/layers-git/l3/poste-b && git push
+cd ~/byte-layers/git/l3/poste-b && git push
 ```
 
 ```verify
-D=~/layers-git/l3
+D=~/byte-layers/git/l3
 if ! git -C "$D/serveur.git" show main:runbook.md >/dev/null 2>&1; then
   echo "Le serveur n'a pas runbook.md. Depuis poste-b, faites le commit puis git push."
   exit 1
@@ -43,7 +43,7 @@ echo "Le runbook est sur le serveur."
 Revenez sur `poste-a` et demandez son état :
 
 ```exec
-cd ~/layers-git/l3/poste-a && git status
+cd ~/byte-layers/git/l3/poste-a && git status
 ```
 
 Git répond que tout est à jour, alors que le serveur a un commit de plus :
@@ -60,8 +60,8 @@ Il n'a pas menti : `git status` compare votre branche à la **dernière position
 `git fetch` télécharge les nouveaux commits du serveur et met à jour `origin/main`. Il ne touche ni à votre branche, ni à vos fichiers :
 
 ```exec
-cd ~/layers-git/l3/poste-a && git fetch
-cd ~/layers-git/l3/poste-a && git status
+cd ~/byte-layers/git/l3/poste-a && git fetch
+cd ~/byte-layers/git/l3/poste-a && git status
 ```
 
 Maintenant, Git sait que vous êtes en retard :
@@ -75,8 +75,8 @@ Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
 Le graphe montre les deux positions, et votre dossier ne contient toujours pas `runbook.md` :
 
 ```exec
-cd ~/layers-git/l3/poste-a && git log --oneline --all --graph
-cd ~/layers-git/l3/poste-a && ls
+cd ~/byte-layers/git/l3/poste-a && git log --oneline --all --graph
+cd ~/byte-layers/git/l3/poste-a && ls
 ```
 
 Votre branche a un commit de retard sur `origin/main`, et `index.html` reste seul dans le dossier :
@@ -92,7 +92,7 @@ index.html
 `git pull` fait deux choses à la suite : un `git fetch`, puis la fusion de `origin/main` dans votre branche. C'est la même fusion que vous connaissez, et ici c'est une avance rapide (*fast-forward*) :
 
 ```exec
-cd ~/layers-git/l3/poste-a && git pull
+cd ~/byte-layers/git/l3/poste-a && git pull
 ```
 
 Git annonce une avance rapide :
@@ -108,7 +108,7 @@ Fast-forward
 Le fichier est maintenant dans votre dossier, et les deux postes sont au même point.
 
 ```verify
-D=~/layers-git/l3
+D=~/byte-layers/git/l3
 if [ ! -f "$D/poste-a/runbook.md" ]; then
   echo "poste-a n'a pas runbook.md. Lancez git pull depuis poste-a."
   exit 1

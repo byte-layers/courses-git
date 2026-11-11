@@ -22,12 +22,12 @@ L'option **Squash commits**, proposée sur chaque merge request, réunit tous le
 Vous pouvez aussi supprimer le projet sur GitLab, depuis **Settings**, **General**, **Advanced**, **Delete project**.
 
 ```exec
-cd ~ && rm -rf ~/layers-git/gitlab-mr
+cd ~ && rm -rf ~/byte-layers/git/gitlab-mr
 ```
 
 ```verify
-if [ -e ~/layers-git/gitlab-mr ]; then
-  echo "Le dossier ~/layers-git/gitlab-mr existe encore."
+if [ -e ~/byte-layers/git/gitlab-mr ]; then
+  echo "Le dossier ~/byte-layers/git/gitlab-mr existe encore."
   exit 1
 fi
 echo "Le dossier est supprimé."

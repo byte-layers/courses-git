@@ -10,7 +10,7 @@ Les traces s'effacent de la mémoire, alors qu'un rapport se télécharge et se 
 Le reporter `json` de mocha écrit le résultat dans un format exploitable, et `--silent` empêche npm d'ajouter ses propres lignes au fichier. Le résultat des tests ne figure donc plus dans la trace, mais dans ce fichier. `when: always` conserve l'artefact même si les tests échouent, ce qui est justement le moment où il est utile :
 
 ```exec
-cat > ~/layers-git/ci-essentials/calculatrice/.gitlab-ci.yml <<'EOF'
+cat > ~/byte-layers/git/ci-essentials/calculatrice/.gitlab-ci.yml <<'EOF'
 stages:
   - test
 
@@ -36,15 +36,15 @@ tests:
       - rapport.json
     expire_in: 7 days
 EOF
-cd ~/layers-git/ci-essentials/calculatrice && git add .gitlab-ci.yml && git commit -m "Conserve le rapport de tests" && git push
+cd ~/byte-layers/git/ci-essentials/calculatrice && git add .gitlab-ci.yml && git commit -m "Conserve le rapport de tests" && git push
 ```
 
 Une fois le job terminé, le panneau de droite de sa page propose **Job artifacts**, avec un bouton de téléchargement.
 
 ```verify
-C=$(cat ~/layers-git/ci-essentials/url 2>/dev/null)
+C=$(cat ~/byte-layers/git/ci-essentials/url 2>/dev/null)
 if [ -z "$C" ]; then
-  echo "L'adresse du projet n'est pas enregistrée dans ~/layers-git/ci-essentials/url."
+  echo "L'adresse du projet n'est pas enregistrée dans ~/byte-layers/git/ci-essentials/url."
   exit 1
 fi
 case "$C" in

@@ -32,7 +32,7 @@ Dans ce schéma, chaque commit désigne son parent, `main` désigne le dernier c
 Créez un petit dépôt, avec un commit et une branche. Ce sont les commandes du cours en prérequis :
 
 ```exec
-mkdir -p ~/layers-git/l2-pointer && cd ~/layers-git/l2-pointer && git init -b main
+mkdir -p ~/byte-layers/git/l2-pointer && cd ~/byte-layers/git/l2-pointer && git init -b main
 echo '# Runbook' > runbook.md && git add runbook.md && git commit -m "État initial"
 git branch feature/x
 ```
@@ -40,7 +40,7 @@ git branch feature/x
 Les branches sont rangées sous `.git/refs/heads`. Affichez le contenu des fichiers de vos deux branches :
 
 ```exec
-cd ~/layers-git/l2-pointer && cat .git/refs/heads/main .git/refs/heads/feature/x
+cd ~/byte-layers/git/l2-pointer && cat .git/refs/heads/main .git/refs/heads/feature/x
 ```
 
 Chaque fichier contient seulement le hash d'un commit, ici le même :
@@ -59,8 +59,8 @@ Dans un dépôt neuf comme celui-ci, une branche occupe donc 41 octets sur le di
 Le fichier `.git/HEAD` indique la branche courante. Lisez-le, placez-vous sur l'autre branche, puis relisez-le :
 
 ```exec
-cd ~/layers-git/l2-pointer && cat .git/HEAD
-cd ~/layers-git/l2-pointer && git switch feature/x && cat .git/HEAD
+cd ~/byte-layers/git/l2-pointer && cat .git/HEAD
+cd ~/byte-layers/git/l2-pointer && git switch feature/x && cat .git/HEAD
 ```
 
 Il pointe d'abord vers `main`, puis vers `feature/x` :
@@ -74,8 +74,8 @@ ref: refs/heads/feature/x
 Un commit fait sur cette branche déplace `feature/x`, et `main` reste où elle est. Vérifiez-le en faisant un commit, puis en demandant à `git log` où sont les noms :
 
 ```exec
-cd ~/layers-git/l2-pointer && echo 'Alerte' >> runbook.md && git commit -am "Ajoute une alerte"
-cd ~/layers-git/l2-pointer && git log --oneline --all
+cd ~/byte-layers/git/l2-pointer && echo 'Alerte' >> runbook.md && git commit -am "Ajoute une alerte"
+cd ~/byte-layers/git/l2-pointer && git log --oneline --all
 ```
 
 Seule `feature/x` a avancé, et `main` n'a pas bougé :
@@ -92,7 +92,7 @@ Vous tenez aussi l'explication de deux gestes vus dans le cours. L'avance rapide
 Ce dossier ne sert plus, et vous pouvez le supprimer depuis votre dossier personnel :
 
 ```exec
-cd ~ && rm -rf ~/layers-git/l2-pointer
+cd ~ && rm -rf ~/byte-layers/git/l2-pointer
 ```
 
 ## Récap
