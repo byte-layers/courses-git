@@ -14,6 +14,7 @@ layers:
     contents:
       - { slug: gitlab-first-pipeline, role: proof }
       - { slug: cache-vs-artifacts }
+      - { slug: gitlab-runner-local }
   - title: "Fiabiliser"
     summary: "Variables, cache, règles, et garde-fou sur les merge requests"
     contents:
